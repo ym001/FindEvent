@@ -1,6 +1,6 @@
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.sparql.vocabulary.FOAF;
-//import com.hp.hpl.jena.vocabulary.RDFS;
+//      import com.hp.hpl.jena.vocabulary.RDFS;
 public class WriteRDFXML 
 {	
 	private static Model userModel = ModelFactory.createDefaultModel();
