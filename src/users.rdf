@@ -1,0 +1,16 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <foaf:Person rdf:about="http://somewhere/YvesMercadier">
+    <foaf:title>Mr.</foaf:title>
+    <foaf:knows>Sebastien Paradis</foaf:knows>
+    <foaf:name>Yves Mercadier</foaf:name>
+    <foaf:knows>Chenyang Gao</foaf:knows>
+    <foaf:family_name>Mercadier</foaf:family_name>
+    <foaf:nick>ym001</foaf:nick>
+    <foaf:givenname>Yves</foaf:givenname>
+    <foaf:knows>Yassine Motie</foaf:knows>
+    <foaf:mbox>mailto:yves.mercadier@gmail.com</foaf:mbox>
+  </foaf:Person>
+</rdf:RDF>
