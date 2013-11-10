@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?><rdf:RDF 
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#" 
+    xmlns:dc="http://purl.org/dc/elements/1.1/" 
+    xmlns:schema="http://schema.org/" 
+    xmlns:event="http://schema.org/Event" 
+    xmlns:place="http://schema.org/Place" 
+    xmlns:address="http://schema.org/PostalAddress" 
+    xmlns:geo="http://schema.org/GeoCoordinates" 
+    xmlns:openingHours="http://schema.org/OpeningHoursSpecification"
+>
+<rdf:Description rdf:about="http://data.mp2013.fr/event/#13EVT029689">
+        <rdf:type rdf:resource="http://data.mp2013.fr/MusicEvent"/>    
+        <event:name xml:lang='fr'>Concert de jazz : PaCoRa Trio et l&#039;ensemble Bashavel</event:name>
+        <event:description rdf:parseType='Literal' xml:lang='en'>
+===
+</event:description>
+        <event:description rdf:parseType='Literal' xml:lang='fr'>Une soirée de très haute volée Jazzistique !!!
+Une invitation au voyage aux contours célestes entre jazz classique et musique traditionnelle Moldave.
+
+Le PaCoRa Trio se compose de trois excellents musiciens slovaques réunis depuis 2004. Le répertoire de ce trio se situe à la lisière du jazz et du folklore avec des réminiscences de musique classique. Le Trio aime aussi jouer ses propres compositions et revisiter les standards du jazz.
+L&#039;ensemble Bashavel qui signifie jouer de la musique en hindi est né au printemps 2006. Il réunit des musiciens hors pair venus de formations de jazz slovaques très différentes.
+Leur répertoire est riche d&#039;incontournables standards du Jazz se mêlant à des compositions issues de chansons traditionnelles moldaves.
+
+La complicité entre les musiciens est totalement magique.
+Éclatant de vitalité et d&#039;inspiration, leur bonheur de jouer ensemble nous rend heureux.
+Ces artistes surdoués pétillent et nous offrent un pur joyau. L&#039;énergie et le plaisir du jazz circulent à fleur de peau. Improvisation et lyrisme des chants moldaves vous emportent !
+Un pur régal !
+===
+Depuis sa création, il a présenté des milliers d’artistes issus de différents pays  - Albanie, Chypre, Espagne, Grèce, Italie, Macédoine, Turquie, Algérie, Tunisie, Maroc, Egypte, Israël, Palestine, Cameroun, Sénégal… - et a accueilli près de 163 150 spectateurs.
+
+Une communauté d’émotions puisée aux sources multiples.
+La culture, mémoire active et critique, joue un rôle fondamental dans la tradition méditerranéenne.
+
+La force d’union que représente ce festival marque de son empreinte et de son style la vie artistique de tout le bassin méditerranéen la ferveur et l’exceptionnelle vitalité qu’il génère en regroupant des artistes, poètes et saltimbanques de cultures, de sensibilités et de religions différentes, font de lui le symbole exemplaire d’une fraternité retrouvée grâce à l’Art.
+
+Il représente aujourd’hui non seulement une force culturelle et poétique mais aussi la recherche d’un renouveau d’une grande tradition culturelle européenne qui permet à notre public de se familiariser avec les multiples sensibilités qui constituent l’ensemble des courants circulant dans le domaine de la théâtralité contemporaine.</event:description>
+        <event:startDate>2013-05-14T00:00:00+0200</event:startDate>
+        <event:endDate>2013-05-14T00:00:00+0200</event:endDate>
+        <event:image></event:image>                
+        <!-- The producers of the event -->
+        <event:producer rdf:resource="http://data.mp2013.fr/producer/#8a6d4df4-c7f9-4732-a56c-731fb0d384bf" />
+
+        <!-- The location of the event or organization. -->
+        <event:location rdf:parseType='Literal'>
+            <!-- Physical address of the item -->
+            <place:address>
+                <address:name>Théâtre Axel Toursky</address:name>
+                <address:addressLocality>Marseille</address:addressLocality>
+                <address:postalCode>13003</address:postalCode>
+                <address:streetAddress>16 Promenade Léo Ferré</address:streetAddress>
+            </place:address>
+            <place:geo>
+                    <geo:latitude>43.31578100</geo:latitude>
+                    <geo:longitude>5.37776500</geo:longitude>
+            </place:geo>                        
+        </event:location>
+        
+    </rdf:Description>
+    
+    
+    
+    
+    
+    
+    
+       <rdf:Description rdf:about="http://data.mp2013.fr/event/#13EVT030829">
+        <rdf:type rdf:resource="http://data.mp2013.fr/MusicEvent"/>    
+        <event:name>Aires libres</event:name>
+        
+        <event:description rdf:parseType='Literal' xml:lang='fr'>Les Aires Libres est un événement musical et pluridisciplinaire créé en 2005 à Marseille (France) par le collectif &quot;A l&#039;unisson&quot;. Il s&#039;inspire d&#039;un concept développé par les festivals &quot;Les siestes électroniques&quot;, &quot;Sous la Plage&quot; et les &quot; Pelouses électroniques&quot;, manifestations nées respectivement à Toulouse et Paris trois à quatre ans auparavant.
+
+Les Aires Libres sont des journées de diffusion de musiques électroniques en plein air qui proposent aussi des animations pour les enfants et familles, des arts visuels et des ateliers artistiques, ainsi que des conditions privilégiées pour la détente et l’harmonie avec la nature. L’accès y est gratuit et ces événements se déroulent chaque été de manière itinérante dans le cadre choisi d’espaces prestigieux identifiés comme patrimoines naturel ou historique en Provence.
+
+Aires Libres, c’est…
+Des nouvelles musiques en pleine herbe
+
+De l’électronica à la house en passant par les musiques black downtempo, les Djs et groupes invités explorent des paysages sonores novateurs et jouissifs, propices à une écoute relaxée. Respirez de nouveaux sons, vous êtes à l’Aire libre !
+
+Des arts visuels en plein vert
+
+Rien que pour vos yeux, des artistes plasticiens s’emparent de la verdure et réalisent des installations paysagères.
+Des activités artistiques pour les enfants
+
+Les animations d’éveil artistique fleurissent avec des activités plus diversifiées s’adressant aux enfants comme aux parents, associés ensemble à la dimension artistique et ludique de l’évènement.
+Saveurs, bien-être, farniente…
+
+Restauration légère, bar champêtre, cafés et glaces artisanales.
+Produits essentiels. Massages relaxants …
+En pleine Nature
+
+Une dimension environnementale de plus en plus présente, nous invitant à la découverte de la Nature, mais aussi à la prise de conscience de sa fragilité malmenée.
+===
+</event:description>
+        <event:startDate>2013-06-01T00:00:00+0200</event:startDate>
+        <event:endDate>2013-06-02T00:00:00+0200</event:endDate>
+        <event:image></event:image>
+        <event:free>True</event:free>
+        
+        <!-- The producers of the event -->
+        <event:producer rdf:resource="http://data.mp2013.fr/producer/#9ede9c1b-26c5-4039-9fda-6f6554bf3587" />
+
+        <!-- The location of the event or organization. -->
+        <event:location rdf:parseType='Literal'>
+            <!-- Physical address of the item -->
+
+            <place:address>
+                <address:name>Parc Borély</address:name>
+                <address:addressLocality>Marseille</address:addressLocality>
+                <address:postalCode>13008</address:postalCode>
+                <address:streetAddress>Allée Borély</address:streetAddress>
+            </place:address>
+            <place:geo>
+                    <geo:latitude>43.26273000</geo:latitude>
+                    <geo:longitude>5.37859100</geo:longitude>
+            </place:geo>            
+            
+        </event:location>
+        
+    </rdf:Description>
+</rdf:RDF>
