@@ -10,9 +10,6 @@ import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.vocabulary.RDF;
-
-
-
 import com.hp.hpl.jena.util.FileManager;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +20,9 @@ import java.io.InputStream;
 public class Qusers {
 
 	public static final String CRLF = System.getProperty("line.separator") ;
-	//public static final String inputFileName  = "resources/users.rdf";
-	//public static final String inputFileName  = "resources/test";
-	//public static final String inputFileName  = "resources/ontology_v3.1.rdf";
-	//final String file = "https://github.com/ym001/FindEvent/blob/master/src/ontology_v3.1.rdf";
-	//public static final String inputFileName = "file:///home/master/Dropbox/github/FindEvent/resources/concert.rdf";
 	//public static final String inputFileName = "file:///home/master/Dropbox/github/FindEvent/resources/users.rdf";
-	public static final String inputFileName = "https://github.com/ym001/FindEvent/blob/master/resources/users.rdf";
-
+	public static final String inputFileName = "file:///home/master/Dropbox/github/FindEvent/resources/users.rdf";
+	//public static final String inputFileName = "http://www.dropbox.com/sh/hzmpdcoh0d3fnkt/tNwq9W5gAy/users.rdf";
 	public static void main(String[] args) {
 
 		  Model m = ModelFactory.createOntologyModel();

@@ -10,21 +10,19 @@ import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.vocabulary.RDF;
-
-
-
 import com.hp.hpl.jena.util.FileManager;
 import java.util.ArrayList;
 import java.util.List;
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.query.*;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 
 public class Qevent {
 
 	public static final String CRLF = System.getProperty("line.separator") ;
-	//public static final String inputFileName = "file:///home/master/Dropbox/github/FindEvent/resources/concert.rdf";
-	public static final String inputFileName = "http://github.com/ym001/FindEvent/blob/master/resources/users.rdf";
+	public static final String inputFileName = "file:///home/master/Dropbox/github/FindEvent/resources/concert.rdf";
+	//public static final String inputFileName = "http://github.com/ym001/FindEvent/blob/master/resources/users.rdf";
 	//public static final String inputFileName = "file:///home/master/Dropbox/github/FindEvent/resources/cibul.json";
 
 	public static double distance( double lat1,double long1,double lat2,double long2) {
@@ -32,18 +30,14 @@ public class Qevent {
 		 long2= Math.toRadians(long2);
 		 lat1= Math.toRadians(lat1);
 		 lat2= Math.toRadians(lat2);
-		double distance=0.0;
 		final double R=6378;
-		double dlon = long2 - long1;
-		double dlat = lat2 - lat1;
-		double a = Math.pow(Math.sin(dlat/2),2)*(Math.sin(dlat/2)) + Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(dlon/2),2);
-		double c = 2 * Math.atan2( Math.sqrt(a), Math.sqrt(1-a) );
-		distance = R * c ;
+		double a = Math.pow(Math.sin((lat2 - lat1)/2),2)*(Math.sin((lat2 - lat1)/2)) + Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin((long2 - long1)/2),2);
+		double distance = R * 2 * Math.atan2( Math.sqrt(a), Math.sqrt(1-a) ) ;
 		return distance;
 	}
 		public static void main(String[] args) {
 
-		  Model m = ModelFactory.createOntologyModel();
+		   Model m = ModelFactory.createOntologyModel();
 		 		  		
 		  m.read(inputFileName);
 	      String sQueries="" ;
@@ -76,9 +70,15 @@ public class Qevent {
 		  //sWhere=" ?place a place:geo . ?place geo:lat ?lat."+ CRLF;
 		  sWhere=sWhere+"?place geo:long ?long ";
 		  sQueries = sQueries+ "WHERE { "+sWhere+" } ";
-		  
-		  System.out.println("distance ="+distance( 43.6000000 ,3.8833300,43.2969500 ,5.3810700)+" km.");	  	  
-		  
+		  double latitude1=43.6000000;
+		  double longitude1=3.8833300;
+		  double latitude2=43.2969500;
+		  double longitude2=5.3810700;
+
+		  System.out.print("Distance = ");	  	
+		  System.out.printf("%.1f",distance(latitude1,longitude1,latitude2 ,longitude2));	  	  
+		  System.out.println(" km.");	  	  
+
 		  System.out.println(sQueries);	  	  
 		  
 		  Query Q = QueryFactory.create(sQueries);
@@ -91,8 +91,7 @@ public class Qevent {
 		 finally {
                 qexec.close() ;
          }
-		  
-			 m.write(System.out, "RDF/JSON");
+		 m.write(System.out, "RDF/JSON");
 	}
 
 }
