@@ -11,11 +11,8 @@
     xmlns:openingHours="http://schema.org/OpeningHoursSpecification"
 >
 <rdf:Description rdf:about="http://data.mp2013.fr/event/#13EVT029689">
-        <rdf:type rdf:resource="http://data.mp2013.fr/MusicEvent"/>    
+        <rdf:type rdf:resource="http://data.mp2013.fr/MusicEvent"/>     
         <event:name xml:lang='fr'>Concert de jazz : PaCoRa Trio et l&#039;ensemble Bashavel</event:name>
-        <event:description rdf:parseType='Literal' xml:lang='en'>
-===
-</event:description>
         <event:description rdf:parseType='Literal' xml:lang='fr'>Une soirée de très haute volée Jazzistique !!!
 Une invitation au voyage aux contours célestes entre jazz classique et musique traditionnelle Moldave.
 
