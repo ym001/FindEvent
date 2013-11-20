@@ -21,7 +21,7 @@ import java.text.DecimalFormat;
 public class Qevent {
 
 	public static final String CRLF = System.getProperty("line.separator") ;
-	public static final String inputFileName = "file:///home/master/Dropbox/github/FindEvent/resources/concert.rdf";
+	public static final String inputFileName = "file:ressources/concert.rdf";
 	//public static final String inputFileName = "http://github.com/ym001/FindEvent/blob/master/resources/users.rdf";
 	//public static final String inputFileName = "file:///home/master/Dropbox/github/FindEvent/resources/cibul.json";
 
