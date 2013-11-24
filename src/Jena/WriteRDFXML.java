@@ -1,3 +1,4 @@
+package Jena;
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.sparql.vocabulary.FOAF;
 //      import com.hp.hpl.jena.vocabulary.RDFS;
