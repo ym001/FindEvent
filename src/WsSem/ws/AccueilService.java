@@ -24,7 +24,7 @@ public class AccueilService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getAllStyles(){
 		
-		EntityManager em = Persistence.createEntityManagerFactory("WsSem").createEntityManager();
+		EntityManager em = Persistence.createEntityManagerFactory("FindEvent").createEntityManager();
 		Query q = em.createNativeQuery("SELECT * FROM Style s WHERE 1=1");
 		List<Style> styles = q.getResultList();
 		

@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 import java.util.List;
 
 
@@ -28,7 +26,6 @@ public class Style implements Serializable {
 
 	//bi-directional many-to-many association to User
 	@ManyToMany(mappedBy="styles")
-	@JsonIgnore
 	private List<User> users;
 
 	public Style() {
@@ -50,12 +47,10 @@ public class Style implements Serializable {
 		this.label = label;
 	}
 
-	@JsonIgnore
 	public List<User> getUsers() {
 		return this.users;
 	}
 
-	@JsonIgnore
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
