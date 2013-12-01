@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-modules id="moduleCoreId" project-version="1.5.0">
-<<<<<<< HEAD
-    <wb-module deploy-name="FindEvent">
-        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/"/>
-        <property name="java-output-path" value="/FindEvent/build/classes"/>
-        <property name="context-root" value="FindEvent"/>
-=======
     <wb-module deploy-name="WsSem">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <property name="context-root" value="WsSem"/>
         <property name="java-output-path" value="/WsSem/build/classes"/>
->>>>>>> 665412fde66e87c18ddf2f0ad9c55355f0a68739
     </wb-module>
 </project-modules>
