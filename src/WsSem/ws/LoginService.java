@@ -16,9 +16,10 @@ import WsSem.factory.JsonResultFactory;
 import WsSem.model.Style;
 
 
-@Path("/loginCheck")
+@Path("/LoginService")
 public class LoginService {
 
+	@Path("/loginCheck")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String checkUser(@Context UriInfo info) {
