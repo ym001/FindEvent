@@ -1,12 +1,13 @@
 package WsSem.model;
 
-public class JsonAlbulm {
+public class JsonAlbum {
 	
 	String titre;
 	String datece;
 	String datadc;
 	String lien;
 	String tag; //c'est un lien
+	
 	public String getTitre() {
 		return titre;
 	}
