@@ -1,6 +1,8 @@
 //package queries;
 package Jena;
 
+import java.io.InputStream;
+
 import org.openjena.atlas.io.IndentedWriter;
 
 import com.hp.hpl.jena.query.Query;
@@ -12,18 +14,31 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.RDF;
 
 public class LocalQueryMusicEvents {
 	public static final String CRLF = System.getProperty("line.separator") ;
-	public static final String service = "file:ressources/musiceventontology.rdf";
+	public static final String servicePath = "ressources/musiceventontology.rdf";
 
 	public static void main(String[] args) {
 		String sWhere="";
 		String sQueries="";
 		Model m = ModelFactory.createDefaultModel();
+		
+		/*
 		// !!!!!!!!!!!! avec CreateOntologyModel --> query ne marche pas !!!!!!!!!!!
-		m.read(service);
+		m.read(service);*/
+		
+		
+		InputStream in = FileManager.get().open(servicePath);
+		if (in == null) {
+			throw new IllegalArgumentException( "File: " + servicePath + " not found");
+		}
+
+		// read the RDF/XML file
+		m.read(in, "");
+		
 
 		String sPrefix ="PREFIX rdf: <" + RDF.getURI() + ">" + CRLF;
 

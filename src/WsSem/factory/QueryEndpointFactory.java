@@ -14,6 +14,7 @@ import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.RDF;
 
 import Exception.WebServiceException;
+import Tools.Tools;
 import WsSem.model.*
 ;
 public class QueryEndpointFactory{
@@ -75,6 +76,17 @@ public class QueryEndpointFactory{
 		String longitudeMax=String.valueOf(lgtMax);
 		String longitudeMin=String.valueOf(lgtMin);
 		
+		//String latitudeMax="44";
+		//String latitudeMin="40";
+		//String longitudeMax="4";
+		//String longitudeMin="3";
+		
+		
+		System.out.println("test latMax:"+latitudeMax);
+		System.out.println("test latMin:"+latitudeMin);
+		System.out.println("test lgtMax:"+longitudeMax);
+		System.out.println("test lgtMax:"+longitudeMin);
+		
 		
 		//String genre="http://fr.wikipedia.org/wiki/Jazz";
 		String genre1="Jazz";
@@ -106,7 +118,8 @@ public class QueryEndpointFactory{
 			item.setGenre(soln.get("?genre").toString());
 			item.setLatitude(Float.valueOf(soln.get("?lat").toString()));
 			item.setLongitude(Float.valueOf(soln.get("?long").toString()));
-			item.setParticipant(soln.get("?participant").toString());
+			item.setParticipant(Tools.getLastItemInLink(soln.get("?participant").toString()));
+			item.setWikilink(soln.get("?participant").toString());
 			listeEvenements.add(item);
 		}
 		return listeEvenements;

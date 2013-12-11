@@ -4,6 +4,7 @@ public class JsonEvenement {
 
 	String nom;
 	String genre;
+	String wikilink;
 	String participant;
 	String date;
 	float latitude;
@@ -20,6 +21,12 @@ public class JsonEvenement {
 	}
 	public void setGenre(String genre) {
 		this.genre = genre;
+	}
+	public String getWikilink() {
+		return wikilink;
+	}
+	public void setWikilink(String wikilink) {
+		this.wikilink = wikilink;
 	}
 	public String getParticipant() {
 		return participant;

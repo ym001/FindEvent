@@ -17,7 +17,7 @@ import WsSem.factory.QueryEndpointFactory;
 import WsSem.model.JsonEvenement;
 
 
-@Path("/EventService")
+@Path("/EvenementService")
 public class EventService {
 
 	@Path("/getAllEvenements")
@@ -27,9 +27,10 @@ public class EventService {
 		List<JsonEvenement> listeEvenement = new ArrayList<JsonEvenement>();
 		String stringResult = "";
 		
-		float latOrg = 53;
-		float lgtOrg = 40;
-		float distance = 2500;
+		float latOrg = Float.valueOf(uriInfo.getQueryParameters().getFirst("lat"));
+		float lgtOrg = Float.valueOf(uriInfo.getQueryParameters().getFirst("lgt"));
+		float distance = Float.valueOf(uriInfo.getQueryParameters().getFirst("distance"));
+		
 		ArrayList<Float> geoFenetre = Tools.createFenetreGeo(latOrg, lgtOrg, distance);
 		
 		try{
