@@ -1,0 +1,260 @@
+
+/***padding***/
+.padding-small{
+	padding:2px;
+}
+
+.padding-medium{
+	padding:5px;
+}
+
+.padding-large{
+	padding:15px;
+}
+
+.padding-xlarge{
+	padding:30px;
+}
+
+
+
+
+/***block, span, tab...style ***/
+span.tabSpace-small{
+	padding:0 10px;
+}
+
+span.tabSpace-medium{
+	padding:0 20px;
+}
+
+span.tabSpace-grand{
+	padding:0 50px;
+}
+
+span.tabSpace-xgrand{
+	padding:0 80px;
+}
+
+.grey-block {
+	margin: 2px;
+	border: solid 1px lightgrey;
+	padding:20px;
+}
+
+.white-block {
+	background-color: rgb(255, 255, 255);
+}
+
+
+/*** decoration ***/
+.non-decoration{
+	text-decoration:none;	
+}
+
+
+/*** margin ***/
+.margin-none{
+	margin:0px;
+}
+
+.margin-mini {
+	margin: 2px;
+}
+
+.margin-small {
+	margin: 5px;
+}
+
+.margin-medium {
+	margin: 10px;
+}
+
+.margin-grand {
+	margin: 15px;
+}
+
+.margin-xgrand {
+	margin: 25px;
+}
+
+
+/***div position ***/
+.dcenter{
+	width:50%;
+	margin:0 auto;
+}
+
+
+
+/*** diver ***/
+.hidden {
+	display: none;
+}
+
+.clear {
+	clear: both;
+}
+
+.aleft {
+	text-align: left;
+}
+
+.aright {
+	text-align: right;
+}
+
+.acenter {
+	text-align: center;
+}
+
+.fleft {
+	float: left;
+}
+
+.fright {
+	float: right;
+}
+
+.ui-match {
+	background-color: yellow;
+}
+
+.inline-block {
+	display: inline-block;
+}
+
+
+/*** a, button, image ***/
+.lien {
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.lien:hover {
+	text-decoration: none;
+}
+
+.image-grand {
+	width: 50px;
+}
+
+.image-mediumX {
+	width: 35px;
+}
+
+.image-medium {
+	width: 25px;
+}
+
+.image-small {
+	width: 15px;
+}
+
+.image-tiny {
+	width: 10px;
+}
+
+.image-clickable {
+	cursor: pointer;
+}
+
+.image-profile {
+	width: 50px;
+}
+
+/*** Couleur ***/
+.white-color {
+	color: white;
+}
+
+.couleur-bleu {
+	color: blue;
+}
+
+.couleur-noire {
+	color: black;
+}
+
+/***Background color ***/
+.light-orange {
+	background-color: rgba(255, 165, 0, 0.3);
+}
+
+/*** select ***/
+.select-small {
+	width: 50px;
+}
+
+.select-medium {
+	width: 100px;
+}
+
+.select-grand {
+	width: 150px;
+}
+
+/*** FontStyle ***/
+.fontBold{
+	font-weight:bold;
+}
+
+
+.font-margin-small {
+	margin: 5px;
+}
+
+.font-margin-medium {
+	margin: 10px;
+}
+
+.font-margin-grand {
+	margin: 15px;
+}
+
+.font-image-small {
+	font-size: 18px;
+	color: rgba(0, 0, 0, 0.8);
+}
+
+.font-image-medium {
+	font-size: 25px;
+	color: rgba(0, 0, 0, 0.8);
+}
+
+.font-image-grand {
+	font-size: 35px;
+	color: rgba(0, 0, 0, 0.8);
+}
+
+.font-image-xgrand {
+	font-size: 55px;
+	color: rgba(0, 0, 0, 0.8);
+}
+
+
+
+.font-xxgrand {
+	font-size: 24px;
+}
+
+.font-xgrand {
+	font-size: 18px;
+}
+
+.font-grand {
+	font-size: 16px;
+}
+
+.font-medium {
+	font-size: 12px;
+}
+
+.font-xmedium {
+	font-size: 14px;
+}
+
+.font-small {
+	font-size: 10px;
+}

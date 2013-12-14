@@ -109,7 +109,8 @@ public class QueryEndpointFactory{
 
 		ResultSet rs = qexec.execSelect() ;
 		while(rs.hasNext())
-		{
+		{			
+			
 			item = new JsonEvenement();
 			QuerySolution soln = rs.nextSolution();
 

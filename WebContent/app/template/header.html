@@ -1,0 +1,24 @@
+<div ng-controller="HeaderCtrl" class="header-block">
+	<!-- <div class="left">
+		<h4><b>Bienvenu,{{nom_user}} Vous êtes à {{ville_actu}}</b></h4>
+	</div> -->
+	
+	<div class="left">
+		<h4><b>Bienvenu au MUSIQUE EVENT</b></h4>
+	</div>
+	
+	<div class="right">
+		<div class="btn-group" ng-controller="HeaderCtrl">
+	  		<button class="btn btn-primary">Menu</button>
+  			<button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+    		<span class="caret"></span>
+  			</button>
+	  		 
+		  	<ul class="dropdown-menu" role="menu">
+			    <li ng-repeat="choice in items">
+			      <a ng-click="menuFunc(choice)">{{choice}}</a>
+			    </li>
+		 	 </ul>
+		</div>
+	
+</div>

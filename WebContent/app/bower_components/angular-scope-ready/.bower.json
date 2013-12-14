@@ -1,0 +1,13 @@
+{
+  "name": "angular-scope-ready",
+  "homepage": "https://github.com/yearofmoo/AngularJS-Scope.onReady",
+  "_release": "4780248732",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "4780248732b6907983fa42546293cb3f2c10ec44"
+  },
+  "_source": "https://github.com/yearofmoo/AngularJS-Scope.onReady.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/yearofmoo/AngularJS-Scope.onReady.git"
+}

@@ -1,0 +1,71 @@
+/***RootView***/
+body{
+	background-image:url('../images/music-background2.jpg');
+	padding-top:2px;
+	
+}
+
+.root-view{
+	/*margin-top:80px;*/
+}
+
+.mycontainer{
+	width:95%;
+	margin:auto;
+}
+
+.header-block{
+	position:relative;
+	margin-top:50px;
+	margin:0px auto;
+	padding:30px;
+	padding-bottom:50px;
+	border:solid rgba(0,0,0,0.5) 1px;
+	background-image: url(../images/music-background.jpg);
+	background-repeat:no-repeat;
+}
+
+.header-block .left{
+	float:left;	
+}
+
+.header-block .right{
+	text-align:left;
+	float:right;
+}
+
+
+/***Page***/
+.login{
+	position:relative;
+	margin-top:50px;
+	margin:0px auto;
+	padding:30px;
+	width:50%;
+}
+
+.accueil{
+	margin:0px auto;
+	padding:30px;
+	border:solid rgba(0,0,0,0.2) 1px;
+	/*background-image: url(../images/music-background2.jpg);*/
+	background-color:rgba(0,0,0,0.0);
+	background-repeat:no-repeat;
+}
+
+.evenements{
+	margin:0px auto;
+	padding:10px;
+	border:solid rgba(0,0,0,0.2) 1px;
+	/*background-image: url(../images/music-background2.jpg);*/
+	background-color:rgba(0,0,0,0.0);
+	background-repeat:no-repeat;
+}
+
+.style-block{
+	
+}
+
+.style-item{
+	margin:10px;
+}
