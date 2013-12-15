@@ -3,8 +3,8 @@ package WsSem.model;
 public class JsonEvenement {
 
 	String nom;
-	String genre;
-	String wikilink;
+	//String genre;
+	//String wikilink;
 	String participant;
 	String date;
 	float latitude;
@@ -16,7 +16,7 @@ public class JsonEvenement {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public String getGenre() {
+	/*public String getGenre() {
 		return genre;
 	}
 	public void setGenre(String genre) {
@@ -27,7 +27,7 @@ public class JsonEvenement {
 	}
 	public void setWikilink(String wikilink) {
 		this.wikilink = wikilink;
-	}
+	}*/
 	public String getParticipant() {
 		return participant;
 	}

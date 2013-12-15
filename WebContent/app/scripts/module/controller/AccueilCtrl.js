@@ -49,9 +49,6 @@
 			}*/
 		});
 
-
-
-
 		$scope.addUserStyles = function(style_id){
 			AccueilService.addUserStyles($scope.$info_user.nom, style_id).success(function(data, status){
 				$scope.stylesByUser = data.binding;
@@ -85,22 +82,32 @@
 			EvenementService.getAllEvenements($scope.latitude, $scope.longitude, $scope.distance).success(function(data, status){
 				$scope.markers = data.binding;
 				$scope.markersProperty = $scope.markers;	
-				console.log($scope.markers);
 			});
 		}
 
+		$scope.afficherGroupesByGenre = function(){
+				//les types musiques sont deja configure ds session
+				$location.path('/groupes');
+		}
+		
 		$scope.afficherEvenementsEnDetaille = function(){
 			$scope.$info_user.distance = $scope.distance;
 			webStorage.session.add('$info_user', $scope.$info_user);
 			$location.path('/festivales');
 		}
 		
+		
+		$scope.$watch('stylesByUser', function(){
+			$scope.$info_user.type_musique = $scope.stylesByUser;
+			webStorage.session.add('$info_user', $scope.$info_user);
+		}, true)
 
 		$scope.init = function(){
-			
 			//Get Liste styles from user
 			AccueilService.getStylesByUserName($scope.$info_user.nom).success(function(data, status){
 				$scope.stylesByUser = data.binding;
+				$scope.$info_user.type_musique = $scope.stylesByUser;
+				webStorage.session.add('$info_user', $scope.$info_user);
 			});
 			
 			//init mon adresse

@@ -49,8 +49,8 @@
 				 controller:"ConcertCtrl"
 			 },
 			 {  when:"/groupes", 
-				 templateUrl:"views/group.html", 
-				 controller:"GroupCtrl"
+				 templateUrl:"views/groupe.html", 
+				 controller:"GroupeCtrl"
 			 }, 
 			 {  when:"/nouveauCompte", 
 				 templateUrl:"views/nouveau_compte.html", 

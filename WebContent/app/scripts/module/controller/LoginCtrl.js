@@ -30,7 +30,7 @@
 						nom : $scope.nom,
 						pass : $scope.pass, 
 						type_musique : [], 
-						distance:0
+						distance:20
 					});
 					
 					//WS freeipgeo

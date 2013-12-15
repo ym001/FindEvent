@@ -26,7 +26,7 @@
 				             {field:'date', displayName:'Date'},
 				             {field:'genre', displayName:'Genre de musique'}, 
 				             {field:'participant', displayName:'Artists Participants'},
-				             {field:'wikilink', displayName:'WikiLink', cellTemplate:'template/templateArtist.html'}, 
+				             {field:'wikilink', displayName:'WikiLink', cellTemplate:'template/templateEvenement.html'}, 
 				             ]
 		}
 
