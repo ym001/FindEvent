@@ -28,9 +28,10 @@ public class JamendoQueryMusicEvents{
 		  sQueries =sQueries + "PREFIX tags: <http://www.holygoat.co.uk/owl/redwood/0.1/tags/>" + CRLF;
 
 		  
-		  /*requette artiste : trouver un artiste à partir de son nom.*/
+		// requette artiste : trouver un artiste à partir de son nom.
 	      String artiste="";
 		  artiste="vincent j";
+	      //artiste = "Konshens";
 		  
 		  //artiste="vavrek";
 			System.out.println();
@@ -70,7 +71,7 @@ public class JamendoQueryMusicEvents{
                 qexec.close() ;
          }
 		  
-		  /*requette album : trouver les enregistrements télechargeable d'un artistes à partir de son numero d'album sur jamendo*/
+		 /* requette album : trouver les enregistrements télechargeable d'un artistes à partir de son numero d'album sur jamendo
 		  
 			System.out.println();
 			System.out.println("Requette album");
@@ -123,7 +124,11 @@ public class JamendoQueryMusicEvents{
                 qexec.close() ;
          }
 		  	  
-		  /*requette genre : trouver les artistes ayant fait des albums de rock et de punk*/
+		 */
+		  
+		  
+		  //requette genre : trouver les artistes ayant fait des albums de rock et de punk
+		  
 		      System.out.println();
 			  System.out.println("Requette genre");
 			  System.out.println();
@@ -148,11 +153,18 @@ public class JamendoQueryMusicEvents{
 			  sWhere="?artist a mo:MusicArtist ;";
 			  sWhere=sWhere + " foaf:name ?name ;";
 			  sWhere=sWhere + " foaf:made ?album .";
-			  sWhere=sWhere + " ?album tags:taggedWithTag ?tag .";		
-			  sWhere=sWhere + "FILTER(?tag=<http://dbtune.org/jamendo/tag/"+tag1+"> || ?tag=<http://dbtune.org/jamendo/tag/"+tag2+">)";		
+			  sWhere=sWhere + " ?album tags:taggedWithTag ?tag .";	
+//			  sWhere=sWhere + "OPTIONAL {?artist foaf:homepage ?homepage }";
+//			  sWhere=sWhere + "OPTIONAL {?artist foaf:img ?img }";
+//			  sWhere=sWhere + "OPTIONAL {?artist foaf:based_near ?based }";
+//			  sWhere=sWhere + "OPTIONAL {?artist foaf:made ?album }";
+//			  sWhere=sWhere + "OPTIONAL {?artist mo:biography ?bio }";
+			  
+			  
+			  
+			  String sFilter = "FILTER(?tag=<http://dbtune.org/jamendo/tag/"+tag1+"> || ?tag=<http://dbtune.org/jamendo/tag/"+tag2+">)";		
 			
-			 
-			  sQueries = sQueries+ "WHERE { "+sWhere+" } ";
+			  sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ";
 				 			  
 		      qexec = QueryExecutionFactory.sparqlService(service, sQueries);
 			  try {	             
@@ -164,6 +176,13 @@ public class JamendoQueryMusicEvents{
 						System.out.println("artiste : "+soln.get("?artist"));
 						System.out.println("nom : "+soln.get("?name"));
 						System.out.println("tag : "+soln.get("?tag"));
+						
+//						System.out.println("biographie : "+soln.get("?bio"));
+//						System.out.println("homepage : "+soln.get("?homepage"));
+//						System.out.println("image : "+soln.get("?img"));
+//						System.out.println("lieu de résidence  : "+soln.get("?based"));
+//						System.out.println("album  : "+soln.get("?album"));
+						
 						System.out.println();
 					}
 			 }
@@ -171,6 +190,11 @@ public class JamendoQueryMusicEvents{
 	                qexec.close() ;
 	         }
 			 
+		  
+		  
+		  
+		  
+		  
 		  
 	}
 

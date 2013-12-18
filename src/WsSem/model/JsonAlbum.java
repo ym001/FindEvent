@@ -2,41 +2,48 @@ package WsSem.model;
 
 public class JsonAlbum {
 	
-	String titre;
-	String datece;
-	String datadc;
-	String lien;
-	String tag; //c'est un lien
+	String idJamendo;
+	String title;
+	String datedc;
+	String imgAlbum;
+	String lienTelecharge;
+	String tag;
 	
-	public String getTitre() {
-		return titre;
-	}
-	public void setTitre(String titre) {
-		this.titre = titre;
-	}
-	public String getDatece() {
-		return datece;
-	}
-	public void setDatece(String datece) {
-		this.datece = datece;
-	}
-	public String getDatadc() {
-		return datadc;
-	}
-	public void setDatadc(String datadc) {
-		this.datadc = datadc;
-	}
-	public String getLien() {
-		return lien;
-	}
-	public void setLien(String lien) {
-		this.lien = lien;
-	}
 	public String getTag() {
 		return tag;
 	}
 	public void setTag(String tag) {
 		this.tag = tag;
+	}
+	public String getIdJamendo() {
+		return idJamendo;
+	}
+	public void setIdJamendo(String idJmendo) {
+		this.idJamendo = idJmendo;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getDatedc() {
+		return datedc;
+	}
+	public void setDatedc(String datedc) {
+		this.datedc = datedc;
+	}
+	public String getImgAlbum() {
+		return imgAlbum;
+	}
+	public void setImgAlbum(String imgAlbum) {
+		this.imgAlbum = imgAlbum;
+	}
+	public String getLienTelecharge() {
+		return lienTelecharge;
+	}
+	public void setLienTelecharge(String lienTelecharge) {
+		this.lienTelecharge = lienTelecharge;
 	}
 	
 	

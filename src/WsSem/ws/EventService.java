@@ -14,12 +14,86 @@ import Exception.WebServiceException;
 import Tools.Tools;
 import WsSem.factory.JsonResultFactory;
 import WsSem.factory.QueryEndpointFactory;
+import WsSem.model.JsonAlbum;
 import WsSem.model.JsonArtist;
 import WsSem.model.JsonEvenement;
+import WsSem.model.JsonGroupe;
 
 
 @Path("/EvenementService")
 public class EventService {
+
+	
+	@Path("getAlbumsByArtiste")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getAlbumsByArtiste(@Context UriInfo uriInfo){
+
+		String idJamendo = uriInfo.getQueryParameters().getFirst("idJamendo");
+		List<JsonAlbum> listeAblum = new ArrayList<JsonAlbum>();
+		String stringResult = "";
+
+		try{
+			listeAblum = QueryEndpointFactory.getAlbumsByArtiste(idJamendo);
+			stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("200", "success", listeAblum);
+		}catch(Exception e){
+			e.printStackTrace();
+			stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("500", "fail", null);
+		}finally{
+			//QueryEndpointFactory.closeQueryExe();
+		}
+		return stringResult;
+	}
+	
+	
+	
+	
+	@Path("getAlbumById")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getAlbumById(@Context UriInfo uriInfo){
+
+		String idJamendo = uriInfo.getQueryParameters().getFirst("idJamendo");
+		List<JsonAlbum> listeAblum = new ArrayList<JsonAlbum>();
+		String stringResult = "";
+
+		try{
+			listeAblum = QueryEndpointFactory.getAlbumById(idJamendo);
+			stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("200", "success", listeAblum);
+		}catch(Exception e){
+			e.printStackTrace();
+			stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("500", "fail", null);
+		}finally{
+			//QueryEndpointFactory.closeQueryExe();
+		}
+		return stringResult;
+	}
+
+	
+	@Path("getGroupesByGenre")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getGroupesByGenre(@Context UriInfo uriInfo){
+
+		String genre1 = uriInfo.getQueryParameters().getFirst("genre1");
+		String genre2 = uriInfo.getQueryParameters().getFirst("genre2");
+		String genre3 = uriInfo.getQueryParameters().getFirst("genre3");
+		String genre4 = uriInfo.getQueryParameters().getFirst("genre4");
+		List<JsonGroupe> listeGroupes = new ArrayList<JsonGroupe>();
+		String stringResult = "";
+		try{
+			listeGroupes = QueryEndpointFactory.getGroupesByGenres(genre1, genre2, genre3, genre4);
+			stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("200", "success", listeGroupes);
+		}catch(Exception e){
+			e.printStackTrace();
+			stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("500", "fail", null);
+		}finally{
+			//QueryEndpointFactory.closeQueryExe();
+		}
+		return stringResult;
+	}
+	
+	
 
 	@Path("getArtistsByGenre")
 	@GET
@@ -34,7 +108,7 @@ public class EventService {
 		String stringResult = "";
 
 		try{
-			listeArtistes = QueryEndpointFactory.getArtistes(genre1, genre2, genre3, genre4);
+			listeArtistes = QueryEndpointFactory.getArtistesByGenres(genre1, genre2, genre3, genre4);
 			stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("200", "success", listeArtistes);
 		}catch(Exception e){
 			e.printStackTrace();
@@ -44,7 +118,6 @@ public class EventService {
 		}
 		return stringResult;
 	}
-
 
 
 	@Path("/getAllEvenements")
@@ -58,7 +131,6 @@ public class EventService {
 		float distance = Float.valueOf(uriInfo.getQueryParameters().getFirst("distance"));
 
 		ArrayList<Float> geoFenetre = Tools.createFenetreGeo(latOrg, lgtOrg, distance);
-
 		try{
 			listeEvenement=QueryEndpointFactory.getAllEvenements(geoFenetre.get(0), geoFenetre.get(1), geoFenetre.get(2), geoFenetre.get(3));
 			stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("200", "success", listeEvenement);
@@ -68,9 +140,7 @@ public class EventService {
 		}finally{
 			//QueryEndpointFactory.closeQueryExe();
 		}
-
 		return stringResult;
-
 	}
 
 }

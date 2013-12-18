@@ -16,7 +16,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 
 public class LocalQueryMusicEvents {
 	public static final String CRLF = System.getProperty("line.separator") ;
-	
+
 
 	public static void main(String[] args) {
 		String sWhere="";
@@ -38,7 +38,7 @@ public class LocalQueryMusicEvents {
 		sPrefix =sPrefix+ "PREFIX foaf:  <http://xmlns.com/foaf/0.1/>" + CRLF;
 		sPrefix =sPrefix+ "PREFIX owl: <http://www.w3.org/2002/07/owl#>" + CRLF;
 		sPrefix =sPrefix+ "PREFIX tags: <http://www.holygoat.co.uk/owl/redwood/0.1/tags/>" + CRLF;
-		  
+
 		sPrefix =sPrefix+ "PREFIX owl: <http://www.w3.org/2002/07/owl#>" + CRLF;
 		sPrefix =sPrefix+ "PREFIX meo: <http://www.musicevents.com/#>" + CRLF;
 		sPrefix =sPrefix+ "PREFIX foaf: <http://xmlns.com/foaf/0.1/>" + CRLF;
@@ -53,8 +53,8 @@ public class LocalQueryMusicEvents {
 		sPrefix =sPrefix+ "PREFIX schema: <http://schema.org/Event>" + CRLF;
 		sPrefix =sPrefix+ "PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>" + CRLF;
 		//sQueries =sQueries + "PREFIX tags: <http://www.holygoat.co.uk/owl/redwood/0.1/tags/>" + CRLF;
-		
-/* requette artiste : trouve un artiste à partir de son nom */
+
+		// requette artiste : trouve un artiste à partir de son nom
 		System.out.println();
 		System.out.println("Requette artiste");
 		System.out.println();
@@ -62,7 +62,7 @@ public class LocalQueryMusicEvents {
 
 		String sSelect="*";
 		sQueries=sPrefix+ "SELECT " + sSelect + CRLF;
-		  
+
 		//sWhere="?artist a meo:Artist ?x;";
 		//sWhere=sWhere + "?artiste meo:Artiste \""+artiste+"\" ."+ CRLF;
 		//sWhere=sWhere + "?artiste meo:Artiste $a."+ CRLF;
@@ -71,56 +71,56 @@ public class LocalQueryMusicEvents {
 		sWhere=sWhere + "OPTIONAL {?artiste foaf:homepage ?homepage }"+ CRLF;
 		sWhere=sWhere + "OPTIONAL {?artiste meo:aPourGenre ?genre }"+ CRLF;
 		sWhere=sWhere + "OPTIONAL {?artiste rdfs:seeAlso ?seealso }"+ CRLF;
-		
+
 		//sWhere=sWhere + " foaf:based_near ?based ;"+ CRLF;
-		  //sWhere=sWhere + " owl:sameAs ?sameas ;";
-		  //sWhere=sWhere + " mo:biography ?bio ;";
-		  
+		//sWhere=sWhere + " owl:sameAs ?sameas ;";
+		//sWhere=sWhere + " mo:biography ?bio ;";
+
 		//sWhere=sWhere + " foaf:img ?img ;"+ CRLF;
 		//sWhere=sWhere + " foaf:made ?made ;"+ CRLF;
-		  //sWhere=sWhere + " tags:taggedWithTag ?tag ;";		
-		
+		//sWhere=sWhere + " tags:taggedWithTag ?tag ;";		
+
 		sFilter="FILTER (?name=\""+artiste+"\"^^xsd:string)"+ CRLF;
 		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ORDER BY ?name LIMIT 20 ";
-			 
-			 
+
+
 		//System.out.println(sQueries);	  	  
-		  
-	    //QueryExecution qexec = QueryExecutionFactory.sparqlService(service, sQueries);
+
+		//QueryExecution qexec = QueryExecutionFactory.sparqlService(service, sQueries);
 		QueryExecution qexec = QueryExecutionFactory.create(sQueries, m);
 
 		try {	             
-				ResultSet rs = qexec.execSelect() ;
-				
-				while(rs.hasNext())
-				{
-					QuerySolution soln = rs.nextSolution();
-					System.out.println("artiste : "+artiste);
-					System.out.println("nick : "+soln.get("?nick"));
-					System.out.println("homepage : "+soln.get("?homepage"));
-					System.out.println("genre : "+soln.get("?genre"));
-					System.out.println("sealso : "+soln.get("?seealso"));
-					System.out.println();
+			ResultSet rs = qexec.execSelect() ;
 
-				}
-		 }
-		 finally {
-                qexec.close() ;
-         }
-		
+			while(rs.hasNext())
+			{
+				QuerySolution soln = rs.nextSolution();
+				System.out.println("artiste : "+artiste);
+				System.out.println("nick : "+soln.get("?nick"));
+				System.out.println("homepage : "+soln.get("?homepage"));
+				System.out.println("genre : "+soln.get("?genre"));
+				System.out.println("sealso : "+soln.get("?seealso"));
+				System.out.println();
+
+			}
+		}
+		finally {
+			qexec.close() ;
+		}
+
 		System.out.println();
 		System.out.println("fin requette artiste");
 		System.out.println();
 
-		
-/*requette groupe : trouve un groupe à partir de son nom.*/
+
+		//requette groupe : trouve un groupe à partir de son nom.
 		System.out.println();
 		System.out.println("Requette groupe");
 		System.out.println();
-		
+
 		sSelect="*";
 		sQueries=sPrefix+"SELECT " + sSelect + CRLF;
-		  
+
 		String groupe ="IAM";
 		//String homepage ="http://www.iam.tm.fr/";
 		sWhere="";
@@ -130,50 +130,49 @@ public class LocalQueryMusicEvents {
 		sWhere=sWhere + "OPTIONAL {?groupe foaf:homepage ?homepage}"+ CRLF;
 		sWhere=sWhere + "OPTIONAL {?groupe foaf:img ?img }"+ CRLF;
 		sWhere=sWhere + "OPTIONAL {?genre skos:notation ?n} "+ CRLF;
-		
-		 
+
+
 		sFilter="FILTER (?label=\""+groupe+"\"^^xsd:string)"+ CRLF;
 		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ORDER BY ?name LIMIT 20 ";
-			 
+
 		// System.out.println(sQueries);	  	  
-		  
+
 		qexec = QueryExecutionFactory.create(sQueries, m);
 
 		try {	             
-				ResultSet rs = qexec.execSelect() ;
-				
-				while(rs.hasNext())
-				{
-					QuerySolution soln = rs.nextSolution();
-					//System.out.println("groupe : "+groupe);
-					System.out.println("groupe : "+groupe);
-					//System.out.println("groupemusic : "+soln.get("?groupemusic"));
-					System.out.println("genre : "+soln.get("?genre"));
-					System.out.println("membre : "+soln.get("?membre"));
-					System.out.println("homepage : "+soln.get("?homepage"));
-					System.out.println("image : "+soln.get("?img"));
-					System.out.println();
+			ResultSet rs = qexec.execSelect() ;
 
-					//System.out.println("sealso : "+soln.get("?seealso"));
-					
-				}
-		 }
-		 finally {
-                qexec.close() ;
-         }
-		 
+			while(rs.hasNext())
+			{
+				QuerySolution soln = rs.nextSolution();
+				System.out.println("groupe : "+groupe);
+				//System.out.println("groupemusic : "+soln.get("?groupemusic"));
+				System.out.println("genre : "+soln.get("?genre"));
+				System.out.println("membre : "+soln.get("?membre"));
+				System.out.println("homepage : "+soln.get("?homepage"));
+				System.out.println("image : "+soln.get("?img"));
+				System.out.println();
+
+				//System.out.println("sealso : "+soln.get("?seealso"));
+
+			}
+		}
+		finally {
+			qexec.close() ;
+		}
+
 		System.out.println();
 		System.out.println("fin requette groupe");
 		System.out.println();
-		
-/*requette lieu : trouver un lieu à partir de son nom*/
+
+		//requette lieu : trouver un lieu à partir de son nom
 		System.out.println();
 		System.out.println("Requette lieu");
 		System.out.println();
-		
+
 		sSelect="*";
 		sQueries=sPrefix+"SELECT " + sSelect + CRLF;
-		  
+
 		String lieu ="Rockstore";
 		sWhere="";
 		sWhere=sWhere + "?lieu rdfs:label ?label."+ CRLF;
@@ -186,52 +185,52 @@ public class LocalQueryMusicEvents {
 		//sWhere=sWhere + "?lieu address:addressLocality ?addresslocality."+ CRLF;
 		//Where=sWhere + "?lieu address:postalCode ?postalcode."+ CRLF;
 		//sWhere=sWhere + "?lieu address:addressCountry ?addresscountry."+ CRLF;
-		
-		 
+
+
 		sFilter="FILTER (?label=\""+lieu+"\"^^xsd:string)"+ CRLF;
 		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ORDER BY ?name LIMIT 20 ";			 
-		 //System.out.println(sQueries);	  	  
-		  
+		//System.out.println(sQueries);	  	  
+
 		qexec = QueryExecutionFactory.create(sQueries, m);
 
 		try {	             
-				ResultSet rs = qexec.execSelect() ;
-				
-				while(rs.hasNext())
-				{
-					QuerySolution soln = rs.nextSolution();
-					System.out.println("lieu : "+soln.get("?label"));
-					System.out.println("homepage : "+soln.get("?homepage"));
-					System.out.println("commune : "+soln.get("?commune"));
-					System.out.println("latitude : "+soln.get("?lat"));
-					System.out.println("longitude : "+soln.get("?long"));
-					
-					
-				}
-		 }
-		 finally {
-                qexec.close() ;
-         }
-		 
+			ResultSet rs = qexec.execSelect() ;
+
+			while(rs.hasNext())
+			{
+				QuerySolution soln = rs.nextSolution();
+				System.out.println("lieu : "+soln.get("?label"));
+				System.out.println("homepage : "+soln.get("?homepage"));
+				System.out.println("commune : "+soln.get("?commune"));
+				System.out.println("latitude : "+soln.get("?lat"));
+				System.out.println("longitude : "+soln.get("?long"));
+
+
+			}
+		}
+		finally {
+			qexec.close() ;
+		}
+
 		System.out.println();
 		System.out.println("fin requette lieu");
 		System.out.println();
-		
-		
-		
-		
-		
-		
-		
-		
-/*requette festival : trouver un festival à partir de son nom*/
+
+
+
+
+
+
+
+
+		//requette festival : trouver un festival à partir de son nom
 		System.out.println();
 		System.out.println("Requette festival");
 		System.out.println();
-		
+
 		sSelect="*";
 		sQueries=sPrefix+"SELECT " + sSelect + CRLF;
-		  
+
 		String festival="Garance Reggae Festival";
 		sWhere="";
 		//sWhere=sWhere + "?festival foaf:name \""+festival+"\" ;"+ CRLF;
@@ -241,56 +240,56 @@ public class LocalQueryMusicEvents {
 		sWhere=sWhere + "OPTIONAL {?festival schema:endDate ?enddate}"+ CRLF;
 		sWhere=sWhere + "OPTIONAL {?festival meo:seDerouleA ?sederoulea}"+ CRLF;
 		sWhere=sWhere + "OPTIONAL {?festival meo:seComposeDe ?secomposede}"+ CRLF;
-		
+
 		//sWhere=sWhere + "?festival meo:aPourParticipant ?apourparticipant."+ CRLF;
 		//sWhere=sWhere + "?festival dc:date ?date."+ CRLF;
-				 
+
 		sFilter="FILTER (?label=\""+festival+"\"^^xsd:string)"+ CRLF;
 		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ORDER BY ?name LIMIT 20 ";				 
 		// System.out.println(sQueries);	  	  
-		  
+
 		qexec = QueryExecutionFactory.create(sQueries, m);
 
 		try {	             
-				ResultSet rs = qexec.execSelect() ;
-				
-				while(rs.hasNext())
-				{
-					QuerySolution soln = rs.nextSolution();
-					//System.out.println("groupe : "+groupe);
-					System.out.println("festival : "+soln.get("?label"));
-					System.out.println("début : "+soln.get("?startdate"));
-					System.out.println("fin : "+soln.get("?enddate"));
-					System.out.println("homepage : "+soln.get("?homepage"));
-					System.out.println("se déroule à : "+soln.get("?sederoulea"));
-					System.out.println("se compose de : "+soln.get("?secomposede"));					
-					System.out.println("");					
-					
-				}
-		 }
-		 finally {
-                qexec.close() ;
-         }
-		 
+			ResultSet rs = qexec.execSelect() ;
+
+			while(rs.hasNext())
+			{
+				QuerySolution soln = rs.nextSolution();
+				//System.out.println("groupe : "+groupe);
+				System.out.println("festival : "+soln.get("?label"));
+				System.out.println("début : "+soln.get("?startdate"));
+				System.out.println("fin : "+soln.get("?enddate"));
+				System.out.println("homepage : "+soln.get("?homepage"));
+				System.out.println("se déroule à : "+soln.get("?sederoulea"));
+				System.out.println("se compose de : "+soln.get("?secomposede"));					
+				System.out.println("");					
+
+			}
+		}
+		finally {
+			qexec.close() ;
+		}
+
 		System.out.println();
 		System.out.println("fin requette festival");
 		System.out.println();
-		
-		
-		
-/*requette latitude longitude : trouve un évènement en fonction d'une fenetre de latitude et de longitude*/
+
+
+
+		//requette latitude longitude : trouve un évènement en fonction d'une fenetre de latitude et de longitude
 		System.out.println();
 		System.out.println("Requette latitude");
 		System.out.println();
-		
+
 		String latitudeMax="44";
 		String latitudeMin="40";
 		String longitudeMax="4";
 		String longitudeMin="3";
-		
+
 		sSelect="*";
 		sQueries=sPrefix+"SELECT " + sSelect + CRLF;
-		
+
 		sWhere="";
 		sWhere=sWhere + "OPTIONAL {?lieu rdfs:label ?label }"+ CRLF;
 		sWhere=sWhere + "OPTIONAL {?lieu foaf:homepage ?homepage }"+ CRLF;
@@ -299,52 +298,52 @@ public class LocalQueryMusicEvents {
 		sWhere=sWhere + "?lieu gps:long ?long ."+ CRLF;	
 		sFilter="FILTER ( xsd:double(?lat) > "+latitudeMin+" && xsd:double(?lat) < "+latitudeMax+" && xsd:double(?long) > "+longitudeMin+" && xsd:double(?long) < "+longitudeMax+" )"+ CRLF;
 		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ORDER BY ?name LIMIT 20 ";
-			 
+
 		//System.out.println(sQueries);	  	  
-		  
+
 		qexec = QueryExecutionFactory.create(sQueries, m);
 
 		try {ResultSet rs = qexec.execSelect() ;
-		
-			while(rs.hasNext())
-			{
+
+		while(rs.hasNext())
+		{
 			QuerySolution soln = rs.nextSolution();
 			System.out.println("lieu : "+soln.get("?label"));
 			System.out.println("homepage : "+soln.get("?homepage"));
 			System.out.println("commune : "+soln.get("?commune"));
 			System.out.println("latitude : "+soln.get("?lat"));
 			System.out.println("longitude : "+soln.get("?long"));
-			}
-		 }
-		 finally {
-                qexec.close() ;
-         }
-		 
+		}
+		}
+		finally {
+			qexec.close() ;
+		}
+
 		System.out.println();
 		System.out.println("fin requette latitude");
 		System.out.println();
-		
-		
-		
-		
-		
 
-		
-/*requette latitude et date : retrouve un évènement dans une fenetre de lat et long à partir d'une date.*/
-		
+
+
+
+
+
+
+		//requette latitude et date : retrouve un évènement dans une fenetre de lat et long à partir d'une date.
+
 		System.out.println();
 		System.out.println("Requette latitude et date");
 		System.out.println();
 
 		sSelect="*";
 		sQueries=sPrefix+"SELECT " + sSelect + CRLF;
-		  
+
 		latitudeMax="44";
 		latitudeMin="40";
 		longitudeMax="4";
 		longitudeMin="3";
 		//String genre="http://fr.wikipedia.org/wiki/Jazz";
-		
+
 		String date="2012-07-26";
 		sWhere="";
 		sWhere=sWhere + "OPTIONAL {?event meo:aPourParticipant ?participant}"+ CRLF;
@@ -353,45 +352,50 @@ public class LocalQueryMusicEvents {
 		sWhere=sWhere + "?event gps:lat ?lat."+ CRLF;
 		sWhere=sWhere + "?event gps:long ?long ."+ CRLF;	
 		//sWhere=sWhere + "?event mo:genre ?genre ."+ CRLF;
-	//ne fonctionne pas	sWhere=sWhere + "?event meo:aPourGenre ?genre ."+ CRLF;
+		//ne fonctionne pas	sWhere=sWhere + "?event meo:aPourGenre ?genre ."+ CRLF;
 		sFilter="FILTER ( xsd:double(?lat) > "+latitudeMin+" && xsd:double(?lat) < "+latitudeMax+" && xsd:double(?long) > "+longitudeMin+" && xsd:double(?long) < "+longitudeMax+" && xsd:date(?date) > \""+date+"\"^^xsd:date )"+ CRLF;
 		//&& (?genre=\""+genre1+"\"^^xsd:string || ?genre=\""+genre2+"\"^^xsd:string )
 		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ORDER BY ?name LIMIT 20 ";
-			 
-//		System.out.println(sQueries);	  	  
-		  
+
+		//		System.out.println(sQueries);	  	  
+
 		qexec = QueryExecutionFactory.create(sQueries, m);
 
 		try {ResultSet rs = qexec.execSelect() ;
-		
-			while(rs.hasNext())
-			{
+
+		while(rs.hasNext())
+		{
 			QuerySolution soln = rs.nextSolution();
 			System.out.println("nom : "+soln.get("?label"));
 			System.out.println("a pour participant : "+soln.get("?participant"));
 			System.out.println("date : "+soln.get("?date"));
 			System.out.println("latitude : "+soln.get("?lat"));
 			System.out.println("longitude : "+soln.get("?long"));
-				
-			}
-		 }
-		 finally {
-                qexec.close() ;
-         }
-		 
+
+		}
+		}
+		finally {
+			qexec.close() ;
+		}
+
 		System.out.println();
 		System.out.println("fin requette latitude et date");
 		System.out.println();
+
 		
-/*requette participant : retrouve les participants d'un évènement musical à partir de son nom.*/
 		
+		
+		
+		
+		//requette participant : retrouve les participants d'un évènement musical à partir de son nom.
+
 		System.out.println();
 		System.out.println("Requette participant à un évènement");
 		System.out.println();
 		String event="Garance Reggae Festival 2013 j2";
 		sSelect="*";
 		sQueries=sPrefix+"SELECT " + sSelect + CRLF;
-		
+
 		sWhere="";
 		sWhere=sWhere + "?event rdfs:label ?label ."+ CRLF;
 		sWhere=sWhere + "OPTIONAL {?event dc:date ?date}"+ CRLF;
@@ -399,73 +403,78 @@ public class LocalQueryMusicEvents {
 		sWhere=sWhere + "OPTIONAL {?event meo:aPourParticipant ?participant}"+ CRLF;
 		sFilter="FILTER (?label=\""+event+"\"^^xsd:string)"+ CRLF;
 		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ORDER BY ?name LIMIT 20 ";				 		  
-		
-		
+
+
 		qexec = QueryExecutionFactory.create(sQueries, m);
 		//System.out.println(sQueries);	  	  
 
 		try {ResultSet rs = qexec.execSelect() ;
-		
-			while(rs.hasNext())
-			{
+
+		while(rs.hasNext())
+		{
 			QuerySolution soln = rs.nextSolution();
 			System.out.println("lieu : "+soln.get("?event"));
 			System.out.println("date : "+soln.get("?date"));
 			System.out.println("genre : "+soln.get("?genre"));
 			System.out.println("a pour participant : "+soln.get("?participant"));				
-			}
-		 }
-		 finally {
-                qexec.close() ;
-         }
-		 
+		}
+		}
+		finally {
+			qexec.close() ;
+		}
+
 		System.out.println();
 		System.out.println("fin requette participant");
 		System.out.println();
 		
-		/* requette artiste : trouve les artistes pour un genre ou un autre genre*/
-				System.out.println();
-				System.out.println("Requette trouve les artistes pour un genre ou un autre genre");
-				System.out.println();
-				
-				String genre1="Jazz";
-				String genre2="Funk";
+		
+		
+		
+		
 
-				sSelect="*";
-				sQueries=sPrefix+ "SELECT " + sSelect + CRLF;
-				sWhere="";
-				sWhere=sWhere + "?artiste meo:aPourGenre ?genre "+ CRLF;
-				sWhere=sWhere + "OPTIONAL {?artiste foaf:name ?name}"+ CRLF;
-				sWhere=sWhere + "OPTIONAL {?artiste foaf:nick ?nick}"+ CRLF;
-				sWhere=sWhere + "OPTIONAL {?artiste foaf:homepage ?homepage }"+ CRLF;
-				sWhere=sWhere + "OPTIONAL {?artiste rdfs:seeAlso ?seealso }"+ CRLF;
-				
-				
-				sFilter="FILTER (?genre=\""+genre1+"\"^^xsd:string || ?genre=\""+genre2+"\"^^xsd:string)"+ CRLF;
-				sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ORDER BY ?name LIMIT 20 ";
-				//System.out.println(sQueries);	  	  
+		//requette artiste : trouve les artistes pour un genre ou un autre genre
+		System.out.println();
+		System.out.println("Requette trouve les artistes pour un genre ou un autre genre");
+		System.out.println();
 
-				qexec = QueryExecutionFactory.create(sQueries, m);
-				try {	             
-						ResultSet rs = qexec.execSelect() ;
-						while(rs.hasNext())
-						{
-							QuerySolution soln = rs.nextSolution();
-							System.out.println("artiste : "+soln.get("?name"));
-							System.out.println("nick : "+soln.get("?nick"));
-							System.out.println("homepage : "+soln.get("?homepage"));
-							System.out.println("genre : "+soln.get("?genre"));
-							System.out.println("sealso : "+soln.get("?seealso"));
-							System.out.println();
-						}
-				 }
-				 finally {
-		                qexec.close() ;
-		         }
-				
+		String genre1="Jazz";
+		String genre2="Funk";
+
+		sSelect="*";
+		sQueries=sPrefix+ "SELECT " + sSelect + CRLF;
+		sWhere="";
+		sWhere=sWhere + "?artiste meo:aPourGenre ?genre "+ CRLF;
+		sWhere=sWhere + "OPTIONAL {?artiste foaf:name ?name}"+ CRLF;
+		sWhere=sWhere + "OPTIONAL {?artiste foaf:nick ?nick}"+ CRLF;
+		sWhere=sWhere + "OPTIONAL {?artiste foaf:homepage ?homepage }"+ CRLF;
+		sWhere=sWhere + "OPTIONAL {?artiste rdfs:seeAlso ?seealso }"+ CRLF;
+
+
+		sFilter="FILTER (?genre=\""+genre1+"\"^^xsd:string || ?genre=\""+genre2+"\"^^xsd:string)"+ CRLF;
+		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ORDER BY ?name LIMIT 20 ";
+		//System.out.println(sQueries);	  	  
+
+		qexec = QueryExecutionFactory.create(sQueries, m);
+		try {	             
+			ResultSet rs = qexec.execSelect() ;
+			while(rs.hasNext())
+			{
+				QuerySolution soln = rs.nextSolution();
+				System.out.println("artiste : "+soln.get("?name"));
+				System.out.println("nick : "+soln.get("?nick"));
+				System.out.println("homepage : "+soln.get("?homepage"));
+				System.out.println("genre : "+soln.get("?genre"));
+				System.out.println("sealso : "+soln.get("?seealso"));
 				System.out.println();
-				System.out.println("fin requette trouve les artistes pour un genre ou un autre genre");
-				System.out.println();
+			}
+		}
+		finally {
+			qexec.close() ;
+		}
+
+		System.out.println();
+		System.out.println("fin requette trouve les artistes pour un genre ou un autre genre");
+		System.out.println();
 	}
 
 }

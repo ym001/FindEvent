@@ -20,6 +20,7 @@ import WsSem.model.*
 public class QueryEndpointFactory{
 
 	private final static String CRLF = System.getProperty("line.separator") ;
+	public static final String serviceJamendo = "http://dbtune.org/jamendo/sparql/";
 	private final static String servicePath1 = "ressources/meo-model.rdf";
 	private final static String servicePath2 = "ressources/meo-data.rdf";
 	private static String sPrefix;
@@ -47,44 +48,39 @@ public class QueryEndpointFactory{
 		sPrefix =sPrefix+ "PREFIX lode: <http://linkedevents.org/ontology/>" + CRLF;
 		sPrefix =sPrefix+ "PREFIX schema: <http://schema.org/Event>" + CRLF;
 		sPrefix =sPrefix+ "PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>" + CRLF;
-
 		return sPrefix;
 	}
 
 
 	public static Model createMyModel(){
-
 		InputStream in1 = FileManager.get().open(servicePath1);
 		if (in1 == null) {
 			throw new IllegalArgumentException( "File: " + servicePath1 + " not found");
 		}
-
 		InputStream in2 = FileManager.get().open(servicePath2);
 		if (in2 == null) {
 			throw new IllegalArgumentException( "File: " + servicePath2 + " not found");
 		}
-
 		Model m = ModelFactory.createDefaultModel();
 		Model m2 = ModelFactory.createDefaultModel();
 		m.read(in1, "");
 		m2.read(in2, "");
 		m.add(m2);
-
 		return m;
 	}
-
+	
 	public static void closeQueryExe(){
 		qexec.close();
 	}
-	
-	//Requette artiste : trouve les artistes pour un genre ou un autre genre*/
-	public static List<JsonArtist> getArtistes(String genre1, String genre2, String genre3, String genre4){
 
+
+	//Requette groupes : trouve les groupes pour un genre ou un autre genre*/
+	public static List<JsonGroupe> getGroupesByGenres(String genre1, String genre2, String genre3, String genre4){
 		String sPrefix = createPrefix();
 		Model m = createMyModel();
-		List<JsonArtist> listeArtistes = new ArrayList<JsonArtist>();
-		JsonArtist item;
-		
+		List<JsonGroupe> listeGroupes = new ArrayList<JsonGroupe>();
+		JsonGroupe item;
+
 		String sSelect="*";
 		String sQueries=sPrefix+ "SELECT " + sSelect + CRLF;
 		String sWhere="";
@@ -93,25 +89,24 @@ public class QueryEndpointFactory{
 		sWhere=sWhere + "OPTIONAL {?artiste foaf:nick ?nick}"+ CRLF;
 		sWhere=sWhere + "OPTIONAL {?artiste foaf:homepage ?homepage }"+ CRLF;
 		sWhere=sWhere + "OPTIONAL {?artiste rdfs:seeAlso ?seealso }"+ CRLF;
-		
+
 		String sFilter = "";
 		if(genre1!=null||genre2!=null||genre3!=null||genre4!=null){
 			sFilter+= "FILTER(";
-				if(genre1!=null){
-					sFilter+="?genre=\""+genre1+"\"^^xsd:string";
-				}
-				if(genre2!=null){
-					sFilter+="||?genre=\""+genre2+"\"^^xsd:string";
-				}if(genre3!=null){
-					sFilter+="||?genre=\""+genre3+"\"^^xsd:string";
-				}
-				if(genre4!=null){
-					sFilter+="||?genre=\""+genre4+"\"^^xsd:string";
-				}
+			if(genre1!=null){
+				sFilter+="?genre=\""+genre1+"\"^^xsd:string";
+			}
+			if(genre2!=null){
+				sFilter+="||?genre=\""+genre2+"\"^^xsd:string";
+			}if(genre3!=null){
+				sFilter+="||?genre=\""+genre3+"\"^^xsd:string";
+			}
+			if(genre4!=null){
+				sFilter+="||?genre=\""+genre4+"\"^^xsd:string";
+			}
 			sFilter+=")";
 		}
-		
-		
+
 		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ORDER BY ?name";
 		//System.out.println(sQueries);	  	  
 
@@ -120,17 +115,171 @@ public class QueryEndpointFactory{
 		while(rs.hasNext())
 		{
 			QuerySolution soln = rs.nextSolution();
-			item = new JsonArtist();
+			item = new JsonGroupe();
 			item.setGenre(soln.get("?genre").toString());
 			item.setHomepage(soln.get("?homepage").toString());
 			item.setName(soln.get("?name").toString());
 			item.setNick(soln.get("?nick").toString());
 			item.setSeeAlso(soln.get("?seealso").toString());
-			listeArtistes.add(item);
+			listeGroupes.add(item);
+		}
+		return listeGroupes;
+	}
+
+	
+	//Requette albums: trouver les albums par selon un artiste
+	public static List<JsonAlbum> getAlbumsByArtiste(String idJamendoArtiste){
+
+		String sPrefix = createPrefix();
+		Model m = createMyModel();
+		List<JsonAlbum> listeAlbum = new ArrayList<JsonAlbum>();
+		JsonAlbum item;
+
+		String sSelect="*";
+		String sQueries=sPrefix + "SELECT " + sSelect + CRLF;	
+		String sWhere="?artist a mo:MusicArtist ;";
+		sWhere=sWhere + " foaf:name ?name ;";
+		sWhere=sWhere + " foaf:made ?album .";
+		sWhere=sWhere + "?album a mo:Record ;";
+		sWhere=sWhere + "dce:title ?title ;";
+		sWhere=sWhere + "dc:date ?datedc ;";
+		sWhere=sWhere + "mo:image ?imgAlbum ;";
+		sWhere=sWhere + "mo:available_as ?lien;";
+		sWhere=sWhere + "tags:taggedWithTag ?tag .";
+
+
+		String sFilter="FILTER(?artist=<http://dbtune.org/jamendo/artist/"+idJamendoArtiste+">)"; 
+
+		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ";
+		//System.out.println(sQueries);
+
+		qexec = QueryExecutionFactory.sparqlService(serviceJamendo, sQueries);             
+		ResultSet rs = qexec.execSelect() ;
+		while(rs.hasNext())
+		{
+			QuerySolution soln = rs.nextSolution();
+			item = new JsonAlbum();
+			item.setDatedc(soln.get("?datedc").toString());
+			item.setIdJamendo(soln.get("?album").toString());
+			item.setImgAlbum(soln.get("?imgAlbum").toString());
+			item.setLienTelecharge(soln.get("?lien").toString());
+			item.setTag( Tools.getLastItemInLink(soln.get("?tag").toString() ));
+			item.setTitle(Tools.getFirstTitle(soln.get("?title").toString()));
+			listeAlbum.add(item);
+			
+//			System.out.println("album : "+soln.get("?album"));
+//			System.out.println("title : "+soln.get("?title"));
+//			System.out.println("imageAlbum : "+soln.get("?imgAlbum"));
+//			System.out.println("datedc : "+soln.get("?datedc"));
+//			System.out.println("lien : "+soln.get("?lien"));
+//			System.out.println("tag : "+soln.get("?tag"));
+//			System.out.println();
+			
+		}
+		return listeAlbum;
+	}
+	
+
+	//Requette artiste : trouve les artistes pour un genre ou un autre genre*/
+	public static List<JsonArtist> getArtistesByGenres(String tag1, String tag2, String tag3, String tag4){
+
+		String sPrefix = createPrefix();
+		Model m = createMyModel();
+		List<JsonArtist> listeArtistes = new ArrayList<JsonArtist>();
+		JsonArtist item;
+
+		String sSelect="*";
+		String sQueries=sPrefix + "SELECT " + sSelect + CRLF;	
+		String sWhere="?artist a mo:MusicArtist ;";
+		sWhere=sWhere + " foaf:name ?name ;";
+		sWhere=sWhere + " foaf:made ?album .";
+		sWhere=sWhere + "?album a mo:Record ;";
+		sWhere=sWhere + "dce:title ?title .";
+		sWhere=sWhere + " ?album tags:taggedWithTag ?tag .";
+		sWhere=sWhere + "OPTIONAL {?artist foaf:homepage ?homepage }";
+		sWhere=sWhere + "OPTIONAL {?artist foaf:img ?imgArtist }";
+		sWhere=sWhere + "OPTIONAL {?artist foaf:based_near ?based }";
+		sWhere=sWhere + "OPTIONAL {?artist mo:biography ?bio }";
+
+
+		String sFilter = "";
+		if(tag1!=null||tag2!=null||tag3!=null||tag4!=null){
+			sFilter+= "FILTER(";
+			if(tag1!=null){
+				sFilter+="?tag=<http://dbtune.org/jamendo/tag/"+tag1+">";
+			}
+			if(tag2!=null){
+				sFilter+="||?tag=<http://dbtune.org/jamendo/tag/"+tag2+">";
+			}if(tag3!=null){
+				sFilter+="||?tag=<http://dbtune.org/jamendo/tag/"+tag3+">";
+			}
+			if(tag4!=null){
+				sFilter+="||?tag=<http://dbtune.org/jamendo/tag/"+tag4+">";
+			}
+			sFilter+=")";
 		}
 
+		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ";
+		//System.out.println(sQueries);
+
+		qexec = QueryExecutionFactory.sparqlService(serviceJamendo, sQueries);             
+		ResultSet rs = qexec.execSelect() ;
+		while(rs.hasNext())
+		{
+			QuerySolution soln = rs.nextSolution();
+			item = new JsonArtist();
+
+			item.setIdJamendo( Tools.getLastItemInLink(soln.get("?artist").toString()) );
+			if(soln.get("?homepage")!=null){item.setHomepage(soln.get("?homepage").toString());}
+			item.setName( Tools.getFirstTitle(soln.get("?name").toString()) );
+			if(soln.get("?bio")!=null)item.setBio(soln.get("?bio").toString());
+			if(soln.get("?imgArtist")!=null)item.setImg(soln.get("?imgArtist").toString());
+			listeArtistes.add(item);
+		}
 		return listeArtistes;
 	}
+
+
+	//Requette album: trouver les infos d'albums selon un artist
+	public static List<JsonAlbum> getAlbumById(String idJamendoAlbum){
+		String sPrefix = createPrefix();
+		Model m = createMyModel();
+		List<JsonAlbum> listeAlbums = new ArrayList<JsonAlbum>();
+		JsonAlbum item;
+
+		String sSelect="DISTINCT *";
+		String sQueries=sPrefix + "SELECT " + sSelect + CRLF;	
+		String sWhere="";
+		sWhere=sWhere+ "?album a mo:Record ;";
+		sWhere=sWhere + "dce:title ?title ;";
+		sWhere=sWhere + "dc:date ?datedc ;";
+		sWhere=sWhere + "mo:image ?imgAlbum ;";	
+		sWhere=sWhere + "mo:available_as ?lien.";
+
+		String sFilter="FILTER(?album=<http://dbtune.org/jamendo/record/"+idJamendoAlbum+">)"; 
+
+		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+"} ";
+		//System.out.println(sQueries);
+
+		qexec = QueryExecutionFactory.sparqlService(serviceJamendo, sQueries);            
+		ResultSet rs = qexec.execSelect() ;
+
+		while(rs.hasNext())
+		{
+			QuerySolution soln = rs.nextSolution();
+			item = new JsonAlbum();
+			item.setDatedc(soln.get("?datedc").toString());
+			item.setIdJamendo(Tools.getLastItemInLink( soln.get("?album").toString()) );
+			item.setLienTelecharge(soln.get("?lien").toString());
+			item.setImgAlbum(soln.get("?imgAlbum").toString());
+			item.setTitle( Tools.getFirstTitle(soln.get("?title").toString()) );
+			listeAlbums.add(item);
+		}
+
+		return listeAlbums;
+
+	}
+
 
 
 	//Requette les evenements et les participants

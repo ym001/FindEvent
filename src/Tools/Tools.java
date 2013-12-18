@@ -2,6 +2,7 @@ package Tools;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.StringTokenizer;
 
 public class Tools {
 
@@ -13,6 +14,16 @@ public class Tools {
 	}
 	
 	
+	/***Parse first ^^***/
+	public static String getFirstTitle(String link){
+		StringTokenizer st = new StringTokenizer(link, "^^");
+		String result ="";
+		while (st.hasMoreElements()) {
+			result=(String) st.nextElement();
+			break;
+		}
+		return result;
+	}
 	
 	
 	/**Geo**/
