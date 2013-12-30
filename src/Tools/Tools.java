@@ -4,7 +4,33 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
+import org.apache.commons.lang3.text.WordUtils;
+
 public class Tools {
+	
+	
+	/*
+	 * Formatage d'une chaine : 
+	 *   + toutes les 1ères lettres en MAJ
+	 *   + suppression des "" en début/fin de chaine
+	 *   + suppression des espaces en début/fin de chaine
+	 * 
+	 * @author Sébastien Paradis
+	 */
+	public static String uppercaseWords(String original) {
+	    if(original.length() == 0)
+	        return original;
+	    // 1er "
+		if (original.charAt(0) == '"') {
+			original = original.substring(1);
+		}
+		// Dernier "
+		if (original.charAt(original.length() - 1) == '"') {
+			original = original.substring(0, original.length() - 1);
+		}
+		original = original.trim();
+		return WordUtils.capitalizeFully(original);
+	}
 
 	
 	/***Parse last element***/

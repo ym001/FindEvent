@@ -4,6 +4,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import json.MainJsonReadData;
+import json.QueryParams;
+
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QuerySolution;
@@ -68,7 +71,7 @@ public class QueryEndpointFactory{
 		m.add(m2);
 		return m;
 	}
-	
+
 	public static void closeQueryExe(){
 		qexec.close();
 	}
@@ -126,7 +129,7 @@ public class QueryEndpointFactory{
 		return listeGroupes;
 	}
 
-	
+
 	//Requette albums: trouver les albums par selon un artiste
 	public static List<JsonAlbum> getAlbumsByArtiste(String idJamendoArtiste){
 
@@ -166,19 +169,19 @@ public class QueryEndpointFactory{
 			item.setTag( Tools.getLastItemInLink(soln.get("?tag").toString() ));
 			item.setTitle(Tools.getFirstTitle(soln.get("?title").toString()));
 			listeAlbum.add(item);
-			
-//			System.out.println("album : "+soln.get("?album"));
-//			System.out.println("title : "+soln.get("?title"));
-//			System.out.println("imageAlbum : "+soln.get("?imgAlbum"));
-//			System.out.println("datedc : "+soln.get("?datedc"));
-//			System.out.println("lien : "+soln.get("?lien"));
-//			System.out.println("tag : "+soln.get("?tag"));
-//			System.out.println();
-			
+
+			//			System.out.println("album : "+soln.get("?album"));
+			//			System.out.println("title : "+soln.get("?title"));
+			//			System.out.println("imageAlbum : "+soln.get("?imgAlbum"));
+			//			System.out.println("datedc : "+soln.get("?datedc"));
+			//			System.out.println("lien : "+soln.get("?lien"));
+			//			System.out.println("tag : "+soln.get("?tag"));
+			//			System.out.println();
+
 		}
 		return listeAlbum;
 	}
-	
+
 
 	//Requette artiste : trouve les artistes pour un genre ou un autre genre*/
 	public static List<JsonArtist> getArtistesByGenres(String tag1, String tag2, String tag3, String tag4){
@@ -281,9 +284,20 @@ public class QueryEndpointFactory{
 	}
 
 
-
 	//Requette les evenements et les participants
 	@SuppressWarnings("finally")
+	public static List<JsonEvent> getAllEvents(String lat, String lgt, int radius, String city, String genre) throws WebServiceException{
+		ArrayList<JsonEvent> events = null;
+		MainJsonReadData reader = new MainJsonReadData(new QueryParams(lat, lgt, radius, city, genre));
+		events = reader.run();
+		return events;
+	}
+
+	/**
+	 *  Old version
+	//Requette les evenements et les participants
+	@SuppressWarnings("finally")
+
 	public static List<JsonEvenement> getAllEvenements(float latMax, float latMin, float lgtMax, float lgtMin) throws WebServiceException{
 
 		Model m = createMyModel();
@@ -316,13 +330,14 @@ public class QueryEndpointFactory{
 		String genre1="Jazz";
 		String genre2="Funk";
 		String date="2012-07-26";
-		/*String sWhere="";
-		sWhere=sWhere + "OPTIONAL {?event meo:EvenementMusical ?name }"+ CRLF;
-		sWhere=sWhere + "OPTIONAL {?event meo:aPourParticipant ?participant}"+ CRLF;
-		sWhere=sWhere + "?event dc:date ?date."+ CRLF;
-		sWhere=sWhere + "?event gps:lat ?lat."+ CRLF;
-		sWhere=sWhere + "?event gps:long ?long ."+ CRLF;	
-		sWhere=sWhere + "?event mo:genre ?genre ."+ CRLF;*/
+
+//		String sWhere="";
+//		sWhere=sWhere + "OPTIONAL {?event meo:EvenementMusical ?name }"+ CRLF;
+//		sWhere=sWhere + "OPTIONAL {?event meo:aPourParticipant ?participant}"+ CRLF;
+//		sWhere=sWhere + "?event dc:date ?date."+ CRLF;
+//		sWhere=sWhere + "?event gps:lat ?lat."+ CRLF;
+//		sWhere=sWhere + "?event gps:long ?long ."+ CRLF;	
+//		sWhere=sWhere + "?event mo:genre ?genre ."+ CRLF;
 
 		String sWhere="";
 		sWhere=sWhere + "OPTIONAL {?event meo:aPourParticipant ?participant}"+ CRLF;
@@ -332,8 +347,10 @@ public class QueryEndpointFactory{
 		sWhere=sWhere + "?event gps:long ?long ."+ CRLF;	
 
 		//ne fonctionne pas	sWhere=sWhere + "?event meo:aPourGenre ?genre ."+ CRLF;
-		/*String sFilter="FILTER ( xsd:double(?lat) > "+latitudeMin+" && xsd:double(?lat) < "+latitudeMax+" && xsd:double(?long) > "+longitudeMin+" && xsd:double(?long) < "+longitudeMax+" && (?genre=\""+genre1+"\"^^xsd:string || ?genre=\""+genre2+"\"^^xsd:string )&& xsd:date(?date) > \""+date+"\"^^xsd:date )"+ CRLF;
-		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ORDER BY ?name ";*/
+		//		
+		//String sFilter="FILTER ( xsd:double(?lat) > "+latitudeMin+" && xsd:double(?lat) < "+latitudeMax+" && xsd:double(?long) > "+longitudeMin+" && xsd:double(?long) < "+longitudeMax+" && (?genre=\""+genre1+"\"^^xsd:string || ?genre=\""+genre2+"\"^^xsd:string )&& xsd:date(?date) > \""+date+"\"^^xsd:date )"+ CRLF;
+		//sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ORDER BY ?name ";
+		//		
 
 		String sFilter="FILTER ( xsd:double(?lat) > "+latitudeMin+" && xsd:double(?lat) < "+latitudeMax+" && xsd:double(?long) > "+longitudeMin+" && xsd:double(?long) < "+longitudeMax+" && xsd:date(?date) > \""+date+"\"^^xsd:date )"+ CRLF;
 		//&& (?genre=\""+genre1+"\"^^xsd:string || ?genre=\""+genre2+"\"^^xsd:string )
@@ -347,13 +364,15 @@ public class QueryEndpointFactory{
 		{			
 			item = new JsonEvenement();
 			QuerySolution soln = rs.nextSolution();
-			/*item.setNom(soln.get("?name").toString());
-			item.setDate(soln.get("?date").toString());
-			item.setGenre(soln.get("?genre").toString());
-			item.setLatitude(Float.valueOf(soln.get("?lat").toString()));
-			item.setLongitude(Float.valueOf(soln.get("?long").toString()));
-			item.setParticipant(Tools.getLastItemInLink(soln.get("?participant").toString()));
-			item.setWikilink(soln.get("?participant").toString());*/
+
+//			item.setNom(soln.get("?name").toString());
+//			item.setDate(soln.get("?date").toString());
+//			item.setGenre(soln.get("?genre").toString());
+//			item.setLatitude(Float.valueOf(soln.get("?lat").toString()));
+//			item.setLongitude(Float.valueOf(soln.get("?long").toString()));
+//			item.setParticipant(Tools.getLastItemInLink(soln.get("?participant").toString()));
+//			item.setWikilink(soln.get("?participant").toString());
+//			
 
 			item.setNom(soln.get("?label").toString());
 			item.setParticipant(Tools.getLastItemInLink(soln.get("?participant").toString()));
@@ -366,7 +385,7 @@ public class QueryEndpointFactory{
 		return listeEvenements;
 
 	}
-
+	 */
 
 
 }

@@ -16,7 +16,8 @@ import WsSem.factory.JsonResultFactory;
 import WsSem.factory.QueryEndpointFactory;
 import WsSem.model.JsonAlbum;
 import WsSem.model.JsonArtist;
-import WsSem.model.JsonEvenement;
+import WsSem.model.JsonEvent;
+//import WsSem.model.JsonEvenement;
 import WsSem.model.JsonGroupe;
 
 
@@ -124,7 +125,30 @@ public class EventService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getAllEvenements(@Context UriInfo uriInfo){
-		List<JsonEvenement> listeEvenement = new ArrayList<JsonEvenement>();
+		
+		List<JsonEvent> eventList = new ArrayList<JsonEvent>();
+		String stringResult = "";
+		String lat = uriInfo.getQueryParameters().getFirst("lat");//"48.857";
+		String lgt = uriInfo.getQueryParameters().getFirst("lgt");//"2.379";
+		int radius = Integer.parseInt(uriInfo.getQueryParameters().getFirst("radius"));//10;
+		String city = uriInfo.getQueryParameters().getFirst("city");//"Montpellier";
+		String genre = "";
+		
+		try{
+			eventList=QueryEndpointFactory.getAllEvents(lat, lgt, radius, city, genre);
+			stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("200", "success", eventList);
+		}catch (WebServiceException e){
+			e.printStackTrace();
+			stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("500", "fail", eventList);
+		}finally{
+			//QueryEndpointFactory.closeQueryExe();
+		}
+		return stringResult;
+		
+		
+		/**
+		 * Old Version
+		 * List<JsonEvenement> listeEvenement = new ArrayList<JsonEvenement>();
 		String stringResult = "";
 		float latOrg = Float.valueOf(uriInfo.getQueryParameters().getFirst("lat"));
 		float lgtOrg = Float.valueOf(uriInfo.getQueryParameters().getFirst("lgt"));
@@ -140,7 +164,8 @@ public class EventService {
 		}finally{
 			//QueryEndpointFactory.closeQueryExe();
 		}
-		return stringResult;
+		return stringResult;*/
+
 	}
 
 }

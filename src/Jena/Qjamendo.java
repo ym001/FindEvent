@@ -70,8 +70,6 @@ public class Qjamendo{
          }
 		 
 	  
-		  
-		  
 		  String record="http://dbtune.org/jamendo/record/1186";
 		  sQueries ="PREFIX rdf: <" + RDF.getURI() + ">" + CRLF;		  
 		  sQueries =sQueries + "PREFIX mo:<http://purl.org/ontology/mo/>" + CRLF;

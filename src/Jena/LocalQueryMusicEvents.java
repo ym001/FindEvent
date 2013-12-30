@@ -1,4 +1,4 @@
-//package queries;
+/*//package queries;
 package Jena;
 
 import org.openjena.atlas.io.IndentedWriter;
@@ -480,3 +480,4 @@ public class LocalQueryMusicEvents {
 }
 
 
+*/

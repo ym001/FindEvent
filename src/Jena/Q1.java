@@ -1,4 +1,4 @@
-package Jena;
+/*package Jena;
 //import javax.sound.sampled.AudioFileFormat.Type;
 
 import com.hp.hpl.jena.query.Query;
@@ -108,3 +108,4 @@ public class Q1 {
 
 }
 
+*/
