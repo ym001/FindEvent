@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+      <!ENTITY meo_url "http://www.musicevents.com/#" >
+]>
+<rdf:RDF 
+  xmlns        ="&meo_url;" 
+  xmlns:meo    ="&meo_url;"      
+  xml:base     ="&meo_url;"  
+  xmlns:owl    ="http://www.w3.org/2002/07/owl#"
+  xmlns:rdfs   ="http://www.w3.org/2000/01/rdf-schema#" 
+  xmlns:skos   ="http://www.w3.org/2004/02/skos/core#"
+  xmlns:foaf   ="http://xmlns.com/foaf/0.1/"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:dc     ="http://purl.org/dc/elements/1.1/" 
+  xmlns:mo     ="http://purl.org/ontology/mo/"   
+  xmlns:rdf    ="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:igeo   ="http://rdf.insee.fr/def/geo#"  
+  xmlns:gps    ="http://www.w3.org/2003/01/geo/wgs84_pos#"
+  xmlns:lode   ="http://linkedevents.org/ontology/"        
+  xmlns:schema ="http://schema.org/Event"
+  xmlns:place  ="http://schema.org/Place"
+  xmlns:address="http://schema.org/PostalAddress"  >  
+                
+<!--============================================================================
+================================== ARTISTES ====================================
+=============================================================================-->
+  <meo:Artiste rdf:about="http://fr.wikipedia.org/wiki/Akhenaton_(rappeur)">  
+    <foaf:nick>Akhenaton</foaf:nick>    
+    <meo:aPourGenre rdf:resource="http://fr.wikipedia.org/wiki/Rap" /> 
+    <foaf:homepage>http://www.akh-official.com/</foaf:homepage>
+    <rdfs:seeAlso rdf:resource="http://fr.wikipedia.org/wiki/IAM" />       <!-- utilite ?? -->
+  </meo:Artiste>
+  <meo:Artiste rdf:about="http://fr.wikipedia.org/wiki/Shurik'n">    
+    <foaf:nick>Shurik'n</foaf:nick> 
+    <meo:aPourGenre rdf:resource="http://fr.wikipedia.org/wiki/Rap" />
+  </meo:Artiste>
+  <meo:Artiste rdf:about="http://fr.wikipedia.org/wiki/Kheops_(DJ)">  
+    <foaf:nick>DJ Kheops</foaf:nick>
+    <meo:aPourGenre rdf:resource="http://fr.wikipedia.org/wiki/Rap" />
+  </meo:Artiste>
+  <meo:Artiste rdf:about="http://fr.wikipedia.org/wiki/Imhotep_(hip-hop)">  
+    <foaf:nick>Imhotep</foaf:nick>       
+    <meo:aPourGenre rdf:resource="http://fr.wikipedia.org/wiki/Rap" />
+    <foaf:homepage>http://imhotepofficial.com/</foaf:homepage>
+  </meo:Artiste>                
+  <meo:Artiste rdf:about="http://fr.wikipedia.org/wiki/Kephren_(Francois_Mendy)">  
+    <foaf:nick>Kephren</foaf:nick>   
+    <meo:aPourGenre rdf:resource="http://fr.wikipedia.org/wiki/Rap" />
+  </meo:Artiste>
+  <meo:Artiste rdf:about="http://fr.wikipedia.org/wiki/Freeman_(rappeur)">  
+    <foaf:nick>Freeman</foaf:nick> 
+    <meo:aPourGenre rdf:resource="http://fr.wikipedia.org/wiki/Rap" />
+  </meo:Artiste>
+  
+<!--============================================================================
+=================================== GROUPES ====================================
+=============================================================================-->
+  <meo:GroupeMusique rdf:about="http://fr.wikipedia.org/wiki/IAM">  
+    <rdfs:label>IAM</rdfs:label>   
+    <meo:aPourGenre rdf:resource="http://fr.wikipedia.org/wiki/Rap" />
+    <meo:aPourMembre rdf:resource="http://fr.wikipedia.org/wiki/Akhenaton_(rappeur)" />
+    <meo:aPourMembre rdf:resource="http://fr.wikipedia.org/wiki/Shurik'n" />
+    <meo:aPourMembre rdf:resource="http://fr.wikipedia.org/wiki/Kheops_(DJ)" />
+    <meo:aPourMembre rdf:resource="http://fr.wikipedia.org/wiki/Kephren_(Francois_Mendy)" />
+    <meo:aPourMembre rdf:resource="http://fr.wikipedia.org/wiki/Freeman_(rappeur)" />  
+    <foaf:homepage>http://www.iam.tm.fr/</foaf:homepage>
+    <foaf:img>http://www.sortirenprovence.com/wp-content/uploads/2013/09/IAM.jpg</foaf:img>
+  </meo:GroupeMusique>
+  
+  <meo:GroupeMusique rdf:about="http://fr.wikipedia.org/wiki/Muse_(groupe)">   
+    <rdfs:label>Muse</rdfs:label>   
+    <meo:aPourGenre rdf:resource="http://fr.wikipedia.org/wiki/Rock_alternatif" />
+    <foaf:homepage>http://muse.mu/</foaf:homepage>
+    <foaf:img>http://www.innamoramento.net/img/news/article_706_muse.jpg</foaf:img>
+  </meo:GroupeMusique>
+  
+  <meo:GroupeMusique rdf:about="http://fr.wikipedia.org/wiki/Arctic_Monkeys">   
+    <rdfs:label>Arctic Monkeys</rdfs:label>   
+    <meo:aPourGenre rdf:resource="http://fr.wikipedia.org/wiki/Rock_alternatif" />
+    <foaf:homepage>http://www.arcticmonkeys.com/</foaf:homepage>
+    <foaf:img>http://www.rollingstone.fr/RS-WP-magazine/wp-content/uploads/2013/09/arctic-monkeys-2013.jpg</foaf:img>
+  </meo:GroupeMusique>
+  
+  <meo:GroupeMusique rdf:about="http://fr.wikipedia.org/wiki/The_Offspring">   
+    <rdfs:label>The Offspring</rdfs:label>   
+    <meo:aPourGenre rdf:resource="http://fr.wikipedia.org/wiki/Punk_rock" />
+    <foaf:homepage>http://www.offspring.com/</foaf:homepage>
+    <foaf:img>http://www.gogoall.net/fonds/musique/t/the_offspring/the_offspring_3.jpg</foaf:img>
+  </meo:GroupeMusique>
+  
+  <meo:GroupeMusique rdf:about="http://fr.wikipedia.org/wiki/Shaka_Ponk"> 
+    <rdfs:label>Shaka Ponk</rdfs:label>   
+    <meo:aPourGenre rdf:resource="http://fr.wikipedia.org/wiki/%C3%89lectro-rock" />
+    <foaf:homepage>http://www.shakaponk.com/</foaf:homepage>
+    <foaf:img>http://midnightcoffee.fr/wp-content/uploads/2011/06/Shaka_Ponk.jpg</foaf:img>
+  </meo:GroupeMusique>
+  
+<!--============================================================================
+==================================== LIEUX =====================================
+=============================================================================-->
+  <meo:LieuConcert rdf:about="http://fr.wikipedia.org/wiki/Rockstore">     
+    <foaf:homepage>http://www.rockstore.fr/</foaf:homepage>
+    <igeo:Commune>http://fr.wikipedia.org/wiki/Montpellier</igeo:Commune>  
+    <rdfs:label>Rockstore</rdfs:label>   
+    <gps:lat>43.606277</gps:lat>     
+    <gps:long>3.881417</gps:long>     
+    <place:address rdf:parseType="Resource">
+      <address:streetAddress>20 Rue de Verdun</address:streetAddress>            
+      <address:addressLocality>Montpellier</address:addressLocality>
+      <address:postalCode>34000</address:postalCode>
+      <address:addressCountry>France</address:addressCountry>
+      <!--<rdf:type rdf:resource="http://www.w3.org/2006/vcard/ns#Home"/>-->
+    </place:address> 
+  </meo:LieuConcert>
+  
+  <meo:LieuConcert rdf:about="#Parc_Arthur_Rimbaud">     
+    <igeo:Commune>http://fr.wikipedia.org/wiki/Bagnols_sur_Ceze</igeo:Commune>   
+    <rdfs:label>Parc Arthur Rimbaud, Bagnols-sur-Ceze</rdfs:label>   
+    <gps:lat>44.1625</gps:lat>     
+    <gps:long>4.620278</gps:long>      
+    <place:address rdf:parseType="Resource">
+      <address:streetAddress>Avenue de Lattre De Tassigny</address:streetAddress>            
+      <address:addressLocality>Bagnols-sur-Ceze</address:addressLocality>
+      <address:postalCode>30200</address:postalCode>
+      <address:addressCountry>France</address:addressCountry>
+      <!--<rdf:type rdf:resource="http://www.w3.org/2006/vcard/ns#Home"/>-->
+    </place:address>    
+  </meo:LieuConcert>     
+  
+  <meo:LieuConcert rdf:about="#Carhaix">     
+    <igeo:Commune>http://fr.wikipedia.org/wiki/Carhaix</igeo:Commune> 
+    <rdfs:label>Carhaix</rdfs:label>   
+    <gps:lat>48.1615</gps:lat>     
+    <gps:long>3.3330</gps:long>      
+    <place:address rdf:parseType="Resource">
+      <address:streetAddress></address:streetAddress>            
+      <address:addressLocality>Carhaix</address:addressLocality>
+      <address:postalCode>29270</address:postalCode>
+      <address:addressCountry>France</address:addressCountry>
+      <rdf:type rdf:resource="http://www.w3.org/2006/vcard/ns#Home"/>
+    </place:address>    
+  </meo:LieuConcert>     
+  
+                                         
+<!--============================================================================
+================================ EVENEMENTS ====================================
+=============================================================================-->
+  <!-- exemple d'evenement composite = festival sur 4 jours -->
+  <meo:EvenementMusical rdf:about="http://fr.wikipedia.org/wiki/Garance_Reggae_Festival"> 
+    <rdfs:label>Garance Reggae Festival</rdfs:label>   
+    <schema:startDate>2013-07-24</schema:startDate>
+    <schema:endDate>2013-07-27</schema:endDate>
+    <foaf:homepage>http://www.garancereggaefestival.com/</foaf:homepage>
+    <meo:seDerouleA rdf:resource="#Parc_Arthur_Rimbaud" />
+    <meo:seComposeDe rdf:resource="#Garance_Reggae_Festival_2013_j1" />
+    <meo:seComposeDe rdf:resource="#Garance_Reggae_Festival_2013_j2" />
+    <meo:seComposeDe rdf:resource="#Garance_Reggae_Festival_2013_j3" />
+    <meo:seComposeDe rdf:resource="#Garance_Reggae_Festival_2013_j4" />
+  </meo:EvenementMusical>
+  
+  <meo:EvenementMusical rdf:about="#Garance_Reggae_Festival_2013_j1">    
+    <dc:date>2013-07-24</dc:date>
+    <meo:aPourParticipant rdf:resource="http://fr.wikipedia.org/wiki/Chinese_Man" />
+  </meo:EvenementMusical>
+  
+  <meo:EvenementMusical rdf:about="#Garance_Reggae_Festival_2013_j2">    
+    <dc:date>2013-07-25</dc:date>
+    <meo:aPourParticipant rdf:resource="http://fr.wikipedia.org/wiki/Don_Carlos_(reggae)" />
+    <meo:aPourParticipant rdf:resource="http://fr.wikipedia.org/wiki/Konshens" />
+  </meo:EvenementMusical>
+  
+  <meo:EvenementMusical rdf:about="#Garance_Reggae_Festival_2013_j3">    
+    <dc:date>2013-07-26</dc:date> 
+    <meo:aPourParticipant rdf:resource="http://fr.wikipedia.org/wiki/Dub_inc" />
+    <meo:aPourParticipant rdf:resource="http://fr.wikipedia.org/wiki/Steel_Pulse" />
+    <meo:aPourParticipant rdf:resource="http://fr.wikipedia.org/wiki/Busy_Signal" />
+    <meo:aPourParticipant rdf:resource="http://fr.wikipedia.org/wiki/Johnny_Osbourne" />
+    <meo:aPourParticipant rdf:resource="http://fr.wikipedia.org/wiki/Stranger_Cole" />
+    <meo:aPourParticipant rdf:resource="http://fr.wikipedia.org/wiki/Busy_Signal" />
+  </meo:EvenementMusical>
+  
+  <meo:EvenementMusical rdf:about="#Garance_Reggae_Festival_2013_j4">    
+    <dc:date>2013-07-27</dc:date>
+    <meo:aPourParticipant rdf:resource="http://fr.wikipedia.org/wiki/Don_Carlos_(reggae)" />
+    <meo:aPourParticipant rdf:resource="http://fr.wikipedia.org/wiki/Konshens" />
+  </meo:EvenementMusical>   
+  
+  <meo:EvenementMusical rdf:about="http://fr.wikipedia.org/wiki/Festival_des_Vieilles_Charrues_2014">  
+    <rdfs:label xml:lang="fr">Festival des Vieilles Charrues</rdfs:label>  
+    <schema:startDate>2014-07-17</schema:startDate>
+    <schema:endDate>2014-07-21</schema:endDate>
+    <foaf:homepage>http://www.vieillescharrues.asso.fr/2014/</foaf:homepage>  
+    <foaf:img>http://upload.wikimedia.org/wikipedia/fr/c/c4/Logo_Vieilles_Charrues.jpg</foaf:img>
+    <meo:seDerouleA rdf:resource="#Carhaix" />
+    <meo:seComposeDe rdf:resource="#Festival_des_Vieilles_Charrues_2014_j1" />
+    <meo:seComposeDe rdf:resource="#Festival_des_Vieilles_Charrues_2014_j2" />
+    <meo:seComposeDe rdf:resource="#Festival_des_Vieilles_Charrues_2014_j3" />
+    <meo:seComposeDe rdf:resource="#Festival_des_Vieilles_Charrues_2014_j4" />
+  </meo:EvenementMusical>   
+  
+  <meo:EvenementMusical rdf:about="#Festival_des_Vieilles_Charrues_2014_j1">    
+    <dc:date>2014-07-17</dc:date>
+    <meo:aPourParticipant rdf:resource="" />
+  </meo:EvenementMusical>
+  
+  <meo:EvenementMusical rdf:about="#Festival_des_Vieilles_Charrues_2014_j2">    
+    <dc:date>2013-07-18</dc:date>
+    <meo:aPourParticipant rdf:resource="http://fr.wikipedia.org/wiki/Stromae" skos:notation="Stromae" />
+  </meo:EvenementMusical>
+  
+  <meo:EvenementMusical rdf:about="#Festival_des_Vieilles_Charrues_2014_j3">    
+    <dc:date>2013-07-19</dc:date>
+    <meo:aPourParticipant rdf:resource="http://fr.wikipedia.org/wiki/Arctic_Monkeys" />
+    <meo:aPourParticipant rdf:resource="http://fr.wikipedia.org/wiki/Shaka_Ponk" />
+  </meo:EvenementMusical>     
+                                                                                   
+  <meo:EvenementMusical rdf:about="#Festival_des_Vieilles_Charrues_2014_j4">    
+    <dc:date>2014-07-20</dc:date>
+    <meo:aPourParticipant rdf:resource="http://fr.wikipedia.org/wiki/Girls_in_Hawaii" />
+  </meo:EvenementMusical>
+<!--============================================================================
+================================ DATABUSINESS ====================================
+=============================================================================-->
+  <meo:DataBusiness rdf:ID="1234" >    
+    <meo:tagg >Pop</meo:tagg>
+    <meo:annotation >Milène ça claque !</meo:annotation> 
+    <meo:EvenementMusical >MYLENE FARMER TIMELESS 2013</meo:EvenementMusical>  
+    <dc:date>2014-01-01</dc:date>
+    <gps:lat>43.5995</gps:lat>     
+    <gps:long>1.4332</gps:long> 
+    <foaf:name>Antoine Seilles</foaf:name> 
+    <foaf:mail>antoineseilles@gmail.com</foaf:mail>
+  </meo:DataBusiness>
+  
+  <meo:DataBusiness rdf:ID="12345" >    
+    <meo:tagg >Rock</meo:tagg>
+    <meo:annotation >ToTo ça claque !</meo:annotation> 
+    <meo:EvenementMusical >TOTO 2013</meo:EvenementMusical>  
+    <dc:date>2014-01-03</dc:date>
+    <gps:lat>44.5995</gps:lat>     
+    <gps:long>2.4332</gps:long> 
+    <foaf:name>Yves Mercadier</foaf:name> 
+    <foaf:mail>yves.mercadier@gmail.com</foaf:mail>
+  </meo:DataBusiness>
+
+</rdf:RDF>
