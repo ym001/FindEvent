@@ -4,6 +4,7 @@
 
 .block-spinner{
 	position:absolute;
+	z-index:99;
 	top:40%;
 	left:50%;
 }

@@ -24,9 +24,14 @@
 		//info_geo
 		$scope.$on('info_geo', function(event, data){
 			if(webStorage.session.get('$info_geo')==null){
+				//If city is empty, we will use 'Montpellier'
+				if((data.region_name.length==0)){
+					data.latitude=43.6109;
+					data.longitude=3.8772;
+					data.region_name='Montpellier';
+				}
 				webStorage.session.add('$info_geo', data);
 			}
-
 			console.log(webStorage.session.get('$info_geo'));
 		});
 

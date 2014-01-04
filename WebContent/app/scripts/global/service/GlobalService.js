@@ -52,6 +52,14 @@
 				 templateUrl:"views/groupe.html", 
 				 controller:"GroupeCtrl"
 			 }, 
+			 {  when:"/albums", 
+				 templateUrl:"views/album.html", 
+				 controller:"AlbumCtrl"
+			 }, 
+			 {  when:"/artistes", 
+				 templateUrl:"views/artiste.html", 
+				 controller:"ArtisteCtrl"
+			 }, 
 			 {  when:"/nouveauCompte", 
 				 templateUrl:"views/nouveau_compte.html", 
 				 controller:"NouveauCompteCtrl"
@@ -79,7 +87,7 @@
 							url:compo_url+uri,
 							method:"GET", 
 							cache:false, 
-							timeout:2000
+							timeout:60000
 						}); 
 					}, 
 
@@ -89,7 +97,7 @@
 							url:compo_url+uri,
 							method:"POST",
 							cache:false,
-							timeout:2000,
+							timeout:60000,
 							data:content
 						});
 					}

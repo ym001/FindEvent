@@ -13,6 +13,7 @@
 		$scope.items = [
 		                "accueil",
 		                "evenement",
+		                "artiste",
 		                "logout"
 		              ];
 		
@@ -25,7 +26,10 @@
 				$location.path('/accueil');
 			}else if(choice=='evenement'){
 				$location.path('/festivales');
+			}else if(choice=='artiste'){
+				$location.path('/artistes');
 			}
+			
 		};
 		
 		

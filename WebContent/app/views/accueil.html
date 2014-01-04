@@ -28,7 +28,7 @@
 	<!-- partie droite -->
 	<div class="right span3">
 		<div class="styles-block">
-			<h4><b><i class="fa fa-music"></i> Styles préférés</b></h4>
+			<h4><b><i class="fa fa-music"></i> Genres préférés</b></h4>
 			<div class="style-item" ng-repeat="item in stylesByUser">
 				<span>
 					<i class="fa fa-star" style="color:yellow"></i>
@@ -70,9 +70,15 @@
 				</a>
 			</div>
 			
-			<div>
+			<!-- <div>
 				<a class="btn btn-primary margin-medium" ng-click="afficherGroupesByGenre()">
 				<i class="fa fa-users"></i> Afficher les groupes par genre
+				</a>
+			</div> -->
+			
+			<div>
+				<a class="btn btn-primary margin-medium" ng-click="afficherArtistesByGenre()">
+				<i class="fa fa-users"></i> Afficher les artistes par genre
 				</a>
 			</div>
 			
