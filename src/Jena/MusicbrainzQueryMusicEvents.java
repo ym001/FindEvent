@@ -87,7 +87,6 @@ public class MusicbrainzQueryMusicEvents{
          }
 		  
 		
-		  	 
 		  
 		  /*requette album : trouver les enregistrements du type track d'un artistes à partir de son numero d'artiste*/
 		  

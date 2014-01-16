@@ -25,9 +25,8 @@
 ================================== ARTISTES ====================================
 =============================================================================-->
   <meo:Artiste rdf:about="http://fr.wikipedia.org/wiki/Akhenaton_(rappeur)">  
-    <foaf:name>Akhenaton</foaf:name>    
     <foaf:nick>Akhenaton</foaf:nick>    
-    <meo:aPourGenre>Rap</meo:aPourGenre>
+    <meo:aPourGenre rdf:resource="http://fr.wikipedia.org/wiki/Rap" /> 
     <foaf:homepage>http://www.akh-official.com/</foaf:homepage>
     <rdfs:seeAlso rdf:resource="http://fr.wikipedia.org/wiki/IAM" />       <!-- utilite ?? -->
   </meo:Artiste>
@@ -52,29 +51,15 @@
     <foaf:nick>Freeman</foaf:nick> 
     <meo:aPourGenre rdf:resource="http://fr.wikipedia.org/wiki/Rap" />
   </meo:Artiste>
-   <meo:Artiste rdf:about="http://fr.wikipedia.org/wiki/Konshens">  
-    <foaf:name>Konshens</foaf:name>    
-    <foaf:nick>toto</foaf:nick>    
-    <meo:aPourGenre>Funk</meo:aPourGenre>
-    <foaf:homepage>http://www.akh-official.com/Konshens</foaf:homepage>
-    <rdfs:seeAlso rdf:resource="http://fr.wikipedia.org/wiki/Konshens" />       <!-- utilite ?? -->
-  </meo:Artiste>
   
-  <meo:Artiste rdf:about="http://fr.wikipedia.org/wiki/Toto">  
-    <foaf:name>Toto</foaf:name>    
-    <foaf:nick>toto</foaf:nick>    
-    <meo:aPourGenre>Jazz</meo:aPourGenre>
-    <foaf:homepage>http://www.akh-official.com/Toto</foaf:homepage>
-    <rdfs:seeAlso rdf:resource="http://fr.wikipedia.org/wiki/Toto" />       <!-- utilite ?? -->
-  </meo:Artiste>
 <!--============================================================================
 =================================== GROUPES ====================================
 =============================================================================-->
   <meo:GroupeMusique rdf:about="http://fr.wikipedia.org/wiki/IAM">  
     <rdfs:label>IAM</rdfs:label>   
-    <meo:aPourGenre>Rap</meo:aPourGenre>
+    <meo:aPourGenre rdf:resource="http://fr.wikipedia.org/wiki/Rap" />
     <meo:aPourMembre rdf:resource="http://fr.wikipedia.org/wiki/Akhenaton_(rappeur)" />
-    <meo:aPourMembre >Shurik'n</meo:aPourMembre>
+    <meo:aPourMembre rdf:resource="http://fr.wikipedia.org/wiki/Shurik'n" />
     <meo:aPourMembre rdf:resource="http://fr.wikipedia.org/wiki/Kheops_(DJ)" />
     <meo:aPourMembre rdf:resource="http://fr.wikipedia.org/wiki/Kephren_(Francois_Mendy)" />
     <meo:aPourMembre rdf:resource="http://fr.wikipedia.org/wiki/Freeman_(rappeur)" />  
@@ -166,27 +151,22 @@
     <schema:startDate>2013-07-24</schema:startDate>
     <schema:endDate>2013-07-27</schema:endDate>
     <foaf:homepage>http://www.garancereggaefestival.com/</foaf:homepage>
-    <meo:seDerouleA rdf:resource="#Parc_Arthur_Rimbaud" >Parc_Arthur_Rimbaud</meo:seDerouleA>
-    <meo:seComposeDe >Garance Reggae Festival 2013 j1</meo:seComposeDe>
+    <meo:seDerouleA rdf:resource="#Parc_Arthur_Rimbaud" />
+    <meo:seComposeDe rdf:resource="#Garance_Reggae_Festival_2013_j1" />
     <meo:seComposeDe rdf:resource="#Garance_Reggae_Festival_2013_j2" />
     <meo:seComposeDe rdf:resource="#Garance_Reggae_Festival_2013_j3" />
     <meo:seComposeDe rdf:resource="#Garance_Reggae_Festival_2013_j4" />
   </meo:EvenementMusical>
   
-  <meo:EvenementMusical rdf:about="#Garance_Reggae_Festival_2013_j1">  
-    <rdfs:label>Garance Reggae Festival 2013 j1</rdfs:label>   
-    <dc:date>2014-07-24</dc:date>
-    <gps:lat>42.1615</gps:lat>     
-    <gps:long>3.3330</gps:long>   
+  <meo:EvenementMusical rdf:about="#Garance_Reggae_Festival_2013_j1">    
+    <dc:date>2013-07-24</dc:date>
     <meo:aPourParticipant rdf:resource="http://fr.wikipedia.org/wiki/Chinese_Man" />
   </meo:EvenementMusical>
   
-  <meo:EvenementMusical rdf:about="#Garance_Reggae_Festival_2013_j2"> 
-    <rdfs:label>Garance Reggae Festival 2013 j2</rdfs:label>      
+  <meo:EvenementMusical rdf:about="#Garance_Reggae_Festival_2013_j2">    
     <dc:date>2013-07-25</dc:date>
     <meo:aPourParticipant rdf:resource="http://fr.wikipedia.org/wiki/Don_Carlos_(reggae)" />
-    <meo:aPourParticipant >Konshens</meo:aPourParticipant>
-    <meo:aPourParticipant >Toto</meo:aPourParticipant>
+    <meo:aPourParticipant rdf:resource="http://fr.wikipedia.org/wiki/Konshens" />
   </meo:EvenementMusical>
   
   <meo:EvenementMusical rdf:about="#Garance_Reggae_Festival_2013_j3">    
@@ -238,4 +218,29 @@
     <dc:date>2014-07-20</dc:date>
     <meo:aPourParticipant rdf:resource="http://fr.wikipedia.org/wiki/Girls_in_Hawaii" />
   </meo:EvenementMusical>
+<!--============================================================================
+================================ DATABUSINESS ====================================
+=============================================================================-->
+  <meo:DataBusiness rdf:ID="1234" >    
+    <meo:tagg >Pop</meo:tagg>
+    <meo:annotation >Milène ça claque !</meo:annotation> 
+    <meo:EvenementMusical >MYLENE FARMER TIMELESS 2013</meo:EvenementMusical>  
+    <dc:date>2014-01-01</dc:date>
+    <gps:lat>43.5995</gps:lat>     
+    <gps:long>1.4332</gps:long> 
+    <foaf:name>Antoine Seilles</foaf:name> 
+    <foaf:mail>antoineseilles@gmail.com</foaf:mail>
+  </meo:DataBusiness>
+  
+  <meo:DataBusiness rdf:ID="12345" >    
+    <meo:tagg >Rock</meo:tagg>
+    <meo:annotation >ToTo ça claque !</meo:annotation> 
+    <meo:EvenementMusical >TOTO 2013</meo:EvenementMusical>  
+    <dc:date>2014-01-03</dc:date>
+    <gps:lat>44.5995</gps:lat>     
+    <gps:long>2.4332</gps:long> 
+    <foaf:name>Yves Mercadier</foaf:name> 
+    <foaf:mail>yves.mercadier@gmail.com</foaf:mail>
+  </meo:DataBusiness>
+
 </rdf:RDF>

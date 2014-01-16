@@ -24,6 +24,8 @@ public class QueryEndpointFactory{
 
 	private final static String CRLF = System.getProperty("line.separator") ;
 	public static final String serviceJamendo = "http://dbtune.org/jamendo/sparql/";
+	public static final String serviceMusicBrainz = "http://dbtune.org/musicbrainz/sparql/";
+	public static final String serviceDBpedia = "http://www.dbpedia.org/sparql";
 	private final static String servicePath1 = "ressources/meo-model.rdf";
 	private final static String servicePath2 = "ressources/meo-data.rdf";
 	private static String sPrefix;
@@ -51,6 +53,19 @@ public class QueryEndpointFactory{
 		sPrefix =sPrefix+ "PREFIX lode: <http://linkedevents.org/ontology/>" + CRLF;
 		sPrefix =sPrefix+ "PREFIX schema: <http://schema.org/Event>" + CRLF;
 		sPrefix =sPrefix+ "PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>" + CRLF;
+
+		sPrefix =sPrefix + "PREFIX prop: <http://dbpedia.org/property/>" + CRLF;
+		sPrefix =sPrefix + "PREFIX dbpedia-owl:<http://dbpedia.org/ontology/>" + CRLF;
+
+		sPrefix =sPrefix + "PREFIX map: <file:/home/moustaki/work/motools/musicbrainz/d2r-server-0.4/mbz_mapping_raw.n3#>" + CRLF;
+		sPrefix =sPrefix + "PREFIX event: <http://purl.org/NET/c4dm/event.owl#>" + CRLF;
+		sPrefix =sPrefix + "PREFIX rel: <http://purl.org/vocab/relationship/>" + CRLF;
+		sPrefix =sPrefix + "PREFIX lingvoj: <http://www.lingvoj.org/ontology#>" + CRLF;
+		sPrefix =sPrefix + "PREFIX db: <http://dbtune.org/musicbrainz/resource/>" + CRLF;
+		sPrefix =sPrefix + "PREFIX bio: <http://purl.org/vocab/bio/0.1/>" + CRLF;
+		sPrefix =sPrefix + "PREFIX mbz: <http://purl.org/ontology/mbz#>" + CRLF;
+
+
 		return sPrefix;
 	}
 
@@ -78,6 +93,7 @@ public class QueryEndpointFactory{
 
 
 	//Requette groupes : trouve les groupes pour un genre ou un autre genre*/
+	/*
 	public static List<JsonGroupe> getGroupesByGenres(String genre1, String genre2, String genre3, String genre4){
 		String sPrefix = createPrefix();
 		Model m = createMyModel();
@@ -128,59 +144,7 @@ public class QueryEndpointFactory{
 		}
 		return listeGroupes;
 	}
-
-
-	//Requette albums: trouver les albums par selon un artiste
-	public static List<JsonAlbum> getAlbumsByArtiste(String idJamendoArtiste){
-
-		String sPrefix = createPrefix();
-		Model m = createMyModel();
-		List<JsonAlbum> listeAlbum = new ArrayList<JsonAlbum>();
-		JsonAlbum item;
-
-		String sSelect="*";
-		String sQueries=sPrefix + "SELECT " + sSelect + CRLF;	
-		String sWhere="?artist a mo:MusicArtist ;";
-		sWhere=sWhere + " foaf:name ?name ;";
-		sWhere=sWhere + " foaf:made ?album .";
-		sWhere=sWhere + "?album a mo:Record ;";
-		sWhere=sWhere + "dce:title ?title ;";
-		sWhere=sWhere + "dc:date ?datedc ;";
-		sWhere=sWhere + "mo:image ?imgAlbum ;";
-		sWhere=sWhere + "mo:available_as ?lien;";
-		sWhere=sWhere + "tags:taggedWithTag ?tag .";
-
-
-		String sFilter="FILTER(?artist=<http://dbtune.org/jamendo/artist/"+idJamendoArtiste+">)"; 
-
-		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ";
-		//System.out.println(sQueries);
-
-		qexec = QueryExecutionFactory.sparqlService(serviceJamendo, sQueries);             
-		ResultSet rs = qexec.execSelect() ;
-		while(rs.hasNext())
-		{
-			QuerySolution soln = rs.nextSolution();
-			item = new JsonAlbum();
-			item.setDatedc(soln.get("?datedc").toString());
-			item.setIdJamendo(soln.get("?album").toString());
-			item.setImgAlbum(soln.get("?imgAlbum").toString());
-			item.setLienTelecharge(soln.get("?lien").toString());
-			item.setTag( Tools.getLastItemInLink(soln.get("?tag").toString() ));
-			item.setTitle(Tools.getFirstTitle(soln.get("?title").toString()));
-			listeAlbum.add(item);
-
-			//			System.out.println("album : "+soln.get("?album"));
-			//			System.out.println("title : "+soln.get("?title"));
-			//			System.out.println("imageAlbum : "+soln.get("?imgAlbum"));
-			//			System.out.println("datedc : "+soln.get("?datedc"));
-			//			System.out.println("lien : "+soln.get("?lien"));
-			//			System.out.println("tag : "+soln.get("?tag"));
-			//			System.out.println();
-
-		}
-		return listeAlbum;
-	}
+	 */
 
 
 	//Requette artiste : trouve les artistes pour un genre ou un autre genre*/
@@ -189,11 +153,16 @@ public class QueryEndpointFactory{
 		String sPrefix = createPrefix();
 		Model m = createMyModel();
 		List<JsonArtist> listeArtistes = new ArrayList<JsonArtist>();
-		JsonArtist item;
+		String sSelect, sQueries, sFilter, sWhere ="";
+		ResultSet rs;
+		QueryExecution qexec;
 
-		String sSelect="*";
-		String sQueries=sPrefix + "SELECT " + sSelect + CRLF;	
-		String sWhere="?artist a mo:MusicArtist ;";
+		/**
+		 * Jamendo SPARQL implementation
+		 */
+		sSelect="*";
+		sQueries=sPrefix + "SELECT " + sSelect + CRLF;	
+		sWhere="?artist a mo:MusicArtist ;";
 		sWhere=sWhere + " foaf:name ?name ;";
 		sWhere=sWhere + " foaf:made ?album .";
 		sWhere=sWhere + "?album a mo:Record ;";
@@ -204,8 +173,7 @@ public class QueryEndpointFactory{
 		sWhere=sWhere + "OPTIONAL {?artist foaf:based_near ?based }";
 		sWhere=sWhere + "OPTIONAL {?artist mo:biography ?bio }";
 
-
-		String sFilter = "";
+		sFilter = "";
 		if(tag1!=null||tag2!=null||tag3!=null||tag4!=null){
 			sFilter+= "FILTER(";
 			if(tag1!=null){
@@ -223,67 +191,250 @@ public class QueryEndpointFactory{
 		}
 
 		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ";
+		qexec = QueryExecutionFactory.sparqlService(serviceJamendo, sQueries);
+		try{//Here will already catch exception. Otherwhere will not catch this one
+			rs = qexec.execSelect() ;
+			while(rs.hasNext())
+			{
+				QuerySolution soln = rs.nextSolution();
+				JsonArtist item = new JsonArtist();
+				item.setIdJamendo( Tools.getLastItemInLink(soln.get("?artist").toString()) );
+				item.setName( Tools.getFirstTitle(soln.get("?name").toString()) );
+				if(soln.get("?tag")!=null)item.setTag(Tools.getLastItemInLink(soln.get("?tag").toString()));
+				if(soln.get("?homepage")!=null)item.setHomepage(soln.get("?homepage").toString());
+				if(soln.get("?bio")!=null)item.setBio(soln.get("?bio").toString());
+				if(soln.get("?imgArtist")!=null)item.setImg(soln.get("?imgArtist").toString());
+				listeArtistes.add(item);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			qexec.close();
+		}
+
+
+		/**
+		 * Musicbrainz implementation
+		 */
+
+		/*
+		sSelect="SELECT DISTINCT *";
+		sQueries=sPrefix + sSelect + CRLF;	
+
+		sWhere="?artist a mo:MusicArtist ;";
+		sWhere=sWhere + " foaf:name ?name ;";
+		sWhere=sWhere + " foaf:made ?album .";
+		sWhere=sWhere + " ?album tags:taggedWithTag ?tag .";
+		sWhere=sWhere + "OPTIONAL {?artist foaf:homepage ?homepage }";
+		sWhere=sWhere + "OPTIONAL {?artist foaf:img ?img }";
+		sWhere=sWhere + "OPTIONAL {?artist foaf:based_near ?based }";
+		sWhere=sWhere + "OPTIONAL {?artist foaf:maker ?album }";
+		sWhere=sWhere + "OPTIONAL {?artist bio:event ?bio }";
+
+		sFilter = "";
+		if(tag1!=null||tag2!=null||tag3!=null||tag4!=null){
+			sFilter+= "FILTER(";
+			if(tag1!=null){
+				sFilter+="?tag=<http://dbtune.org/jamendo/tag/"+tag1+">";
+			}
+			if(tag2!=null){
+				sFilter+="||?tag=<http://dbtune.org/jamendo/tag/"+tag2+">";
+			}if(tag3!=null){
+				sFilter+="||?tag=<http://dbtune.org/jamendo/tag/"+tag3+">";
+			}
+			if(tag4!=null){
+				sFilter+="||?tag=<http://dbtune.org/jamendo/tag/"+tag4+">";
+			}
+			sFilter+=")";
+		}
+
+		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+"} ";
+		qexec = QueryExecutionFactory.sparqlService(serviceMusicBrainz, sQueries);
+		try{//Here will already catch exception. Otherwhere will not catch this one
+			rs = qexec.execSelect() ;
+			while(rs.hasNext())
+			{
+				QuerySolution soln = rs.nextSolution();
+				JsonArtist item = new JsonArtist();
+				item.setIdJamendo( Tools.getLastItemInLink(soln.get("?artist").toString()) );
+				item.setName( Tools.getFirstTitle(soln.get("?name").toString()) );
+				if(soln.get("?tag")!=null)item.setTag(soln.get("?tag").toString());
+				if(soln.get("?homepage")!=null)item.setHomepage(soln.get("?homepage").toString());
+				if(soln.get("?bio")!=null)item.setBio(soln.get("?bio").toString());
+				if(soln.get("?img")!=null)item.setImg(soln.get("?img").toString());
+				listeArtistes.add(item);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			qexec.close();
+		}
+		*/
+	
+
+		/**
+		 * DBpedia implementation
+		 */
+
+		/*
+		sSelect="SELECT DISTINCT *";
+		sQueries=sPrefix + sSelect + CRLF; 
+		sWhere=sWhere + "OPTIONAL{?artiste foaf:name ?name.}";
+		sWhere=sWhere + "OPTIONAL{?artiste dbpedia-owl:abstract  ?resume.}";
+		//sWhere=sWhere + "OPTIONAL{?artiste foaf:depiction ?depiction.}";
+		//sWhere=sWhere + "OPTIONAL{?artiste dbpedia-owl:birthDate ?anif.}";
+		sWhere=sWhere + "OPTIONAL{?artiste dbpedia-owl:genre ?genre.}";
+		//sWhere=sWhere + "OPTIONAL{?artiste dbpedia-owl:instrument ?instrument.}";
+		//sWhere=sWhere + "OPTIONAL{?artiste dc:description ?description.}";
+		//sWhere=sWhere + "OPTIONAL{?artiste rdfs:comment ?comment.}";
+
+		sFilter = "";
+		if(tag1!=null||tag2!=null||tag3!=null||tag4!=null){
+			sFilter+= "FILTER(";
+			if(tag1!=null){
+				sFilter+="?genre="+Tools.myString(tag1);
+			}
+			if(tag2!=null){
+				sFilter+="||?genre="+Tools.myString(tag2);
+			}if(tag3!=null){
+				sFilter+="||?genre="+Tools.myString(tag3);
+			}
+			if(tag4!=null){
+				sFilter+="||?genre="+Tools.myString(tag4);
+			}
+			sFilter+=")";
+		}
+
+
+		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ";
 		//System.out.println(sQueries);
 
-		qexec = QueryExecutionFactory.sparqlService(serviceJamendo, sQueries);             
-		ResultSet rs = qexec.execSelect() ;
-		while(rs.hasNext())
-		{
-			QuerySolution soln = rs.nextSolution();
-			item = new JsonArtist();
-
-			item.setIdJamendo( Tools.getLastItemInLink(soln.get("?artist").toString()) );
-			if(soln.get("?homepage")!=null){item.setHomepage(soln.get("?homepage").toString());}
-			item.setName( Tools.getFirstTitle(soln.get("?name").toString()) );
-			if(soln.get("?bio")!=null)item.setBio(soln.get("?bio").toString());
-			if(soln.get("?imgArtist")!=null)item.setImg(soln.get("?imgArtist").toString());
-			listeArtistes.add(item);
+		qexec = QueryExecutionFactory.sparqlService(serviceDBpedia, sQueries);   
+		try{//Here will already catch exception. Otherwhere will not catch this one
+			rs = qexec.execSelect() ;
+			while(rs.hasNext())
+			{
+				QuerySolution soln = rs.nextSolution();
+				JsonArtist item = new JsonArtist();
+				item.setName( Tools.getFirstTitle(soln.get("?name").toString()) );
+				if(soln.get("?genre")!=null)item.setTag(soln.get("?genre").toString());
+				if(soln.get("?homepage")!=null)item.setHomepage(soln.get("?homepage").toString());
+				if(soln.get("?resume")!=null)item.setResume(soln.get("?resume").toString());
+				listeArtistes.add(item);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			qexec.close();
 		}
+		
+		*/
+		
+		
 		return listeArtistes;
 	}
 
 
-	//Requette album: trouver les infos d'albums selon un artist
-	public static List<JsonAlbum> getAlbumById(String idJamendoAlbum){
-		String sPrefix = createPrefix();
-		Model m = createMyModel();
-		List<JsonAlbum> listeAlbums = new ArrayList<JsonAlbum>();
-		JsonAlbum item;
+	//Requette albums: trouver les albums par selon un artiste
+		public static List<JsonAlbum> getAlbumsByArtiste(String idJamendoArtiste, String nameOfArtist){
 
-		String sSelect="DISTINCT *";
-		String sQueries=sPrefix + "SELECT " + sSelect + CRLF;	
-		String sWhere="";
-		sWhere=sWhere+ "?album a mo:Record ;";
-		sWhere=sWhere + "dce:title ?title ;";
-		sWhere=sWhere + "dc:date ?datedc ;";
-		sWhere=sWhere + "mo:image ?imgAlbum ;";	
-		sWhere=sWhere + "mo:available_as ?lien.";
+			String sPrefix = createPrefix();
+            Model m = createMyModel();
+            List<JsonAlbum> listeAlbum = new ArrayList<JsonAlbum>();
+            JsonAlbum item;
 
-		String sFilter="FILTER(?album=<http://dbtune.org/jamendo/record/"+idJamendoAlbum+">)"; 
+            String sSelect="DISTINCT *";
+            String sQueries=sPrefix + "SELECT " + sSelect + CRLF;        
+            String sWhere="?artist a mo:MusicArtist ;";
+            sWhere=sWhere + " foaf:name ?name ;";
+            sWhere=sWhere + " foaf:made ?album .";
+            sWhere=sWhere + "?album a mo:Record ;";
+            sWhere=sWhere + "dce:title ?title ;";
+            sWhere=sWhere + "dc:date ?datedc ;";
+            sWhere=sWhere + "mo:image ?imgAlbum ;";
+            sWhere=sWhere + "mo:available_as ?lien;";
+            sWhere=sWhere + "tags:taggedWithTag ?tag .";
 
-		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+"} ";
-		//System.out.println(sQueries);
 
-		qexec = QueryExecutionFactory.sparqlService(serviceJamendo, sQueries);            
-		ResultSet rs = qexec.execSelect() ;
+            String sFilter="FILTER(?artist=<http://dbtune.org/jamendo/artist/"+idJamendoArtiste+">)"; 
 
-		while(rs.hasNext())
-		{
-			QuerySolution soln = rs.nextSolution();
-			item = new JsonAlbum();
-			item.setDatedc(soln.get("?datedc").toString());
-			item.setIdJamendo(Tools.getLastItemInLink( soln.get("?album").toString()) );
-			item.setLienTelecharge(soln.get("?lien").toString());
-			item.setImgAlbum(soln.get("?imgAlbum").toString());
-			item.setTitle( Tools.getFirstTitle(soln.get("?title").toString()) );
-			listeAlbums.add(item);
+            sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ";
+            //System.out.println(sQueries);
+
+            qexec = QueryExecutionFactory.sparqlService(serviceJamendo, sQueries);  
+            try{
+            	ResultSet rs = qexec.execSelect() ;
+                while(rs.hasNext())
+                {
+                        QuerySolution soln = rs.nextSolution();
+                        item = new JsonAlbum();
+                        item.setDatedc(soln.get("?datedc").toString());
+                        item.setIdJamendo(soln.get("?album").toString());
+                        item.setImgAlbum(soln.get("?imgAlbum").toString());
+                        item.setLienTelecharge(soln.get("?lien").toString());
+                        item.setTag( Tools.getLastItemInLink(soln.get("?tag").toString() ));
+                        item.setTitle(Tools.getFirstTitle(soln.get("?title").toString()));
+                        listeAlbum.add(item);
+                }
+            }catch(Exception e){
+            	e.printStackTrace();
+            }finally{
+            	qexec.close();
+            }
+			
+
+			/**
+			 * DBpedia Implementation
+			 */
+			/*
+			String artiste=nameOfArtist;
+			
+			sSelect="SELECT DISTINCT *";
+			sQueries=sQueries + sSelect + CRLF;
+			sWhere= "?album prop:artist  <http://dbpedia.org/resource/"+artiste+"> .";
+			sWhere=sWhere + "OPTIONAL{ ?album prop:name ?name . }";
+			sWhere=sWhere + "OPTIONAL{ ?album rdf:type <http://dbpedia.org/ontology/Album> . }";
+			sWhere=sWhere + "OPTIONAL{ ?album rdf:type <http://schema.org/MusicAlbum> .} ";
+			sWhere=sWhere + "OPTIONAL{ ?album foaf:depiction ?depiction.}";
+			sWhere=sWhere + "OPTIONAL{ ?album dbpedia-owl:abstract ?abstract.}";
+			sWhere=sWhere + "OPTIONAL{ ?album rdfs:comment ?comment.}";
+			sWhere=sWhere + "OPTIONAL{ ?album prop:cover ?cover.}";
+			sWhere=sWhere + "OPTIONAL{ ?album prop:genre ?genre.}";
+			sWhere=sWhere + "OPTIONAL{ ?album dbpedia-owl:producer ?producer.}";
+			sWhere=sWhere + "OPTIONAL{ ?album <http://dbpedia.org/ontology/releaseDate> ?date .}"; 
+			sWhere=sWhere + "OPTIONAL{ ?album dbpedia-owl:recordLabel ?label}";
+
+			sQueries = sQueries+ "WHERE { "+sWhere+" } ";
+
+			qexec = QueryExecutionFactory.sparqlService(serviceDBpedia, sQueries);
+			try{
+				rs = qexec.execSelect() ;
+				while(rs.hasNext())
+				{
+					QuerySolution soln = rs.nextSolution();
+					System.out.println("album : "+soln.get("?album"));
+					System.out.println("nom : "+soln.get("?name"));
+					System.out.println("img : "+soln.get("?depiction"));
+					System.out.println("resumé : "+soln.get("?abstract"));
+					System.out.println("commentaire : "+soln.get("?comment"));
+					System.out.println("couverture : "+soln.get("?cover"));
+					System.out.println("genre : "+soln.get("?genre"));
+					System.out.println("producteur : "+soln.get("?producer"));
+					System.out.println("label : "+soln.get("?label"));
+					System.out.println("date : "+soln.get("?date"));
+					System.out.println();
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally{
+				qexec.close();
+			}
+			*/
+
+			return listeAlbum;
 		}
 
-		return listeAlbums;
-
-	}
-
-
+	
 	//Requette les evenements et les participants
 	@SuppressWarnings("finally")
 	public static List<JsonEvent> getAllEvents(String lat, String lgt, int radius, String city, String genre) throws WebServiceException{
@@ -292,6 +443,7 @@ public class QueryEndpointFactory{
 		events = reader.run();
 		return events;
 	}
+
 
 	/**
 	 *  Old version

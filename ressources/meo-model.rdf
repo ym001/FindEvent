@@ -19,7 +19,10 @@
   xmlns:lode   ="http://linkedevents.org/ontology/"        
   xmlns:schema ="http://schema.org/Event"
   xmlns:place  ="http://schema.org/Place"
-  xmlns:address="http://schema.org/PostalAddress"  >
+  xmlns:address="http://schema.org/PostalAddress"  
+  xmlns:nao="http://www.semanticdesktop.org/ontologies/2007/08/15/nao"  
+  
+  >
 
 <!-- ================= Ontology Information ================= -->
   <owl:Ontology rdf:about="http://www.musicevents.com/ontology">          
@@ -31,7 +34,7 @@
     <dcterms:description xml:lang="fr">Une ontologie mettant en relation les groupes et artistes avec les evenements musicaux (festivals, concerts, ...) afin de proposer a un utilisateur des sorties selon ses gouts"</dcterms:description>
     <dc:date>2013-11-14</dc:date>
     <dcterms:issued>2013-11</dcterms:issued>
-    <dcterms:modified>2013-12-10</dcterms:modified>
+    <dcterms:modified>2014-01-03</dcterms:modified>
     <!--<adms:relatedDocumentation rdf:resource="&meo;/ontology/documentation.html"/> -->
     <!--<cc:license rdf:resource="http://creativecommons.org/licenses/by/3.0/"/>-->
     <dcterms:creator>
@@ -67,7 +70,7 @@
     </dcterms:creator>
     <rdfs:comment xml:lang="fr">Commentaires</rdfs:comment>
     <rdfs:isDefinedBy rdf:resource="meo-model.rdf" />
-    <owl:versionInfo>Version 0.3 (2013-12-04)</owl:versionInfo>
+    <owl:versionInfo>Version 0.4 (2014-01-03)</owl:versionInfo>
     <foaf:homepage rdf:resource="documentation.html" />
   </owl:Ontology>
 
@@ -104,6 +107,18 @@
     <rdfs:comment xml:lang="fr">Groupe de musique : aggregation d'artistes</rdfs:comment>
     <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Group" />
   </owl:Class>
+  
+  <owl:Class rdf:about="#DataBusiness">
+	<rdfs:subClassOf rdf:resource="meo:EvenementMusical" />    
+	<rdfs:subClassOf rdf:resource="meo:LieuConcert" />    
+	<rdfs:subClassOf rdf:resource="meo:Artiste" />    
+	<rdfs:subClassOf rdf:resource="meo:GroupeMusique" />    
+    <rdfs:label xml:lang="fr">DataBusiness</rdfs:label>
+    <rdfs:comment xml:lang="fr">
+      Un évenement musical,un lieu de concert, un artiste, un groupe musical, un album, un enregistrement peuvent être tagger ou annoter.
+      Les attributs d'un databusiness sont un tagg et/ou une annotation, sa localisation spatiale, sa date,  ainsi que son créateur(utilisateur) et sa référence à l'évènement musical.
+    </rdfs:comment>
+  </owl:Class>  
   
   <skos:Concept rdf:about="#Genre">                
     <owl:sameAs rdf:resource="mo:Genre"/>             
@@ -326,11 +341,19 @@
     <rdfs:range rdf:resource="#Artiste" />
   </owl:ObjectProperty>
   
-  <owl:ObjectProperty rdf:about="#aPourGroupe">  
-    <owl:equivalentProperty rdf:resource="mo:member_of" />
-    <owl:inverseOf rdf:resource="#aPourMembre" />
-    <rdfs:domain rdf:resource="#Artiste" />
-    <rdfs:range rdf:resource="#GroupeMusique" />
+  <owl:ObjectProperty rdf:about="#tagg">  
+    <rdfs:domain rdf:resource="#DataBusiness" />
+    <owl:sameAs rdf:resource="mo:Genre"/>    
+    <rdfs:label xml:lang="fr">Genre de musique</rdfs:label>
+    <rdfs:comment xml:lang="fr">Genre de musique</rdfs:comment>         
+    <!--<rdfs:range rdf:resource="#Business" />-->
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="#annotation">  
+    <rdfs:domain rdf:resource="#DataBusiness" />
+    <owl:sameAs rdf:resource="nao:annotation"/>    
+    <rdfs:label xml:lang="fr">Annotation</rdfs:label>
+    <rdfs:comment xml:lang="fr">Generic annotation for a resource musical event</rdfs:comment>         
   </owl:ObjectProperty>
 
 </rdf:RDF>

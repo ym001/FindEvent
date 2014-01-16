@@ -7,7 +7,7 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.vocabulary.RDF;
 
 
-public class WikipediaQueryMusicEvents{
+public class DBpediaQueryMusicEvents{
 
 	public static final String CRLF = System.getProperty("line.separator") ;
 	public static final String service = "http://www.dbpedia.org/sparql";
@@ -33,9 +33,10 @@ public class WikipediaQueryMusicEvents{
 		  
 /* requette artiste : trouver toutes les informations sur un artiste. */
 	      String artiste="";
-		  artiste="Buddy_Guy";
-		  
 		  //artiste="Buddy_Guy";
+		  
+		  
+	      artiste="Vincent_J";
 			System.out.println();
 			System.out.println("Requette info artiste : "+artiste);
 			System.out.println();
@@ -50,7 +51,7 @@ public class WikipediaQueryMusicEvents{
 		  sWhere=sWhere + "OPTIONAL{?artiste dbpedia-owl:abstract  ?resume.FILTER(lang(?resume) = 'fr')}";
 		  sWhere=sWhere + "OPTIONAL{?artiste foaf:depiction ?depiction.}";
 		  sWhere=sWhere + "OPTIONAL{?artiste dbpedia-owl:birthDate ?anif.}";
-		  sWhere=sWhere + "OPTIONAL{?artiste dbpedia-owl:genre     ?genre.}";
+		  sWhere=sWhere + "OPTIONAL{?artiste dbpedia-owl:genre ?genre.}";
 		  sWhere=sWhere + "OPTIONAL{?artiste dbpedia-owl:instrument ?instrument.}";
 		  sWhere=sWhere + "OPTIONAL{?artiste dbpedia-owl:wikiPageExternalLink ?link.}";
 		  sWhere=sWhere + "OPTIONAL{?artiste dc:description ?description.FILTER(lang(?description) = 'fr')}";
@@ -90,7 +91,7 @@ public class WikipediaQueryMusicEvents{
 
 /* requette album : trouver les albums d'un artistes */
 
-		  artiste="Buddy_Guy";
+		  artiste="Vincent_J";
 		System.out.println("fin requette infos artiste : "+artiste);
 
 			System.out.println();

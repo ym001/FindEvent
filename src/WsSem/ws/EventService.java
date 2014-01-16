@@ -24,53 +24,33 @@ import WsSem.model.JsonGroupe;
 @Path("/EvenementService")
 public class EventService {
 
-	
+
 	@Path("getAlbumsByArtiste")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getAlbumsByArtiste(@Context UriInfo uriInfo){
 
 		String idJamendo = uriInfo.getQueryParameters().getFirst("idJamendo");
-		List<JsonAlbum> listeAblum = new ArrayList<JsonAlbum>();
+		String artistName = uriInfo.getQueryParameters().getFirst("artistName");
+		List<JsonAlbum> listeAlbum = new ArrayList<JsonAlbum>();
 		String stringResult = "";
-
-		try{
-			listeAblum = QueryEndpointFactory.getAlbumsByArtiste(idJamendo);
-			stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("200", "success", listeAblum);
+		try{//Normally Here can catch nothing, exceptions have been catched in getAlbumsByArtiste
+			listeAlbum = QueryEndpointFactory.getAlbumsByArtiste(idJamendo, artistName);
 		}catch(Exception e){
 			e.printStackTrace();
-			stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("500", "fail", null);
 		}finally{
-			//QueryEndpointFactory.closeQueryExe();
-		}
-		return stringResult;
-	}
-	
-	
-	
-	
-	@Path("getAlbumById")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public String getAlbumById(@Context UriInfo uriInfo){
-
-		String idJamendo = uriInfo.getQueryParameters().getFirst("idJamendo");
-		List<JsonAlbum> listeAblum = new ArrayList<JsonAlbum>();
-		String stringResult = "";
-
-		try{
-			listeAblum = QueryEndpointFactory.getAlbumById(idJamendo);
-			stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("200", "success", listeAblum);
-		}catch(Exception e){
-			e.printStackTrace();
-			stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("500", "fail", null);
-		}finally{
-			//QueryEndpointFactory.closeQueryExe();
+			if(listeAlbum.size()==0){
+				stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("500", "fail", null);
+			}else{
+				stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("200", "success", listeAlbum);
+			}
 		}
 		return stringResult;
 	}
 
-	
+
+
+	/**
 	@Path("getGroupesByGenre")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -93,8 +73,8 @@ public class EventService {
 		}
 		return stringResult;
 	}
-	
-	
+	 */
+
 
 	@Path("getArtistsByGenre")
 	@GET
@@ -108,24 +88,27 @@ public class EventService {
 		List<JsonArtist> listeArtistes = new ArrayList<JsonArtist>();
 		String stringResult = "";
 
-		try{
+		try{//Normally here will catch nothing since in QueryEndPoint, have already catched JenaQuery Exception in 3 cases
 			listeArtistes = QueryEndpointFactory.getArtistesByGenres(genre1, genre2, genre3, genre4);
-			stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("200", "success", listeArtistes);
 		}catch(Exception e){
 			e.printStackTrace();
-			stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("500", "fail", null);
 		}finally{
-			//QueryEndpointFactory.closeQueryExe();
+			if(listeArtistes.size()==0){
+				stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("500", "fail", null);
+			}else{
+				stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("200", "success", listeArtistes);
+			}
 		}
 		return stringResult;
 	}
 
 
+	@SuppressWarnings("finally")
 	@Path("/getAllEvenements")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getAllEvenements(@Context UriInfo uriInfo){
-		
+
 		List<JsonEvent> eventList = new ArrayList<JsonEvent>();
 		String stringResult = "";
 		String lat = uriInfo.getQueryParameters().getFirst("lat");//"48.857";
@@ -133,7 +116,7 @@ public class EventService {
 		int radius = Integer.parseInt(uriInfo.getQueryParameters().getFirst("radius"));//10;
 		String city = uriInfo.getQueryParameters().getFirst("city");//"Montpellier";
 		String genre = "";
-		
+
 		try{
 			eventList=QueryEndpointFactory.getAllEvents(lat, lgt, radius, city, genre);
 			stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("200", "success", eventList);
@@ -143,9 +126,9 @@ public class EventService {
 		}finally{
 			//QueryEndpointFactory.closeQueryExe();
 		}
+
 		return stringResult;
-		
-		
+
 		/**
 		 * Old Version
 		 * List<JsonEvenement> listeEvenement = new ArrayList<JsonEvenement>();

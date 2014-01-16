@@ -17,6 +17,12 @@ public class Tools {
 	 * 
 	 * @author Sébastien Paradis
 	 */
+	
+	//return 'sth'
+	public static String myString(String txt){
+		return "'"+txt+"'";
+	}
+	
 	public static String uppercaseWords(String original) {
 	    if(original.length() == 0)
 	        return original;

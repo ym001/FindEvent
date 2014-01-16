@@ -7,7 +7,21 @@ public class JsonArtist {
 	String homepage;
 	String bio;
 	String img;
+	String tag;
+	String resume;
 	
+	public String getResume() {
+		return resume;
+	}
+	public void setResume(String resume) {
+		this.resume = resume;
+	}
+	public String getTag() {
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
 	public String getIdJamendo() {
 		return idJamendo;
 	}
