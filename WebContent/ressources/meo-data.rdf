@@ -209,39 +209,28 @@
   </meo:MusicEvent>
   
 
-  <meo:DataBusiness rdf:about="http://www.musicevents.com/#1234">
-    <meo:tagg>Pop</meo:tagg>
-    <meo:annotation>Milène ça claque !</meo:annotation>
-    <meo:EvenementMusical>MYLENE FARMER TIMELESS 2013</meo:EvenementMusical>
-    <oa:annotatedAt>2014-01-03</oa:annotatedAt>
-    <gps:lat>43.5995</gps:lat>
-    <gps:lgt>1.4332</gps:lgt>
-    <foaf:name>Yves Mercadier</foaf:name>
-    <foaf:mail>yves.mercadier@gmail.com</foaf:mail>
-  </meo:DataBusiness>
-  <meo:DataBusiness rdf:about="http://www.musicevents.com/#12345">
-    <meo:tagg>Rock</meo:tagg>
-    <meo:annotation>ToTo ça claque !</meo:annotation>
-    <meo:EvenementMusical>TOTO 2013</meo:EvenementMusical>
-    <oa:annotatedAt>2014-01-03</oa:annotatedAt>
-    <gps:lat>44.5995</gps:lat>
-    <gps:lgt>2.4332</gps:lgt>
-    <foaf:name>Yves Mercadier</foaf:name>
-    <foaf:mail>yves.mercadier@gmail.com</foaf:mail>
-  </meo:DataBusiness>
-  <meo:DataBusiness rdf:about="http://www.musicevents.com/#33212">
-    <meo:tagg>Rock</meo:tagg>
-    <meo:annotation>OK</meo:annotation>
+ <meo:DataBusiness rdf:about="http://www.musicevents.com/#2">
     <meo:EvenementMusical>MusicEvent_1</meo:EvenementMusical>
-    <oa:annotatedAt>2013-12-03</oa:annotatedAt>
-    <gps:lat>34.54</gps:lat>
-    <gps:lgt>40.56</gps:lgt>
     <foaf:name>gao</foaf:name>
+    <meo:annotation>OK</meo:annotation>
+    <gps:lgt>40.56</gps:lgt>
+    <gps:lat>34.54</gps:lat>
+    <meo:numAnno>2</meo:numAnno>
+    <meo:tagg>Rock</meo:tagg>
+    <oa:annotatedAt>2013-20-20</oa:annotatedAt>
     <foaf:mail>chenyanggao123@gmail.com</foaf:mail>
   </meo:DataBusiness>
-</rdf:RDF>
-
-
+  <meo:DataBusiness rdf:about="http://www.musicevents.com/#1">
+    <meo:numAnno>1</meo:numAnno>
+    <gps:lgt>40.56</gps:lgt>
+    <meo:EvenementMusical>MusicEvent_1</meo:EvenementMusical>
+    <oa:annotatedAt>2013-20-20</oa:annotatedAt>
+    <foaf:mail>chenyanggao123@gmail.com</foaf:mail>
+    <gps:lat>34.54</gps:lat>
+    <meo:annotation>OK</meo:annotation>
+    <foaf:name>gao</foaf:name>
+    <meo:tagg>Rock</meo:tagg>
+  </meo:DataBusiness>
 
 
 </rdf:RDF>
