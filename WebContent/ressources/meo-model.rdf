@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+      <!ENTITY meo_url "http://www.musicevents.com/#" >
+]>
+<rdf:RDF 
+  xmlns         = "&meo_url;" 
+  xmlns:meo     = "&meo_url;"      
+  xml:base      = "&meo_url;"  
+  xmlns:cc      = "http://web.resource.org/cc/"
+  xmlns:owl     = "http://www.w3.org/2002/07/owl#"
+  xmlns:rdfs    = "http://www.w3.org/2000/01/rdf-schema#" 
+  xmlns:skos    = "http://www.w3.org/2004/02/skos/core#"
+  xmlns:foaf    = "http://xmlns.com/foaf/0.1/"
+  xmlns:dcterms = "http://purl.org/dc/terms/"
+  xmlns:dc      = "http://purl.org/dc/elements/1.1/" 
+  xmlns:mo      = "http://purl.org/ontology/mo/"   
+  xmlns:rdf     = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:igeo    = "http://rdf.insee.fr/def/geo#"  
+  xmlns:gps     = "http://www.w3.org/2003/01/geo/wgs84_pos#"
+  xmlns:geo     = "http://www.geonames.org/ontology#"
+  xmlns:lode    = "http://linkedevents.org/ontology/"        
+  xmlns:schema  = "http://schema.org/Event"
+  xmlns:place   = "http://schema.org/Place"
+  xmlns:address = "http://schema.org/PostalAddress" 
+  xmlns:oa      = "http://www.w3.org/ns/oa#" >
+  
+
+<!-- ======================= Ontology Information ========================== -->
+
+  <owl:Ontology rdf:about="http://www.musicevents.com/ontology">          
+    <owl:imports rdf:resource="http://purl.org/ontology/mo/" /> 
+    <rdfs:label xml:lang="en">Musical events ontology</rdfs:label>
+    <rdfs:label xml:lang="fr">Ontologie d'evenements musicaux</rdfs:label> 
+    <dcterms:description xml:lang="en">Ontology linking music groups and artists 
+      with musical events (festivals, concerts, ...) to offer users opportunities 
+      for going out according to his tastes and spatial location.
+    </dcterms:description>
+    <dcterms:description xml:lang="fr">Une ontologie mettant en relation les groupes 
+      et artistes avec les evenements musicaux (festivals, concerts, ...) 
+      afin de proposer a un utilisateur des sorties selon ses gouts et sa 
+      geolocalisation.
+    </dcterms:description>
+    <dc:date>2013-11-14</dc:date>
+    <dcterms:issued>2013-11-14</dcterms:issued>
+    <dcterms:modified>2013-01-16</dcterms:modified>
+    <cc:license rdf:resource="http://creativecommons.org/licenses/by/3.0/"/>
+    <dcterms:creator>
+      <foaf:Person rdf:about="#Chenyang">
+        <foaf:name>Chenyang Gao</foaf:name>     
+        <foaf:mbox>chenyanggao123@gmail.com</foaf:mbox>
+        <foaf:workplaceHomepage rdf:resource="" />
+      </foaf:Person>
+    </dcterms:creator>
+    <dcterms:creator>
+      <foaf:Person rdf:about="#Yassine">
+        <foaf:name>Yassine Motie</foaf:name> 
+        <foaf:mbox>yassinemotie@gmail.com</foaf:mbox>
+        <foaf:workplaceHomepage rdf:resource="" />
+      </foaf:Person>
+    </dcterms:creator>
+    <dcterms:creator>
+      <foaf:Person rdf:about="#Yves">
+        <foaf:name>Yves Mercadier</foaf:name>   
+        <foaf:mbox>yves.mercadier@gmail.com</foaf:mbox>
+        <foaf:workplaceHomepage rdf:resource="" />
+      </foaf:Person>
+    </dcterms:creator>
+    <dcterms:creator>
+      <foaf:Person rdf:about="#Sebastien">
+        <foaf:name>Sebastien Paradis</foaf:name>
+        <foaf:mbox>sebastien.paradis@gmail.com</foaf:mbox>
+      </foaf:Person>
+    </dcterms:creator>
+    <rdfs:comment xml:lang="en">This ontology is proposed in the context of an
+       academic project realized in the course 'Advanced technologies of Web',
+       taught by A. Seilles at University of Montpellier 2.</rdfs:comment>
+    <rdfs:comment xml:lang="fr">Cette ontologie est proposee dans le cadre d'un 
+      projet universitaire realise dans l'UE 'Technologies avancees du Web', 
+      enseignee par A. Seilles a l'Universite Montpellier 2.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="meo-model.rdf" />
+    <owl:versionInfo>Version 0.5 (2014-01-16)</owl:versionInfo>
+  </owl:Ontology>
+
+
+<!-- ============================== Classes ================================ -->
+
+  <owl:Class rdf:about="#MusicEvent">
+    <owl:equivalentClass rdf:resource="schema:MusicEvent" />    
+    <rdfs:subClassOf rdf:resource="lode:Event" />    
+    <rdfs:label xml:lang="fr">Evenement musical</rdfs:label>
+    <rdfs:label xml:lang="en">Musical event</rdfs:label>
+    <rdfs:comment xml:lang="fr">
+      Un evenement musical peut etre simple (concert) ou se composer d'autres evenements 
+      musicaux (festival). La composition s'effectue au moyen de la propriete 'hasSubEvent'.
+      Les attributs d'un evenement sont sa localisation spatiale (salle ou lieu + ville)
+      et temporelle, ainsi que ses participants (classe 'MusicGroup')
+    </rdfs:comment>
+    <rdfs:comment xml:lang="en">
+      A musical event can be simple (like a concert) or be composed of other musical
+      events (festival). The composition is done using the property 'hasSubEvent'.
+      The attributes of an event are its spatial location (venue + city) and time, 
+      combined to its participants ('MusicGroup' class)
+    </rdfs:comment>
+  </owl:Class>   
+  
+  <owl:Class rdf:about="#EventLocation">
+    <rdfs:label xml:lang="fr">Lieu de concert</rdfs:label>
+    <rdfs:label xml:lang="en">Place of concert</rdfs:label>
+    <rdfs:comment xml:lang="fr">Tout lieu de concert eventuel : salle, stade, parc, ...</rdfs:comment>
+    <rdfs:comment xml:lang="en">Every potential place for a concert: venue, stadium, park, ...</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="geo:Feature" />
+  </owl:Class>
+      
+  <owl:Class rdf:about="#MusicGroup">  
+    <owl:equivalentClass rdf:resource="mo:MusicGroup"/>             
+    <rdfs:label xml:lang="fr">Groupe de musique</rdfs:label>       
+    <rdfs:label xml:lang="en">Music group</rdfs:label>
+    <rdfs:comment xml:lang="fr">Artiste ou groupe de musique se produisant sur scene</rdfs:comment>
+    <rdfs:comment xml:lang="en">Artist or music group performing on stage</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="foaf:Group" />
+  </owl:Class>   
+  
+  <owl:Class rdf:about="#DataBusiness"> 
+    <rdfs:subClassOf rdf:resource="oa:Annotation"/> 
+    <rdfs:label xml:lang="fr">Annotations pour l'enrichissement de donnees en vue
+      de leur publication</rdfs:label>
+    <rdfs:label xml:lang="en">Annotations for data business</rdfs:label>
+    <rdfs:comment xml:lang="fr">
+      Un evenement musical, un lieu de concert, un artiste ou groupe de musique
+      et leurs productions peuvent etre annotes par les utilisateurs. Une instance de la 
+      classe 'DataBusiness' est la reification d'une annotation, caracterisee par sa 
+      localisation spatiale, sa date, son createur (un utilisateur) et la 
+      reference a l'evenement musical concerne.
+    </rdfs:comment>
+    <rdfs:comment xml:lang="en">
+      A musical event, a concert venue, artist or music band and their productions 
+      can be annotated by users. An instance of the 'DataBusiness' class is the 
+      reification of an annotation, characterized by its spatial location, date, 
+      its creator (an user) and the reference related to the concerned musical event.
+    </rdfs:comment>
+  </owl:Class>  
+  
+  <skos:Concept rdf:about="#MusicalGenre">                
+    <owl:sameAs rdf:resource="mo:Genre"/>             
+    <rdfs:label xml:lang="fr">Genre de musique</rdfs:label>     
+    <rdfs:label xml:lang="en">Genre of music</rdfs:label>
+    <rdfs:comment xml:lang="fr">Genre de musique, concept plus general que les genres ci-dessous</rdfs:comment>
+    <rdfs:comment xml:lang="en">Kind of music, more general concept that types below</rdfs:comment>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Rock_%26_Roll" skos:notation="Rock and roll">                
+    <rdfs:label xml:lang="fr">Rock and Roll</rdfs:label>              
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept> 
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Rock_alternatif" skos:notation="Rock alternatif"> 
+    <rdfs:label xml:lang="fr">Rock alternatif</rdfs:label>    
+    <skos:broader rdf:resource="http://fr.wikipedia.org/wiki/Rock" />
+  </skos:Concept>           
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Grunge">  
+    <rdfs:label>Grunge</rdfs:label>   
+    <skos:broader rdf:resource="http://fr.wikipedia.org/wiki/Rock" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Hard_rock"> 
+    <rdfs:label>Hard rock</rdfs:label>    
+    <skos:broader rdf:resource="http://fr.wikipedia.org/wiki/Rock" />
+  </skos:Concept>        
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Metal">  
+    <rdfs:label>Metal</rdfs:label>    
+    <skos:broader rdf:resource="http://fr.wikipedia.org/wiki/Rock" />
+  </skos:Concept>  
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Heavy_metal"> 
+    <rdfs:label>Heavy metal</rdfs:label>  
+    <skos:broader rdf:resource="http://fr.wikipedia.org/wiki/Metal" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Black_metal">
+    <rdfs:label>Black metal</rdfs:label>   
+    <skos:broader rdf:resource="http://fr.wikipedia.org/wiki/Metal" />
+  </skos:Concept>                
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Death_metal">
+    <rdfs:label>Death metal</rdfs:label>   
+    <skos:broader rdf:resource="http://fr.wikipedia.org/wiki/Metal" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Punk_rock">   
+    <rdfs:label>Punk rock</rdfs:label>   
+    <skos:broader rdf:resource="http://fr.wikipedia.org/wiki/Rock" />
+  </skos:Concept>     
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/%C3%89lectro-rock">   
+    <rdfs:label>Electro rock</rdfs:label>   
+    <skos:broader rdf:resource="http://fr.wikipedia.org/wiki/Punk_rock" />
+    <rdfs:seeAlso rdf:resource="http://fr.wikipedia.org/wiki/Rock" />
+  </skos:Concept>        
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Blues">
+    <rdfs:label>Blues</rdfs:label>            
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/A_cappella"> 
+    <rdfs:label xml:lang="fr">A cappella</rdfs:label>            
+    <skos:broader rdf:resource="#MusicalGenre" /> 
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Acid_Jazz">  
+    <rdfs:label>Acid Jazz</rdfs:label>                
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Comedie_musicale">    
+    <rdfs:label xml:lang="fr">Comedie musicale</rdfs:label>             
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Country"> 
+    <rdfs:label>Country</rdfs:label>            
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>          
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Disco">
+    <rdfs:label>Disco</rdfs:label>            
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Easy_listening"> 
+    <rdfs:label>Easy listening</rdfs:label>            
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Folk">    
+    <rdfs:label>Folk</rdfs:label>           
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Freestyle_%28genre_musical%29"> 
+    <rdfs:label>Freestyle</rdfs:label>           
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Funk">  
+    <rdfs:label>Funk</rdfs:label>             
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Gospel">  
+    <rdfs:label>Gospel</rdfs:label>            
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Musique_instrumentale">  
+    <rdfs:label>Instrumental</rdfs:label>           
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Jazz">  
+    <rdfs:label>Jazz</rdfs:label>             
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Merengue">  
+    <rdfs:label>Merengue</rdfs:label>            
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Musique_classique"> 
+    <rdfs:label xml:lang="fr">Musique classique</rdfs:label> 
+    <rdfs:label xml:lang="en">Classical</rdfs:label>            
+    <skos:broader rdf:resource="#MusicalGenre" />    
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Musique_de_film">  
+    <rdfs:label xml:lang="fr">Musique de film</rdfs:label>  
+    <rdfs:label xml:lang="en">Soundtrack</rdfs:label>              
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Musique_%C3%A9lectronique">   
+    <rdfs:label xml:lang="fr">Musique electronique</rdfs:label>             
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>             
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Dance">  
+    <rdfs:label>Dance</rdfs:label>    
+    <skos:broader rdf:resource="http://fr.wikipedia.org/wiki/Musique_%C3%A9lectronique" />
+  </skos:Concept>              
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Drum_and_bass">   
+    <rdfs:label>Drum and bass</rdfs:label>   
+    <skos:broader rdf:resource="http://fr.wikipedia.org/wiki/Musique_%C3%A9lectronique" />
+  </skos:Concept>   
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Jungle_(musique)#Jungle"> 
+    <rdfs:label>Jungle</rdfs:label> 
+    <skos:broader rdf:resource="http://fr.wikipedia.org/wiki/Musique_%C3%A9lectronique" />
+  </skos:Concept>                          
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Techno">  
+    <rdfs:label>Techno</rdfs:label>      
+    <skos:broader rdf:resource="http://fr.wikipedia.org/wiki/Musique_%C3%A9lectronique" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Musique_ethnique">  
+    <rdfs:label xml:lang="fr">Musique ethnique</rdfs:label>          
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/New_wave_%28musique%29"> 
+    <rdfs:label xml:lang="fr">New wave</rdfs:label>            
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Op%C3%A9ra_%28musique%29">  
+    <rdfs:label xml:lang="fr">Opera</rdfs:label>              
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Pop">  
+    <rdfs:label>Pop</rdfs:label>                
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/RnB_contemporain">  
+    <rdfs:label>R'n'B</rdfs:label>           
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Rap"> 
+    <rdfs:label>Rap</rdfs:label>            
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>    
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Hip-hop">  
+    <rdfs:label>Hip-hop</rdfs:label>
+    <rdfs:seeAlso rdf:resource="http://fr.wikipedia.org/wiki/Rap" />
+  </skos:Concept>      
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Gangsta">
+    <rdfs:label>Gangsta</rdfs:label>
+    <skos:broader rdf:resource="http://fr.wikipedia.org/wiki/Rap" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Reggae">  
+    <rdfs:label>Reggae</rdfs:label>           
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>   
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Dancehall">  
+    <rdfs:label>Dancehall</rdfs:label> 
+    <skos:broader rdf:resource="http://fr.wikipedia.org/wiki/Reggae" /> 
+  </skos:Concept> 
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Ragga">  
+    <rdfs:label>Ragga</rdfs:label>  
+    <skos:broader rdf:resource="http://fr.wikipedia.org/wiki/Reggae" />
+  </skos:Concept>   
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Salsa">   
+    <rdfs:label>Salsa</rdfs:label>           
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Samba">  
+    <rdfs:label>Samba</rdfs:label>            
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Ska">    
+    <rdfs:label>Ska</rdfs:label>            
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Soul">  
+    <rdfs:label>Soul</rdfs:label>            
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Swing">
+    <rdfs:label>Swing</rdfs:label>          
+    <skos:broader rdf:resource="#MusicalGenre" />  
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Tango">
+    <rdfs:label>Tango</rdfs:label>              
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>
+  <skos:Concept rdf:about="http://fr.wikipedia.org/wiki/Trip_hop">  
+    <rdfs:label>Trip-hop</rdfs:label>            
+    <skos:broader rdf:resource="#MusicalGenre" />
+  </skos:Concept>                                     
+                 
+                 
+<!-- ============================= Properties ============================== -->
+          
+  <owl:ObjectProperty rdf:about="#hasSubEvent">  
+    <owl:equivalentProperty rdf:resource="schema:subEvent" />                
+    <rdfs:label xml:lang="en">Composition of an event by multiple sub-events</rdfs:label>   
+    <rdfs:label xml:lang="fr">Compose un evenement de tous ses sous-evenements</rdfs:label> 
+    <rdfs:domain rdf:resource="#MusicEvent" />
+    <rdfs:range rdf:resource="#MusicEvent" />
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="#hasPerformer"> 
+    <owl:equivalentProperty rdf:resource="schema:performer" /> 
+    <rdfs:label xml:lang="en">Relationship between band or artist and the event
+      in which it performs</rdfs:label>     
+    <rdfs:label xml:lang="fr">Mise en relation : groupe ou artiste se produisant lors 
+      d'un evenement</rdfs:label>    
+    <rdfs:domain rdf:resource="#MusicEvent" />  
+    <rdfs:range rdf:resource="#MusicGroup" /> 
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="#takesPlace">  
+    <rdfs:subPropertyOf rdf:resource="lode:atPlace" />         
+    <rdfs:label xml:lang="en">Venue of an event</rdfs:label>    
+    <rdfs:label xml:lang="fr">Localisation d'un evenement</rdfs:label>   
+    <rdfs:domain rdf:resource="#MusicEvent" />
+    <rdfs:range rdf:resource="#EventLocation" />   
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="#dateBegin">  
+    <owl:equivalentProperty rdf:resource="schema:startDate" /> 
+    <rdfs:subPropertyOf rdf:resource="dc:date" />                     
+    <rdfs:label xml:lang="en">Beginning date of an event</rdfs:label>   
+    <rdfs:label xml:lang="fr">Date de debut d'un evenement</rdfs:label>    
+    <rdfs:domain rdf:resource="#MusicEvent" />
+    <rdfs:range rdf:resource="dc:date" />   
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="#dateEnd">  
+    <owl:equivalentProperty rdf:resource="schema:endDate" /> 
+    <rdfs:subPropertyOf rdf:resource="dc:date" />                        
+    <rdfs:label xml:lang="en">Ending date of an event</rdfs:label>     
+    <rdfs:label xml:lang="fr">Date de fin d'un evenement</rdfs:label>  
+    <rdfs:domain rdf:resource="#MusicEvent" />
+    <rdfs:range rdf:resource="dc:date" />   
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="#hasForMusicalGenre">  
+    <owl:equivalentProperty rdf:resource="mo:Genre" />   
+    <rdfs:label xml:lang="en">Associates an artist, a group or an event to a 
+      particular musical genre</rdfs:label>
+    <rdfs:label xml:lang="fr">Associe un artiste, un groupe ou un evenement a 
+      un genre musical</rdfs:label>
+    <rdfs:domain rdf:resource="#MusicGroup" /> 
+    <rdfs:range rdf:resource="#MusicalGenre" />
+  </owl:ObjectProperty>
+  
+  <owl:ObjectProperty rdf:about="#hasForTarget">    
+    <owl:equivalentProperty rdf:resource="oa:hasTarget" />     
+    <rdfs:label xml:lang="en">Associates an annotation to its target (a resource
+      of kind musical event, artist or music group)</rdfs:label>    
+    <rdfs:label xml:lang="fr">Associe une annotation a sa cible (une ressource 
+      evenement musical, artiste ou groupe de musique)</rdfs:label> 
+    <rdfs:domain rdf:resource="#DataBusiness" /> 
+    <rdfs:range rdf:resource="#MusicEvent" />
+    <rdfs:range rdf:resource="#MusicGroup" />
+    <rdfs:comment xml:lang="fr">Equivalent a la propriete 'hasTarget' de 
+      l'ontologie Open Annotation du W3C, avec des restrictions sur les types de
+      la cible et de la ressource annotee</rdfs:comment>
+    <rdfs:comment xml:lang="en">Equivalent to 'hasTarget' property of W3C's Open 
+      Annotation ontology, with restrictions on the type of both domain and range
+      of the annotation</rdfs:comment>       
+  </owl:ObjectProperty> 
+  
+  <owl:ObjectProperty rdf:about="#hasForContent">   
+    <owl:equivalentProperty rdf:resource="oa:hasBody" />       
+    <rdfs:label xml:lang="en">Annotation content</rdfs:label>   
+    <rdfs:label xml:lang="fr">Contenu d'une annotation</rdfs:label>    
+    <rdfs:domain rdf:resource="#DataBusiness" /> 
+    <rdfs:comment xml:lang="fr">Equivalent a la propriete 'hasBody' de 
+      l'ontologie Open Annotation du W3C, avec une restriction sur le type de la 
+      cible</rdfs:comment>
+    <rdfs:comment xml:lang="en">Equivalent to 'hasBody' property of W3C's Open 
+      Annotation ontology, with restriction on the type of target</rdfs:comment>       
+  </owl:ObjectProperty>
+
+</rdf:RDF>

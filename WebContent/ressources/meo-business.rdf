@@ -1,0 +1,37 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:igeo="http://rdf.insee.fr/def/geo#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:lode="http://linkedevents.org/ontology/"
+    xmlns:oa="http://www.w3.org/ns/oa#"
+    xmlns:mo="http://purl.org/ontology/mo/"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:meo="http://www.musicevents.com/#"
+    xmlns:gps="http://www.w3.org/2003/01/geo/wgs84_pos#">
+  <meo:DataBusiness rdf:about="http://www.musicevents.com/#2">
+    <meo:EvenementMusical>MusicEvent_1</meo:EvenementMusical>
+    <foaf:name>gao</foaf:name>
+    <meo:annotation>OK</meo:annotation>
+    <gps:lgt>40.56</gps:lgt>
+    <gps:lat>34.54</gps:lat>
+    <meo:numAnno>2</meo:numAnno>
+    <meo:tagg>Rock</meo:tagg>
+    <oa:annotatedAt>2013-20-20</oa:annotatedAt>
+    <foaf:mail>chenyanggao123@gmail.com</foaf:mail>
+  </meo:DataBusiness>
+  <meo:DataBusiness rdf:about="http://www.musicevents.com/#1">
+    <meo:numAnno>1</meo:numAnno>
+    <gps:lgt>40.56</gps:lgt>
+    <meo:EvenementMusical>MusicEvent_1</meo:EvenementMusical>
+    <oa:annotatedAt>2013-20-20</oa:annotatedAt>
+    <foaf:mail>chenyanggao123@gmail.com</foaf:mail>
+    <gps:lat>34.54</gps:lat>
+    <meo:annotation>OK</meo:annotation>
+    <foaf:name>gao</foaf:name>
+    <meo:tagg>Rock</meo:tagg>
+  </meo:DataBusiness>
+</rdf:RDF>
