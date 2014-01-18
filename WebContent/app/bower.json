@@ -1,0 +1,19 @@
+{
+  "name": "iovision-prototype",
+  "version": "0.1.0",
+  "dependencies": {
+    "font-awesome": "https://github.com/FortAwesome/Font-Awesome.git"
+  },
+  "devDependencies": {
+  },
+  "description": "Test",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/components",
+    "test",
+    "tests"
+  ]
+}

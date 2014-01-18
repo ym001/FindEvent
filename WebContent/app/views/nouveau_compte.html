@@ -1,0 +1,39 @@
+
+<div class="acenter">
+	<h1>
+		<b>CREATION COMPTE</b>
+	</h1>
+</div>
+
+<form class="login form-horizontal">
+
+	<div class="control-group">
+		<label class="control-label">Votre nom utilisateur: </label>
+		<div class="controls">
+			<input type="text" ng-model="nom">
+		</div>
+	</div>
+
+	<div class="control-group">
+		<label class="control-label">Votre mail: </label>
+		<div class="controls">
+			<input type="text" ng-model="mail">
+		</div>
+	</div>
+
+	<div class="control-group">
+		<label class="control-label">Votre mot de pass: </label>
+		<div class="controls">
+			<input type="password" ng-model="password">
+		</div>
+	</div>
+
+
+	<div class="control-group">
+		<div class="controls">
+			<button type="submit" class="btn btn-primary" ng-click="checkLogin()">Créer
+				votre compte</button>
+		</div>
+	</div>
+
+</form>

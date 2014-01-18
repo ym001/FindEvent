@@ -16,19 +16,19 @@ import WsSem.factory.JsonResultFactory;
 import WsSem.model.Style;
 
 
-@Path("/loginCheck")
+@Path("/LoginService")
 public class LoginService {
 
+	@Path("/loginCheck")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String checkUser(@Context UriInfo info) {
-
 
 		String username=info.getQueryParameters().getFirst("username");
 		String password = info.getQueryParameters().getFirst("password");
 
 
-		EntityManager em = Persistence.createEntityManagerFactory("WsSem").createEntityManager();
+		EntityManager em = Persistence.createEntityManagerFactory("FindEvent").createEntityManager();
 		Query q = em.createNativeQuery("SELECT * from User u WHERE u.username = ?1 AND u.password = ?2");
 		q.setParameter(1, username);
 		q.setParameter(2, password);

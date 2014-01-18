@@ -39,7 +39,7 @@ public class Hello {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String sayHtmlHello() {
 
-		EntityManager em = Persistence.createEntityManagerFactory("WsSem").createEntityManager();
+		EntityManager em = Persistence.createEntityManagerFactory("FindEvent").createEntityManager();
 		List<Style> listeStyles= new ArrayList<Style>(em.createQuery("select s from Style s", Style.class).getResultList());
 		
 		

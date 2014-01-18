@@ -70,6 +70,7 @@ public class Qjamendo{
          }
 		 
 	  
+<<<<<<< HEAD
 		  
 		  
 		  
@@ -79,6 +80,8 @@ public class Qjamendo{
 		  
 		  
 		  
+=======
+>>>>>>> ea63653450464348f58bad9de982b17a8bda6e71
 		  String record="http://dbtune.org/jamendo/record/1186";
 		  sQueries ="PREFIX rdf: <" + RDF.getURI() + ">" + CRLF;		  
 		  sQueries =sQueries + "PREFIX mo:<http://purl.org/ontology/mo/>" + CRLF;
@@ -122,6 +125,56 @@ public class Qjamendo{
 		 finally {
                 qexec.close() ;
          }
+		  
+		  
+		  
+		  /*requette genre
+		  System.out.println();
+			System.out.println("Requette genre");
+			System.out.println();
+		  
+			 sSelect="*";
+			  sQueries=sQueries+ "SELECT " + sSelect + CRLF;
+			  
+			  
+			  sWhere="?artist a mo:MusicArtist ;";
+			  sWhere=sWhere + " foaf:homepage ?homepage ;";
+			  sWhere=sWhere + " foaf:based_near ?based ;";
+			  //sWhere=sWhere + " owl:sameAs ?sameas ;";
+			  //sWhere=sWhere + " mo:biography ?bio ;";
+			  
+			  sWhere=sWhere + " foaf:img ?img ;";
+			  sWhere=sWhere + " foaf:made ?made ;";
+			  //sWhere=sWhere + " tags:taggedWithTag ?tag ;";		
+			  sWhere=sWhere + " foaf:name \""+artiste+"\" .";
+			
+			 
+			  sQueries = sQueries+ "WHERE { "+sWhere+" } ";
+				 
+			 // System.out.println(sQueries);	  	  
+			  
+		      QueryExecution qexec = QueryExecutionFactory.sparqlService(service, sQueries);
+			  try {	             
+					ResultSet rs = qexec.execSelect() ;
+					
+					while(rs.hasNext())
+					{
+						QuerySolution soln = rs.nextSolution();
+						System.out.println("artiste : "+soln.get("?artist"));
+						System.out.println("homepage : "+soln.get("?homepage"));
+						System.out.println("image : "+soln.get("?img"));
+						System.out.println("album  : "+soln.get("?made"));
+						System.out.println("lieu de résidence  : "+soln.get("?based"));
+						//System.out.println("biographie  : "+soln.get("?bio"));
+						System.out.println("voir aussi  : "+soln.get("?sameas"));
+						System.out.println();
+					}
+			 }
+			 finally {
+	                qexec.close() ;
+	         }
+			 */
+		  
 	}
 
 }
