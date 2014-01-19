@@ -12,6 +12,17 @@
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:meo="http://www.musicevents.com/#"
     xmlns:gps="http://www.w3.org/2003/01/geo/wgs84_pos#">
+  <meo:DataBusiness rdf:about="http://www.musicevents.com/#3">
+    <meo:numAnno>3</meo:numAnno>
+    <foaf:mail>vigno@sina.com</foaf:mail>
+    <meo:EvenementMusical>Wallace Negão Chanteur</meo:EvenementMusical>
+    <gps:lgt>3.8772</gps:lgt>
+    <oa:annotatedAt>2014-01-19</oa:annotatedAt>
+    <meo:annotation>Good not bad</meo:annotation>
+    <meo:tagg></meo:tagg>
+    <foaf:name>gao</foaf:name>
+    <gps:lat>43.6109</gps:lat>
+  </meo:DataBusiness>
   <meo:DataBusiness rdf:about="http://www.musicevents.com/#2">
     <meo:EvenementMusical>MusicEvent_1</meo:EvenementMusical>
     <foaf:name>gao</foaf:name>
@@ -30,8 +41,8 @@
     <oa:annotatedAt>2013-20-20</oa:annotatedAt>
     <foaf:mail>chenyanggao123@gmail.com</foaf:mail>
     <gps:lat>34.54</gps:lat>
-    <meo:annotation>OK</meo:annotation>
     <foaf:name>gao</foaf:name>
+    <meo:annotation>OK</meo:annotation>
     <meo:tagg>Rock</meo:tagg>
   </meo:DataBusiness>
 </rdf:RDF>

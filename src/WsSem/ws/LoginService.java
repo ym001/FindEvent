@@ -1,5 +1,8 @@
 package WsSem.ws;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
@@ -14,6 +17,7 @@ import javax.ws.rs.core.UriInfo;
 
 import WsSem.factory.JsonResultFactory;
 import WsSem.model.Style;
+import WsSem.model.User;
 
 
 @Path("/LoginService")
@@ -29,12 +33,13 @@ public class LoginService {
 
 
 		EntityManager em = Persistence.createEntityManagerFactory("FindEvent").createEntityManager();
-		Query q = em.createNativeQuery("SELECT * from User u WHERE u.username = ?1 AND u.password = ?2");
+		Query q = em.createQuery("SELECT distinct u from User u WHERE u.username = ?1 AND u.password = ?2", User.class);
 		q.setParameter(1, username);
 		q.setParameter(2, password);
 
+		List<User> users = q.getResultList();
 		if(q.getResultList().size()>0){
-			return JsonResultFactory.getJsonResultFactory().createJsonResultString("200", "success", null);	
+			return JsonResultFactory.getJsonResultFactory().createJsonResultString("200", "success", users);	
 		}else{
 			return JsonResultFactory.getJsonResultFactory().createJsonResultString("200", "fail", null);
 		}
