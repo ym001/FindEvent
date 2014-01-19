@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-7-openjdk-i386">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre7">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
@@ -27,9 +27,9 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jax-rs-1.x"/>
-	<classpathentry kind="lib" path="/home/cgao/Outil/jackson/jackson-core-2.2.3.jar"/>
-	<classpathentry kind="lib" path="/home/cgao/Outil/jackson/jackson-databind-2.2.3.jar"/>
-	<classpathentry kind="lib" path="/home/cgao/Outil/apache-commons-lang3.1/commons-lang3-3.1.jar"/>
-	<classpathentry kind="lib" path="/home/cgao/Outil/jackson/jackson-annotations-2.2.3.jar"/>
+	<classpathentry kind="lib" path="D:/Tools/JAR/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="D:/Tools/JAR/jackson-annotations-2.2.3.jar"/>
+	<classpathentry kind="lib" path="D:/Tools/JAR/jackson-core-2.2.3.jar"/>
+	<classpathentry kind="lib" path="D:/Tools/JAR/jackson-databind-2.2.3.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

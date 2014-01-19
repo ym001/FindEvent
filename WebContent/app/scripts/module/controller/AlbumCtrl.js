@@ -7,6 +7,7 @@
 
 		$scope.$info_user = webStorage.session.get('$info_user');
 		$scope.idArtiste = $routeParams.idArtiste;
+		$scope.artistName = $routeParams.artistName;
 		$scope.dataAlbums = [];
 
 

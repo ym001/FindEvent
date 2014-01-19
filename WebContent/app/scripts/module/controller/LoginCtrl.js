@@ -27,9 +27,10 @@
 					$scope.type_musique = 'pop';
 					
 					$scope.$emit('info_user', {
+						email:data.binding[0].email,
 						nom : $scope.nom,
 						pass : $scope.pass, 
-						type_musique : [], 
+						type_musique : data.binding[0].styles, 
 						distance:20
 					});
 					

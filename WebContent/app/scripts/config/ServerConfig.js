@@ -7,7 +7,7 @@
     protocal:'http://', 
     domain:'localhost',
     context:'', 
-    port:9200
+    port:8080
   });
 
 //===>information for the server who provides REST service

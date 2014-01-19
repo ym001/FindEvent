@@ -7,38 +7,37 @@
 	<img src="images/music-event5.jpg" class="margin-small" style="width:180px">
 </div>
 
-<form class="login form-horizontal">
+<form class="login form-horizontal" role="form">
 
-	<div class="control-group">
-		<label class="control-label"><b style="color:black">Votre identifiant: </b></label>
-		<div class="controls">
-			<input type="text" ng-model="nom">
-		</div>
-	</div>
+		<div class="form-group">
+    		<label class="col-sm-6 control-label"><b>Votre identifiant: </b></label>
+			<div class="col-sm-6">
+				<input class="form-control" type="text" ng-model="nom">
+			</div>
+  		</div>
+  		
+  		<div class="form-group">
+    		<label class="col-sm-6 control-label"><b>Votre mot de passe: </b></label>
+			<div class="col-sm-6">
+				<input class="form-control" type="password" ng-model="pass">
+			</div>
+  		</div>
 	
-	<div class="control-group">
-		<label class="control-label"><b style="color:black">Votre mot de passe: </b></label>
-		<div class="controls">
-			<input type="password" ng-model="pass">
-		</div>
-	</div>
-	
-	<div class="control-group">
-	    <div class="controls">
-	      <button type="submit" class="btn btn-primary btn-large" ng-click="checkLogin()">
+	<div class="form-group">
+	    <div class="col-sm-offset-4 col-sm-8">
+	      <button type="submit" class="btn btn-primary" ng-click="checkLogin()">
 	      <i class="fa fa-music"></i> Se connecter
 	      </button>
 	    </div>
   	</div>
   	
-  	
-  	<div class="control-group">
-	    <div class="controls">
-	      <a class="btn btn-primary" href="#/nouveauCompte">
+  	<div class="form-group">
+	    <div class="col-sm-offset-4 col-sm-8">
+	       <a class="btn btn-primary" href="#/nouveauCompte">
 	      <i class="fa fa-pencil-square-o"></i> créer un nouveau compte
 	      </a>
 	    </div>
   	</div>
-	
-
+  		
 </form>
+

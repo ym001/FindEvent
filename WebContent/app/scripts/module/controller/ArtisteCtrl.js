@@ -31,14 +31,6 @@
 				             ]
 		}
 
-		
-		$scope.getAlbums = function(idJamendo){
-			console.log(idJamendo);
-			$location.search('idArtiste',idJamendo);
-			$location.path('/albums');
-		}
-		
-
 		$scope.init = function(){
 			EvenementService.getArtistesByGenre($scope.$info_user.type_musique).success(function(data, status){
 				$scope.dataTemp = data.binding;

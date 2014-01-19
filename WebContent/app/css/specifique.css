@@ -1,5 +1,6 @@
 #spinner{
-	width:45px;
+	width:35px;
+	color:yellow;
 }
 
 .block-spinner{
@@ -9,11 +10,13 @@
 	left:50%;
 }
 
-.google-map{
+/* .google-map{
 	height:450px;
 	width:100%;
 	border:solid rgba(0,0,0,0.2) 1px;
-}
+} */
+
+.angular-google-map-container { height: 600px; }
 
 
 /***Specifique pour resoudre le probleme d'affichage icon

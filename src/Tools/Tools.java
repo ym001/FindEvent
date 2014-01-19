@@ -19,6 +19,11 @@ public class Tools {
 	 * @author Sébastien Paradis
 	 */
 
+	public static String getBusinessRdfPath(){
+		//return "/home/cgao/Travail/FindEvent/WebContent/ressources/meo-business.rdf";
+		return "D:/Travaille/FindEvent/WebContent/ressources/meo-business.rdf";
+	}
+	
 	//From null to "", for Jena alimentation
 	public static String nullToString(Object o){
 		if(o==null){
