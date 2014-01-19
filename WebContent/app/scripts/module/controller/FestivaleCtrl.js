@@ -86,7 +86,7 @@
 				content.annotation = result.annotation;
 				BusinessService.addAnnotation(content).success(function(data, status){
 					if(data.result=='success'){
-						console.log('success');
+						alert('Vous avez bien postulé votre annotation! Merci');
 					}else{
 						console.log('error');
 					}

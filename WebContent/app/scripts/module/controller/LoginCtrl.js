@@ -48,9 +48,7 @@
 						if(navigator.geolocation){
 							navigator.geolocation.getCurrentPosition($scope.maPosition);
 						}
-						
-						
-						//Mettre en statique
+						//Mettre en statique si probleme de connextion
 						$rootScope.$broadcast('spinnerOff');
 						var geoData = {
 							"ip":"162.38.218.204",
