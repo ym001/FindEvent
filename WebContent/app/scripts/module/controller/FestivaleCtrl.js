@@ -55,11 +55,12 @@
 			console.log('open');
 			console.log(rowEntity);
 			$scope.$info_user = webStorage.session.get('$info_user');
+			var date_current = new Date();
 			var content = {
 					tag : "",
 					annotation : "",
 					event : rowEntity.name, 
-					date : new Date(),
+					date : date_current,
 					lat : $scope.latitude,
 					lgt : $scope.longitude,
 					nom : $scope.$info_user.nom,
