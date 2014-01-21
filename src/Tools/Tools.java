@@ -20,8 +20,8 @@ public class Tools {
 	 */
 
 	public static String getBusinessRdfPath(){
-		return "/home/cgao/Travail/FindEvent/WebContent/ressources/meo-business.rdf";
-		//return "D:/Travaille/FindEvent/WebContent/ressources/meo-business.rdf";
+		//return "/home/cgao/Travail/FindEvent/WebContent/ressources/meo-business.rdf";
+		return "D:/Travaille/FindEvent/WebContent/ressources/meo-business.rdf";
 	}
 	
 	//From null to "", for Jena alimentation
