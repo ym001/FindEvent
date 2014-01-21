@@ -4,7 +4,7 @@
 		<class>WsSem.model.Style</class>
 		<class>WsSem.model.User</class>
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.223.1:3306/webSem"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/webSem"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>
 			<property name="javax.persistence.jdbc.password" value="123"/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
