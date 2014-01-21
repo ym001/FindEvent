@@ -23,15 +23,21 @@
 
 		//info_geo
 		$scope.$on('info_geo', function(event, data){
-			if(webStorage.session.get('$info_geo')==null){
-				//If city is empty, we will use 'Montpellier'
-				if((data.region_name.length==0)){
-					data.latitude=43.6109;
-					data.longitude=3.8772;
-					data.region_name='Montpellier';
+
+			if(_.isEmpty(data.city)){ //in case not found city
+				data = {
+						"ip":"162.38.218.204",
+						"region_name":"Languedoc-Roussillon",
+						"latitude":43.6109,
+						"longitude":3.8772,
+						"city":"Montpellier",
+						"region_code":"A9",
+						"country_code":"FR", 
+						"country_name":"France"
 				}
-				webStorage.session.add('$info_geo', data);
 			}
+
+			webStorage.session.add('$info_geo', data);
 			console.log(webStorage.session.get('$info_geo'));
 		});
 

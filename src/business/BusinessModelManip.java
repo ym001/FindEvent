@@ -26,7 +26,7 @@ public class BusinessModelManip{
 	public static void addBusinessObject(JsonBusinessObject obj){
 		try {
 
-			String rdf_file = "file:/home/cgao/Travail/FindEvent/WebContent/ressources/meo-business.rdf";
+			String rdf_file = "file:"+Tools.getBusinessRdfPath();
 			Model model = ModelFactory.createDefaultModel();
 			FileManager.get().readModel( model, rdf_file );
 
@@ -76,7 +76,7 @@ public class BusinessModelManip{
 
 			
 			//Write into rdf file
-			File out_file = new File("/home/cgao/Travail/FindEvent/WebContent/ressources/meo-business.rdf");
+			File out_file = new File(Tools.getBusinessRdfPath());
 			FileOutputStream ost = new FileOutputStream(out_file);
 			//model.write(System.out, "RDF/XML-ABBREV");
 			model.write(ost, "RDF/XML-ABBREV" ); 

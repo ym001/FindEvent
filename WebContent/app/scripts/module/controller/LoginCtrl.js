@@ -27,9 +27,10 @@
 					$scope.type_musique = 'pop';
 					
 					$scope.$emit('info_user', {
+						email:data.binding[0].email,
 						nom : $scope.nom,
 						pass : $scope.pass, 
-						type_musique : [], 
+						type_musique : data.binding[0].styles, 
 						distance:20
 					});
 					
@@ -47,9 +48,7 @@
 						if(navigator.geolocation){
 							navigator.geolocation.getCurrentPosition($scope.maPosition);
 						}
-						
-						
-						//Mettre en statique
+						//Mettre en statique si probleme de connextion
 						$rootScope.$broadcast('spinnerOff');
 						var geoData = {
 							"ip":"162.38.218.204",
