@@ -58,8 +58,8 @@
 		//La gestion de session
 		$scope.$on('$routeChangeStart', function(event, next, current){
 
-			//Si cas nouveau client
-			if(next.$$route.controller=='NouveauCompteCtrl'){
+			//Si cas nouveau client ou business
+			if(next.$$route.controller=='NouveauCompteCtrl'||next.$$route.controller=='BusinessCtrl'){
 				//
 			}else{
 				//verifier si la session est toujours valide

@@ -2,7 +2,7 @@
 	'use strict';
 	var module = angular.module('mod.controller');
 
-	module.controller('LoginCtrl', ['$scope', '$rootScope', '$location', 'cmWSFacade', 'LoginService', '$http', 
+	module.controller('LoginCtrl', ['$scope', '$rootScope', '$location', 'cmWSFacade', 'LoginService', '$http',  
 	                                function($scope, $rootScope, $location, cmWSFacade, LoginService, $http){
 
 
@@ -17,7 +17,9 @@
 		
 		$scope.maPosition = function(position){
 			console.log(position);
-		}
+		};
+		
+		
 		
 		$scope.checkLogin = function(){
 			//function d'authentification

@@ -63,6 +63,10 @@
 			 {  when:"/nouveauCompte", 
 				 templateUrl:"views/nouveau_compte.html", 
 				 controller:"NouveauCompteCtrl"
+			 }, 
+			 {  when:"/business", 
+				 templateUrl:"views/business.html", 
+				 controller:"BusinessCtrl"
 			 }
 
 			 ]);
