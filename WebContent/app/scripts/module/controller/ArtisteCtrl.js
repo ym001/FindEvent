@@ -26,7 +26,7 @@
 				             {field:'img', displayName:'Image', cellTemplate:'template/templateArtiste.html'}, 
 				             {field:'name', displayName:'Nom du Artiste'}, 
 				             {field:'homepage', displayName:'Homepage', cellTemplate:'<div><a href="{{row.entity.homepage}}">{{row.entity.homepage}}</a></div>'}, 
-				             {field:'bio', displayName:'Biologie Artiste', cellTemplate:'<div><div ng-bind-html="{{row.entity.bio}}"/></div>'}, 
+				             {field:'tag', displayName:'Genre musicale'}, 
 				             {field:'', displayName:'Albums', cellTemplate:'template/templateArtisteAlbum.html'}
 				             ]
 		}
