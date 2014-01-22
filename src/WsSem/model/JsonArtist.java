@@ -1,5 +1,7 @@
 package WsSem.model;
 
+import com.hp.hpl.jena.rdf.model.Model;
+
 public class JsonArtist {
 
 	String idJamendo;
@@ -53,6 +55,5 @@ public class JsonArtist {
 	public void setImg(String img) {
 		this.img = img;
 	}
-	
 	
 }

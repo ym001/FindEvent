@@ -2,13 +2,14 @@ package Tools;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.StringTokenizer;
 
 import org.apache.commons.lang3.text.WordUtils;
 
 public class Tools {
-	
-	
+
+
 	/*
 	 * Formatage d'une chaine : 
 	 *   + toutes les 1ères lettres en MAJ
@@ -17,16 +18,30 @@ public class Tools {
 	 * 
 	 * @author Sébastien Paradis
 	 */
+
+	public static String getBusinessRdfPath(){
+		return "/home/cgao/Travail/FindEvent/WebContent/ressources/meo-business.rdf";
+		//return "D:/Travaille/FindEvent/WebContent/ressources/meo-business.rdf";
+	}
+	
+	//From null to "", for Jena alimentation
+	public static String nullToString(Object o){
+		if(o==null){
+			return "";
+		}else{
+			return o.toString();
+		}
+	}
 	
 	//return 'sth'
 	public static String myString(String txt){
 		return "'"+txt+"'";
 	}
-	
+
 	public static String uppercaseWords(String original) {
-	    if(original.length() == 0)
-	        return original;
-	    // 1er "
+		if(original.length() == 0)
+			return original;
+		// 1er "
 		if (original.charAt(0) == '"') {
 			original = original.substring(1);
 		}
@@ -38,14 +53,14 @@ public class Tools {
 		return WordUtils.capitalizeFully(original);
 	}
 
-	
+
 	/***Parse last element***/
 	public static String getLastItemInLink(String link){
 		String result = link.substring(link.lastIndexOf("/")+1);
 		return result;
 	}
-	
-	
+
+
 	/***Parse first ^^***/
 	public static String getFirstTitle(String link){
 		StringTokenizer st = new StringTokenizer(link, "^^");
@@ -56,10 +71,10 @@ public class Tools {
 		}
 		return result;
 	}
-	
-	
+
+
 	/**Geo**/
-	
+
 	private static float toRad(float num){
 		return (float) (num*Math.PI/180);
 	}
@@ -125,7 +140,7 @@ public class Tools {
 		float lgtOuest = (float)(lgtOrigin + Math.atan2(Math.sin(bearing_ouest)*Math.sin(distance_R)*Math.cos(latOrigin), 
 				Math.cos(distance_R)-Math.sin(latOrigin)*Math.sin(latOuest)));
 
-/*		System.out.println("point Nord:"+Tools.toDeg(latNord)+", "+Tools.toDeg(lgtNord));
+		/*		System.out.println("point Nord:"+Tools.toDeg(latNord)+", "+Tools.toDeg(lgtNord));
 		System.out.println("point Est:"+Tools.toDeg(latEst)+", "+Tools.toDeg(lgtEst));
 		System.out.println("point Sud:"+Tools.toDeg(latSud)+", "+Tools.toDeg(lgtSud));
 		System.out.println("point Nord:"+Tools.toDeg(latOuest)+", "+Tools.toDeg(lgtOuest));*/
@@ -135,7 +150,7 @@ public class Tools {
 		lgtMax = Tools.toDeg(lgtEst);
 		lgtMin = Tools.toDeg(lgtOuest);
 
-/*		System.out.println("latMax"+latMax);
+		/*		System.out.println("latMax"+latMax);
 		System.out.println("latMin:"+latMin);
 		System.out.println("lgtMax:"+lgtMax);
 		System.out.println("lgtMin:"+lgtMin);*/

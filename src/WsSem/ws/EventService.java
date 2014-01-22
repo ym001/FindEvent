@@ -10,7 +10,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
-import Exception.WebServiceException;
+import exception.WebServiceException;
 import Tools.Tools;
 import WsSem.factory.JsonResultFactory;
 import WsSem.factory.QueryEndpointFactory;

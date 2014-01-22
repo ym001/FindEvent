@@ -6,6 +6,7 @@ import java.util.List;
 
 import json.MainJsonReadData;
 import json.QueryParams;
+import business.BusinessModelCreation;
 
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -16,7 +17,7 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.RDF;
 
-import Exception.WebServiceException;
+import exception.WebServiceException;
 import Tools.Tools;
 import WsSem.model.*
 ;
@@ -26,8 +27,8 @@ public class QueryEndpointFactory{
 	public static final String serviceJamendo = "http://dbtune.org/jamendo/sparql/";
 	public static final String serviceMusicBrainz = "http://dbtune.org/musicbrainz/sparql/";
 	public static final String serviceDBpedia = "http://www.dbpedia.org/sparql";
-	private final static String servicePath1 = "ressources/meo-model.rdf";
-	private final static String servicePath2 = "ressources/meo-data.rdf";
+//	private final static String servicePath1 = "file:rdf_model/meo-data.rdf";
+//	private final static String servicePath2 = "file:rdf_model/meo-data.rdf";
 	private static String sPrefix;
 	private static QueryExecution qexec;
 	//private static Model m1, m2, m;
@@ -47,7 +48,7 @@ public class QueryEndpointFactory{
 		sPrefix =sPrefix+ "PREFIX skos: <http://www.w3.org/2004/02/skos/core#>" + CRLF;
 		sPrefix =sPrefix+ "PREFIX dcterms: <http://purl.org/dc/terms/>" + CRLF;
 		sPrefix =sPrefix+ "PREFIX dc: <http://purl.org/dc/elements/1.1/>" + CRLF;
-		//sQueries =sQueries + "PREFIX mo: <http://purl.org/ontology/mo/>" + CRLF;
+		//sPrefix =sPrefix + "PREFIX mo: <http://purl.org/ontology/mo/>" + CRLF;
 		sPrefix =sPrefix+ "PREFIX igeo: <http://rdf.insee.fr/def/geo#>" + CRLF;
 		sPrefix =sPrefix+ "PREFIX gps: <http://www.w3.org/2003/01/geo/wgs84_pos#>" + CRLF;
 		sPrefix =sPrefix+ "PREFIX lode: <http://linkedevents.org/ontology/>" + CRLF;
@@ -64,6 +65,8 @@ public class QueryEndpointFactory{
 		sPrefix =sPrefix + "PREFIX db: <http://dbtune.org/musicbrainz/resource/>" + CRLF;
 		sPrefix =sPrefix + "PREFIX bio: <http://purl.org/vocab/bio/0.1/>" + CRLF;
 		sPrefix =sPrefix + "PREFIX mbz: <http://purl.org/ontology/mbz#>" + CRLF;
+		
+		sPrefix =sPrefix + "PREFIX oa: <http://www.w3.org/ns/oa#>" + CRLF;
 
 
 		return sPrefix;
@@ -71,87 +74,79 @@ public class QueryEndpointFactory{
 
 
 	public static Model createMyModel(){
-		InputStream in1 = FileManager.get().open(servicePath1);
-		if (in1 == null) {
-			throw new IllegalArgumentException( "File: " + servicePath1 + " not found");
-		}
-		InputStream in2 = FileManager.get().open(servicePath2);
-		if (in2 == null) {
-			throw new IllegalArgumentException( "File: " + servicePath2 + " not found");
-		}
-		Model m = ModelFactory.createDefaultModel();
-		Model m2 = ModelFactory.createDefaultModel();
-		m.read(in1, "");
-		m2.read(in2, "");
-		m.add(m2);
-		return m;
+		return BusinessModelCreation.getModel();
 	}
 
 	public static void closeQueryExe(){
 		qexec.close();
 	}
-
-
-	//Requette groupes : trouve les groupes pour un genre ou un autre genre*/
-	/*
-	public static List<JsonGroupe> getGroupesByGenres(String genre1, String genre2, String genre3, String genre4){
+	
+	
+	
+	
+	
+	//Requette Business trouve les évènements annotés.
+	public static List<JsonBusinessObject> getSampleBusinessEvent(){
+		
 		String sPrefix = createPrefix();
+		List<JsonBusinessObject> listeBusiness = new ArrayList<JsonBusinessObject>();
 		Model m = createMyModel();
-		List<JsonGroupe> listeGroupes = new ArrayList<JsonGroupe>();
-		JsonGroupe item;
-
-		String sSelect="*";
-		String sQueries=sPrefix+ "SELECT " + sSelect + CRLF;
-		String sWhere="";
-		sWhere=sWhere + "?artiste meo:aPourGenre ?genre "+ CRLF;
-		sWhere=sWhere + "OPTIONAL {?artiste foaf:name ?name}"+ CRLF;
-		sWhere=sWhere + "OPTIONAL {?artiste foaf:nick ?nick}"+ CRLF;
-		sWhere=sWhere + "OPTIONAL {?artiste foaf:homepage ?homepage }"+ CRLF;
-		sWhere=sWhere + "OPTIONAL {?artiste rdfs:seeAlso ?seealso }"+ CRLF;
-
-		String sFilter = "";
-		if(genre1!=null||genre2!=null||genre3!=null||genre4!=null){
-			sFilter+= "FILTER(";
-			if(genre1!=null){
-				sFilter+="?genre=\""+genre1+"\"^^xsd:string";
-			}
-			if(genre2!=null){
-				sFilter+="||?genre=\""+genre2+"\"^^xsd:string";
-			}if(genre3!=null){
-				sFilter+="||?genre=\""+genre3+"\"^^xsd:string";
-			}
-			if(genre4!=null){
-				sFilter+="||?genre=\""+genre4+"\"^^xsd:string";
-			}
-			sFilter+=")";
-		}
-
-		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ORDER BY ?name";
+		String sSelect, sQueries, sFilter, sWhere ="";
+		ResultSet rs;
+		QueryExecution qexec;
+		
+		sSelect="*";
+		sQueries=sPrefix+"SELECT DISTINCT " + sSelect + CRLF;
+		
+		sWhere="";
+		sWhere=sWhere + "?databusiness meo:annotation ?annotation."+ CRLF;
+		sWhere=sWhere + "OPTIONAL {?databusiness meo:numAnno ?numAnno}"+ CRLF;
+		sWhere=sWhere + "OPTIONAL {?databusiness meo:tagg ?tagg}"+ CRLF;
+		sWhere=sWhere + "OPTIONAL {?databusiness meo:EvenementMusical ?event}"+ CRLF;
+		sWhere=sWhere + "OPTIONAL {?databusiness oa:annotatedAt: ?date}"+ CRLF;
+		sWhere=sWhere + "OPTIONAL {?databusiness gps:lat ?lat}"+ CRLF;
+		sWhere=sWhere + "OPTIONAL {?databusiness gps:lgt ?lgt}"+ CRLF;		
+		sWhere=sWhere + "OPTIONAL {?databusiness foaf:mail ?mail}"+ CRLF;
+		sWhere=sWhere + "OPTIONAL {?databusiness foaf:name ?nom}"+ CRLF;
+		sQueries = sQueries+ "WHERE { "+sWhere+" } ";
+			 
 		//System.out.println(sQueries);	  	  
+		qexec = QueryExecutionFactory.create(sQueries, m);
+		try {	             
+				rs = qexec.execSelect() ;
+				while(rs.hasNext())
+				{
+					QuerySolution soln = rs.nextSolution();
+					JsonBusinessObject item = new JsonBusinessObject();
+					if(soln.get("?numAnno")!=null)item.setNumAnno(Integer.parseInt(soln.get("?numAnno").toString()));
+					if(soln.get("?tagg")!=null)item.setTag(soln.get("?tagg").toString());
+					if(soln.get("?annotation")!=null)item.setAnnotation(soln.get("?annotation").toString());
+					if(soln.get("?event")!=null)item.setEvent(soln.get("?event").toString());
+					if(soln.get("?date")!=null)item.setDate(soln.get("?date").toString());
+					if(soln.get("?lat")!=null)item.setLat(soln.get("?lat").toString());
+					if(soln.get("?lgt")!=null)item.setLgt(soln.get("?lgt").toString());
+					if(soln.get("?nom")!=null)item.setNom(soln.get("?nom").toString());
+					if(soln.get("?mail")!=null)item.setMail(soln.get("?mail").toString());
+					listeBusiness.add(item);
+				}
+		 }catch(Exception e){
+			 e.printStackTrace();
+		 }
+		 finally {
+                qexec.close() ;
+         }
 
-		qexec = QueryExecutionFactory.create(sQueries, m);	             
-		ResultSet rs = qexec.execSelect() ;
-		while(rs.hasNext())
-		{
-			QuerySolution soln = rs.nextSolution();
-			item = new JsonGroupe();
-			item.setGenre(soln.get("?genre").toString());
-			item.setHomepage(soln.get("?homepage").toString());
-			item.setName(soln.get("?name").toString());
-			item.setNick(soln.get("?nick").toString());
-			item.setSeeAlso(soln.get("?seealso").toString());
-			listeGroupes.add(item);
-		}
-		return listeGroupes;
+		return listeBusiness;
+		
 	}
-	 */
-
+	
+	
+	
 
 	//Requette artiste : trouve les artistes pour un genre ou un autre genre*/
 	public static List<JsonArtist> getArtistesByGenres(String tag1, String tag2, String tag3, String tag4){
 
 		String sPrefix = createPrefix();
-		Model m = createMyModel();
 		List<JsonArtist> listeArtistes = new ArrayList<JsonArtist>();
 		String sSelect, sQueries, sFilter, sWhere ="";
 		ResultSet rs;
@@ -192,6 +187,7 @@ public class QueryEndpointFactory{
 
 		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ";
 		qexec = QueryExecutionFactory.sparqlService(serviceJamendo, sQueries);
+		
 		try{//Here will already catch exception. Otherwhere will not catch this one
 			rs = qexec.execSelect() ;
 			while(rs.hasNext())
@@ -217,7 +213,6 @@ public class QueryEndpointFactory{
 		 * Musicbrainz implementation
 		 */
 
-		/*
 		sSelect="SELECT DISTINCT *";
 		sQueries=sPrefix + sSelect + CRLF;	
 
@@ -269,14 +264,12 @@ public class QueryEndpointFactory{
 		}finally{
 			qexec.close();
 		}
-		*/
 	
 
 		/**
 		 * DBpedia implementation
 		 */
 
-		/*
 		sSelect="SELECT DISTINCT *";
 		sQueries=sPrefix + sSelect + CRLF; 
 		sWhere=sWhere + "OPTIONAL{?artiste foaf:name ?name.}";
@@ -328,8 +321,6 @@ public class QueryEndpointFactory{
 			qexec.close();
 		}
 		
-		*/
-		
 		
 		return listeArtistes;
 	}
@@ -339,7 +330,6 @@ public class QueryEndpointFactory{
 		public static List<JsonAlbum> getAlbumsByArtiste(String idJamendoArtiste, String nameOfArtist){
 
 			String sPrefix = createPrefix();
-            Model m = createMyModel();
             List<JsonAlbum> listeAlbum = new ArrayList<JsonAlbum>();
             JsonAlbum item;
 

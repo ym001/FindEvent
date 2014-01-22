@@ -63,6 +63,10 @@
 			 {  when:"/nouveauCompte", 
 				 templateUrl:"views/nouveau_compte.html", 
 				 controller:"NouveauCompteCtrl"
+			 }, 
+			 {  when:"/business", 
+				 templateUrl:"views/business.html", 
+				 controller:"BusinessCtrl"
 			 }
 
 			 ]);
@@ -80,13 +84,13 @@
 
 
 				return {
-					cmWSGet:function(uri){
+					cmWSGet:function(uri, cache){
 						$rootScope.$broadcast('spinnerOn');
 						console.log('NOW GET '+compo_url+uri);
 						return $http({
 							url:compo_url+uri,
 							method:"GET", 
-							cache:false, 
+							cache:cache, 
 							timeout:60000
 						}); 
 					}, 

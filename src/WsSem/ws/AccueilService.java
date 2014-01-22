@@ -28,8 +28,8 @@ public class AccueilService {
 
 		EntityManager em = Persistence.createEntityManagerFactory("FindEvent").createEntityManager();
 		Query q = em.createNativeQuery("SELECT * FROM Style s WHERE 1=1");
+		//Query q = em.createQuery("SELECT distinct s FROM Style s WHERE 1=1", Style.class); this is better
 		List<Style> styles = q.getResultList();
-
 		String stringResult = JsonResultFactory.getJsonResultFactory().createJsonResultString("200", "success", styles);
 		return stringResult;				
 	}

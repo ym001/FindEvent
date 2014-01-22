@@ -7,7 +7,7 @@
 		
 		return{
 			checkLogin:function(username, login){
-				return cmWSFacade.cmWSGet('LoginService/loginCheck?username='+username+'&password='+login);
+				return cmWSFacade.cmWSGet('LoginService/loginCheck?username='+username+'&password='+login, false);
 			}
 		}
 	

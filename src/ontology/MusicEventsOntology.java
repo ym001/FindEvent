@@ -1,4 +1,4 @@
-/*package ontology;
+package ontology;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -24,13 +24,13 @@ import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
-
+/*
  * Mod�le mettant en relation l'ontologies de groupes de musique 
  * et celle des �v�nements musicaux (concerts, festivals, ...)
  * event: http://purl.org/NET/c4dm/event.owl#
  * 
  * @author S�bastien Paradis
- 
+ */
 public class MusicEventsOntology {
 	private static Model m;
 	
@@ -40,7 +40,7 @@ public class MusicEventsOntology {
 	public static Resource MusicEvent;
 	public static Resource MusicalGenre;
 	
-	*//**** Propri�t�s d�finies dans l'ontologie ****//*
+	/**** Propri�t�s d�finies dans l'ontologie ****/
 	// Propri�t�s applicables � #MusicEvent 
 	public static Property hasSubEvent;			// de type #MusicEvent
 	public static Property hasPerformer;		// de type #MusicGroup ou #Artist
@@ -52,7 +52,7 @@ public class MusicEventsOntology {
 	// Propri�t� applicable � #MusicGroup 
 	public static Property hasForMember;		// de type #Artist
 	
-	*//**** Autres propri�t�s n�cessaires  ****//*
+	/**** Autres propri�t�s n�cessaires  ****/
 	public static Property hasForWebsite;
 	public static Property hasForImage;
 	public static Property latitude;
@@ -71,10 +71,10 @@ public class MusicEventsOntology {
         ShowClassProperties((OntClass) MusicEvent);
         ShowClassProperties((OntClass) MusicalGenre);
 
-        Individual paul = CreateResource(m, Artist, "Paul McCartney");
+        /*Individual paul = CreateResource(m, Artist, "Paul McCartney");
         paul.addProperty(aPourGenre, m.createTypedLiteral("Pop"));
         paul.addProperty(hasForWebsite, "www.beatles.com");
-        ShowInstanceProperties(paul, (OntClass)Artist);
+        ShowInstanceProperties(paul, (OntClass)Artist);*/
 	}
 	
 	public MusicEventsOntology() {
@@ -162,11 +162,11 @@ public class MusicEventsOntology {
 	public static Resource getResource(String pName) {
 		return new ResourceImpl(getUri(), pName); 
 	}
-	
+	/*
 	private Individual CreateInstance(OntModel m, OntClass cls, String name) {
         return m.createIndividual(getUri() + name, cls);
     }
-	
+	*/
     private void ShowClassProperties(OntClass c) {
         System.out.println("Class " + c.getURI());
         for (ExtendedIterator<OntProperty> i = c.listDeclaredProperties(); i.hasNext();) {
@@ -182,11 +182,11 @@ public class MusicEventsOntology {
         }
     }
     
-    
+    /*
      * Ajout d'un artiste dans le mod�le
      * 
      * @author S�bastien Paradis
-     
+     */
     public void addArtist(JsonArtist artist) {
     	String ns = Namespaces.meo_ns;
     	
@@ -197,7 +197,7 @@ public class MusicEventsOntology {
 		rArtist.addProperty(FOAF.homepage, "");
 		rArtist.addProperty(FOAF.img, "");
 		
-		if (!artist.getMembers().isEmpty()) {
+		/*if (!artist.getMembers().isEmpty()) {
 			for (JsonArtist a : artist.getMembers()) {
 				Resource rMember = m.createResource(ns + a.getName());
 
@@ -206,8 +206,10 @@ public class MusicEventsOntology {
 				
 				rArtist.addProperty(this.hasForMember, rMember);
 			}
-		}
+		}*/
 		
+		
+		/*
 		 * 
         Literal l_title = m.createTypedLiteral(l.l_title, XSDDatatype.XSDstring) ;
     	m.add(livre,DC.title,l_title);
@@ -217,7 +219,7 @@ public class MusicEventsOntology {
             m.add(livre,DC.subject,infoConcept);
         }
         
-		 
+		 */
 	}
 	
 
@@ -231,7 +233,7 @@ public class MusicEventsOntology {
 	public static void main (String args[]) {
 		//new MusicEventsOntology().run();
 		MusicEventsOntology meo = new MusicEventsOntology();
-		
+		/*
 		<meo:EvenementMusical rdf:about="http://fr.wikipedia.org/wiki/Garance_Reggae_Festival"> 
 	    <rdfs:label>Garance Reggae Festival</rdfs:label>   
 	    <meo:dateDebut>2013-07-24</meo:dateDebut>
@@ -247,15 +249,15 @@ public class MusicEventsOntology {
 	  <meo:EvenementMusical rdf:about="#Garance_Reggae_Festival_2013_j1">    
 	    <dc:date>2013-07-24</dc:date>
 	    <meo:aPourParticipant rdf:resource="http://fr.wikipedia.org/wiki/Chinese_Man" />
-	  </meo:EvenementMusical>
+	  </meo:EvenementMusical>*/
 	  
-		JsonArtist ja = new JsonArtist("IAM");
+		JsonArtist ja = new JsonArtist();
 		meo.addArtist(ja);
 		
-		ja = new JsonArtist("Muse");
+		ja = new JsonArtist();
 		meo.addArtist(ja);
 		
-		
+		/*
 		 * 
 
     	GroupeMusique mb1 = new GroupeMusique("Wu-Tang Clan", 1989);
@@ -291,8 +293,7 @@ public class MusicEventsOntology {
 	    }
         catch (FileNotFoundException e) {System.out.println("File not found");}
 	    catch (IOException e) {System.out.println("IO problem");}
-		 
+		 */
 	}
 
 }
-*/

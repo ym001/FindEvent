@@ -224,7 +224,7 @@ public class LocalQueryDataBusiness {
 		System.out.println();
 		
 		String sSelect="*";
-		sQueries=sPrefix+"SELECT DISTINCT" + sSelect + CRLF;
+		sQueries=sPrefix+"SELECT " + sSelect + CRLF;
 		  
 		String tagg ="Pop";
 		sWhere="";
@@ -238,7 +238,7 @@ public class LocalQueryDataBusiness {
 		sWhere=sWhere + "OPTIONAL {?databusiness foaf:mail ?mail}"+ CRLF;
 		sQueries = sQueries+ "WHERE { "+sWhere+" } ";
 			 
-		//System.out.println(sQueries);	  	  
+		System.out.println(sQueries);	  	  
 		QueryExecution qexec = QueryExecutionFactory.create(sQueries, m);
 
 		try {	             
@@ -259,6 +259,8 @@ public class LocalQueryDataBusiness {
 					System.out.println();
 					
 				}
+		 }catch(Exception e){
+			 e.printStackTrace();
 		 }
 		 finally {
                 qexec.close() ;

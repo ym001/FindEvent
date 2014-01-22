@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 package queries;
 
 import org.openjena.atlas.io.IndentedWriter;
@@ -62,6 +63,9 @@ public class LocalQueryMusicEvents {
 }
 =======
 /*//package queries;
+=======
+//package queries;
+>>>>>>> 66410d5a163fff41fecc46739219774083d15dea
 package Jena;
 
 import org.openjena.atlas.io.IndentedWriter;
@@ -198,7 +202,7 @@ public class LocalQueryMusicEvents {
 		sFilter="FILTER (?label=\""+groupe+"\"^^xsd:string)"+ CRLF;
 		sQueries = sQueries+ "WHERE { "+sWhere+" "+sFilter+" } ORDER BY ?name LIMIT 20 ";
 
-		// System.out.println(sQueries);	  	  
+		System.out.println(sQueries);	  	  
 
 		qexec = QueryExecutionFactory.create(sQueries, m);
 
@@ -541,7 +545,10 @@ public class LocalQueryMusicEvents {
 	}
 
 }
+<<<<<<< HEAD
 
 
 */
 >>>>>>> ea63653450464348f58bad9de982b17a8bda6e71
+=======
+>>>>>>> 66410d5a163fff41fecc46739219774083d15dea

@@ -4,14 +4,14 @@
 <div class="accueil row">
 	
 	<!-- partie gauche -->
-	<div class="left span9">
+	<div class="left col-sm-9">
 		<div>
 			<h4><b>Bienvenu: {{nom_user}} Vous êtes à {{ville_actu}}</b></h4>
 		</div>
 	
 		<!-- Google Map -->
-		<div class="google-map" 
-                center="position.coords"
+		<!-- <div class="google-map">
+			 center="position.coords"
                 zoom="zoomProperty" 
                 markers="markersProperty"
                 latitude="clickedLatitudeProperty"
@@ -19,20 +19,62 @@
                 mark-click="false"
                 draggable="true"
                 fit="true"
-                events="eventsProperty">
-        </div>
+                events="eventsProperty"
+          </div>      
+           -->
+         {{center}}       
+                
+         <google-map
+         	center="map.center" 
+			zoom="map.zoom"
+			draggable="true"
+		>
+		
+			<marker coords="myPositionMarker.coords">
+			</marker>
+		
+			<window show="true" coords="myPositionMarker.coords">
+	            <p>Vous êtes localisé ici:
+		            {{myPositionMarker.coords.latitude}}, 
+		            {{myPositionMarker.coords.longitude}}
+	            </p>
+        	</window>
+        	
+        	
+        	<!-- <marker ng-repeat="m in map.markers" coords="m" icon="m.icon" click="onMarkerClicked(m)">
+            <marker-label content="m.title" anchor="22 0" class="marker-labels"/>
+	            <window show="m.showWindow" closeClick="m.closeClick()">
+	                <p>This is an info window at {{ m.latitude | number:4 }}, {{ m.longitude | number:4 }}!</p>
+	
+	                <p class="muted">My marker will stay open when the window is popped up!</p>
+	            </window>
+        	</marker> -->
+		
+			
+			<marker ng-model="eventMarkers" ng-repeat="em in eventMarkers" coords="em.coords" icon="em.icon" click="onMarkerClicked(em)">
+				<window show="em.showWindow" closeClick="em.closeClick()">
+					<p><b>L'événement</b>:{{em.coords.name}}
+					<p><b>Location</b>:{{em.coords.locName}}
+					<p><b>Adresse</b>: {{em.coords.address}}</p>
+					<p><b>Coordonnée</b>: {{em.coords.latitude}}, {{em.coords.longitude}}</p>
+				</window>
+			</marker>
+			
+			
+		
+		</google-map>       
 
 	</div>
 	
 	
 	<!-- partie droite -->
-	<div class="right span3">
+	<div class="right col-sm-3">
 		<div class="styles-block">
 			<h4><b><i class="fa fa-music"></i> Genres préférés</b></h4>
 			<div class="style-item" ng-repeat="item in stylesByUser">
 				<span>
 					<i class="fa fa-star" style="color:yellow"></i>
-					<a class="btn btn-inverse">{{item.label}}</a>
+					<a class="btn btn-inverse"><b>{{item.label}}</b></a>
 					<a ng-click="deleteUserStyles(item.id)" title="élever de liste de préférence" class="btn btn-danger btn-small margin-medium">
 	  					<i class="fa fa-trash-o"></i>
 	  				</a>

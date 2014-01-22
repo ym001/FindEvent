@@ -9,8 +9,9 @@ import com.hp.hpl.jena.rdf.model.impl.ResourceImpl;
 
 /*
  * Classe MusicOntology
- * @author Sébastien Paradis
- */
+ * @author Sï¿½bastien Paradis
+*/ 
+ 
 public class MO {
 	private static Model m = ModelFactory.createDefaultModel();
 
